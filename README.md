@@ -5,7 +5,7 @@ Team ID  : AK_G05
 
 Members :: 
 Elvin Rejimone,
-Santhosh Sandhanam,
+Santhosh Santhanam,
 Anushka Sharma,
 Ujjawal Aggarwal,
 Sejal Chopra
