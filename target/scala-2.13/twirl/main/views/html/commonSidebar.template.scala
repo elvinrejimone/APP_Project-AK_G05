@@ -32,13 +32,12 @@ object commonSidebar extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.
 Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
 """),format.raw/*3.1*/("""<h3>Table of Contents</h3>
 <ul>
-  <li><a href=""""),_display_(/*5.17*/routes/*5.23*/.HomeController.index),format.raw/*5.44*/("""#Introduction">Welcome</a>
-  <li><a href=""""),_display_(/*6.17*/routes/*6.23*/.HomeController.explore),format.raw/*6.46*/("""">Play application overview</a>
-  <li><a href=""""),_display_(/*7.17*/routes/*7.23*/.HomeController.tutorial),format.raw/*7.47*/("""">Implementing Hello World</a>
+  <li><a href=""""),_display_(/*5.17*/routes/*5.23*/.HomeController.explore),format.raw/*5.46*/("""">Play application overview</a>
+  <li><a href=""""),_display_(/*6.17*/routes/*6.23*/.HomeController.tutorial),format.raw/*6.47*/("""">Implementing Hello World</a>
 </ul>
 <h3>Related Resources</h3>
 <ul>
-  <li><a href="https://playframework.com/documentation/"""),_display_(/*11.57*/version),format.raw/*11.64*/("""" target="_blank">Play documentation</a></li>
+  <li><a href="https://playframework.com/documentation/"""),_display_(/*10.57*/version),format.raw/*10.64*/("""" target="_blank">Play documentation</a></li>
   <li><a href="https://discuss.lightbend.com/c/play/" target="_blank">Forum</a></li>
   <li><a href="https://gitter.im/playframework/playframework" target="_blank">Gitter Channel</a></li>
   <li><a href="https://stackoverflow.com/questions/tagged/playframework" target="_blank">Stackoverflow</a></li>
@@ -61,9 +60,9 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
               /*
                   -- GENERATED --
                   SOURCE: app/views/commonSidebar.scala.html
-                  HASH: 35e014d3bb1af046d936754c1beab28a548cb015
-                  MATRIX: 908->1|1004->5|1051->44|1101->57|1128->58|1202->106|1216->112|1257->133|1326->176|1340->182|1383->205|1457->253|1471->259|1515->283|1667->408|1695->415
-                  LINES: 27->1|32->2|32->2|32->2|33->3|35->5|35->5|35->5|36->6|36->6|36->6|37->7|37->7|37->7|41->11|41->11
+                  HASH: 0f49b8f053fe427ecf3485011b82cfea143cfaa1
+                  MATRIX: 908->1|1004->5|1051->44|1101->57|1128->58|1202->106|1216->112|1259->135|1333->183|1347->189|1391->213|1543->338|1571->345
+                  LINES: 27->1|32->2|32->2|32->2|33->3|35->5|35->5|35->5|36->6|36->6|36->6|40->10|40->10
                   -- GENERATED --
               */
           

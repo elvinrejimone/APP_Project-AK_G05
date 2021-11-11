@@ -1,1 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m/home/ujjawal/eclipse-workspace/playFrameworkDemos/app/controllers/HomeController.java:87:1: class, interface, or enum expected[0m
+[0m[[0m[31merror[0m] [0m[0m/home/ujjawal/eclipse-workspace/playFrameworkDemos/conf/routes:10:1: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : String[0m
+[0m[[0m[31merror[0m] [0m[0m required: play.mvc.Http.Request[0m
+[0m[[0m[31merror[0m] [0m[0mGET    /user/:user                   controllers.HomeController.searchUsers(user:String)[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

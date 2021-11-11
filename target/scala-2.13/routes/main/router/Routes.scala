@@ -15,7 +15,7 @@ class Routes(
   override val errorHandler: play.api.http.HttpErrorHandler, 
   // @LINE:6
   HomeController_1: controllers.HomeController,
-  // @LINE:12
+  // @LINE:13
   Assets_0: controllers.Assets,
   val prefix: String
 ) extends GeneratedRouter {
@@ -24,7 +24,7 @@ class Routes(
    def this(errorHandler: play.api.http.HttpErrorHandler,
     // @LINE:6
     HomeController_1: controllers.HomeController,
-    // @LINE:12
+    // @LINE:13
     Assets_0: controllers.Assets
   ) = this(errorHandler, HomeController_1, Assets_0, "/")
 
@@ -39,10 +39,10 @@ class Routes(
   }
 
   def documentation = List(
-    ("""GET""", this.prefix, """controllers.HomeController.index"""),
+    ("""GET""", this.prefix, """controllers.HomeController.index(request:Request)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """explore""", """controllers.HomeController.explore"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """tutorial""", """controllers.HomeController.tutorial"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """""" + "$" + """username<[^/]+>""", """controllers.HomeController.searchUsers(username:String)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/""" + "$" + """user<[^/]+>""", """controllers.HomeController.searchUsers(user:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -56,12 +56,14 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix)))
   )
   private[this] lazy val controllers_HomeController_index0_invoker = createInvoker(
-    HomeController_1.index,
+    
+    (req:play.mvc.Http.Request) =>
+      HomeController_1.index(fakeValue[play.mvc.Http.Request]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
       "index",
-      Nil,
+      Seq(classOf[play.mvc.Http.Request]),
       "GET",
       this.prefix + """""",
       """ An example controller showing a sample home page""",
@@ -107,7 +109,7 @@ class Routes(
 
   // @LINE:10
   private[this] lazy val controllers_HomeController_searchUsers3_route = Route("GET",
-    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), DynamicPart("username", """[^/]+""",true)))
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("user/"), DynamicPart("user", """[^/]+""",true)))
   )
   private[this] lazy val controllers_HomeController_searchUsers3_invoker = createInvoker(
     HomeController_1.searchUsers(fakeValue[String]),
@@ -117,13 +119,13 @@ class Routes(
       "searchUsers",
       Seq(classOf[String]),
       "GET",
-      this.prefix + """""" + "$" + """username<[^/]+>""",
+      this.prefix + """user/""" + "$" + """user<[^/]+>""",
       """""",
       Seq()
     )
   )
 
-  // @LINE:12
+  // @LINE:13
   private[this] lazy val controllers_Assets_versioned4_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("assets/"), DynamicPart("file", """.+""",false)))
   )
@@ -147,7 +149,8 @@ class Routes(
     // @LINE:6
     case controllers_HomeController_index0_route(params@_) =>
       call { 
-        controllers_HomeController_index0_invoker.call(HomeController_1.index)
+        controllers_HomeController_index0_invoker.call(
+          req => HomeController_1.index(req))
       }
   
     // @LINE:7
@@ -164,11 +167,11 @@ class Routes(
   
     // @LINE:10
     case controllers_HomeController_searchUsers3_route(params@_) =>
-      call(params.fromPath[String]("username", None)) { (username) =>
-        controllers_HomeController_searchUsers3_invoker.call(HomeController_1.searchUsers(username))
+      call(params.fromPath[String]("user", None)) { (user) =>
+        controllers_HomeController_searchUsers3_invoker.call(HomeController_1.searchUsers(user))
       }
   
-    // @LINE:12
+    // @LINE:13
     case controllers_Assets_versioned4_route(params@_) =>
       call(Param[String]("path", Right("/public")), params.fromPath[Asset]("file", None)) { (path, file) =>
         controllers_Assets_versioned4_invoker.call(Assets_0.versioned(path, file))

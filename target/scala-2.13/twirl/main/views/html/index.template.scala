@@ -36,8 +36,10 @@ Seq[Any](format.raw/*1.1*/("""<section style="backgroundColor:green">
       <h2>github analysis app!</h2>
       		
       		<h1>Hello Griffity!</h1>
-	      	<input >
-	      	<button>Go!</button>
+      		<form name="search" id="form" action="/" method="GET">
+	      	<input id="user" name="search" type="text" placeholder="enter name">
+	      	<button type="submit">Go!</button>
+	      	</form>
 	      	
 	      	
 	      	<button>Clear!</button>
@@ -61,7 +63,7 @@ Seq[Any](format.raw/*1.1*/("""<section style="backgroundColor:green">
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: 99fc37f67ee26a1718a79a03bfd783cf2660b862
+                  HASH: 72aba04bedaf387fbc0e8cd01b19df39c06839f0
                   MATRIX: 989->0
                   LINES: 32->1
                   -- GENERATED --
