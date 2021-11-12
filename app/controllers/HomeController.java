@@ -17,6 +17,8 @@ import play.libs.ws.WSRequest;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
@@ -25,12 +27,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 
     private final AssetsFinder assetsFinder;
     
-    String user = "Santhosh-S14";
+    String user = "anush97";
     
     ArrayList<String> users = new ArrayList<>();
-    
+    //ArrayList<String> repos = new ArrayList<>();
     @Inject WSClient ws = null;
-
+    
     @Inject
     public HomeController(AssetsFinder assetsFinder) {
         this.assetsFinder = assetsFinder;
@@ -53,11 +55,15 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     		req.setMethod("GET");
     		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
     		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+    
     		for (JsonNode out : obj) {
     			users.add(out.get("login").toString());
     			System.out.println(out.get("login"));
+    			//repos.add(out.get("repos_url").toString());
+    			
     		}
-    		return ok(Json.prettyPrint(obj));
+    		
+    		return ok(views.html.display.render(users));
     	}
         
     }
