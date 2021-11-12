@@ -23,12 +23,6 @@ package controllers {
       Call("GET", _prefix)
     }
   
-    // @LINE:10
-    def searchUsers(user:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "user/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("user", user)))
-    }
-  
     // @LINE:8
     def tutorial: Call = {
       
@@ -43,14 +37,14 @@ package controllers {
   
   }
 
-  // @LINE:13
+  // @LINE:11
   class ReverseAssets(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:13
+    // @LINE:11
     def versioned(file:Asset): Call = {
       implicit lazy val _rrc = new play.core.routing.ReverseRouteContext(Map(("path", "/public"))); _rrc
       Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[play.api.mvc.PathBindable[Asset]].unbind("file", file))

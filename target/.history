@@ -5,3 +5,7 @@ eclipse with source=true
 compile
 run
 exit
+eclipse
+run
+exit
+run

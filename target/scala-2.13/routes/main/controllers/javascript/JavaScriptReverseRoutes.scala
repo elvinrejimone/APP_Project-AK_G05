@@ -28,16 +28,6 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:10
-    def searchUsers: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.searchUsers",
-      """
-        function(user0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("user", user0))})
-        }
-      """
-    )
-  
     // @LINE:8
     def tutorial: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.tutorial",
@@ -60,7 +50,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:13
+  // @LINE:11
   class ReverseAssets(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -68,7 +58,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:13
+    // @LINE:11
     def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.Assets.versioned",
       """

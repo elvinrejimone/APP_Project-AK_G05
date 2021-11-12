@@ -2,12 +2,16 @@ package controllers;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import play.libs.Json;
 import play.libs.ws.WSBodyReadables;
@@ -17,6 +21,7 @@ import play.libs.ws.WSRequest;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import models.*;
 
 
 /**
@@ -27,11 +32,9 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 
     private final AssetsFinder assetsFinder;
     
-    String user = "anush97";
-    
-    ArrayList<String> users = new ArrayList<>();
-    //ArrayList<String> repos = new ArrayList<>();
     @Inject WSClient ws = null;
+    
+    List<JsonNode> response = new ArrayList<>();
     
     @Inject
     public HomeController(AssetsFinder assetsFinder) {
@@ -48,37 +51,23 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     	if(!request.queryString("search").isPresent()) {
     		return ok(views.html.index.render());
     	}
-    	else {
-    		System.out.println("https://api.github.com/search/users?q=" + request.queryString("search").get());
-    		WSRequest req = ws.url("https://api.github.com/search/users?q=" + request.queryString("search").get());
+    	else 
+    	{
+    		searchGithub(request.queryString("search").get());
     		
-    		req.setMethod("GET");
-    		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-    		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
-    
-    		for (JsonNode out : obj) {
-    			users.add(out.get("login").toString());
-    			System.out.println(out.get("login"));
-<<<<<<< HEAD
-    			//repos.add(out.get("repos_url").toString());
-=======
->>>>>>> 3d5524582d56921078b2de14988948d7cab24492
-    			
-    		}
-    		
-    		return ok(views.html.display.render(users));
+    		//printing the result for now to see the data in front end 
+    		//later this data can be used to render 
+    		return ok(Json.prettyPrint(Json.toJson(this.response)));
     	}
         
     }
     public Result names(String names) {
     	return ok("Hii ! "+ names);
     }
-    public Result name(String name,String course) {
-    	return ok("Hii ! "+ name + " Is your course "+course+ "this?");
-    }
-//    public Result welcome(String name,String course) {
-//    	return ok(welcome.render(name,course)));
-//    }
+
+	public Result name(String name, String course) {
+		return ok("Hii ! " + name + " Is your course " + course + "this?");
+	}
     public Result explore() {
         return ok(views.html.explore.render());
     }
@@ -87,29 +76,24 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
         return ok(views.html.tutorial.render());
     }
     
-    public Result searchUsers(String request) throws InterruptedException, ExecutionException {
-    	
-		WSRequest req = ws.url("https://api.github.com/search/users?q=" + request);
+    public void searchGithub(String query) throws InterruptedException, ExecutionException {
+    	System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
+    	System.out.println();
+		WSRequest req = ws.url("https://api.github.com/search/repositories?q=" + query);
 		req.setMethod("GET");
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
-		for (JsonNode out : obj) {
-			users.add(out.get("login").toString());
-			System.out.println(out.get("login"));
-		}
-		return ok(Json.prettyPrint(obj));
-	}
-    
-	public Result searchCode(String toBeSearched) throws InterruptedException, ExecutionException {
-		System.out.println(toBeSearched);
-		WSRequest req = ws.url("https://api.github.com/search/code?q=" + toBeSearched + "+user:" + user);
-		req.setMethod("GET");
-		req.addHeader("ACCEPT", "application/vnd.github.v3+json");
-		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-		return ok(Json.toJson(res.toCompletableFuture().get()));
 		
-	}
-
+		//converts json object to list
+		this.response = new ObjectMapper().convertValue(obj, ArrayList.class);
+		
+		//takes the first 10 search results from the response
+		this.response = this.response.stream()
+						.limit(10)
+						.collect(Collectors.toList());
+		for(int i=0;i<this.response.size();i++) {
+			System.out.println(this.response.get(i));
+			System.out.println();
+		}
+    }
 }
-
-
