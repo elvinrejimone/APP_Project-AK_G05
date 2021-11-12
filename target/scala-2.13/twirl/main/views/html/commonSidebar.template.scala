@@ -29,7 +29,8 @@ object commonSidebar extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.
       {
 
 
-Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
+Seq[Any](format.raw/*1.4*/("""
+"""),_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { version =>_display_(Seq[Any](format.raw/*2.54*/("""
 """),format.raw/*3.1*/("""<h3>Table of Contents</h3>
 <ul>
   <li><a href=""""),_display_(/*5.17*/routes/*5.23*/.HomeController.explore),format.raw/*5.46*/("""">Play application overview</a>
@@ -60,9 +61,9 @@ Seq[Any](_display_(/*2.2*/defining(play.core.PlayVersion.current)/*2.41*/ { vers
               /*
                   -- GENERATED --
                   SOURCE: app/views/commonSidebar.scala.html
-                  HASH: 0f49b8f053fe427ecf3485011b82cfea143cfaa1
-                  MATRIX: 908->1|1004->5|1051->44|1101->57|1128->58|1202->106|1216->112|1259->135|1333->183|1347->189|1391->213|1543->338|1571->345
-                  LINES: 27->1|32->2|32->2|32->2|33->3|35->5|35->5|35->5|36->6|36->6|36->6|40->10|40->10
+                  HASH: 4336938b0a3eb382f2b7c6383df06157c3458670
+                  MATRIX: 908->1|1004->3|1032->6|1079->45|1129->58|1157->60|1233->110|1247->116|1290->139|1365->188|1379->194|1423->218|1579->347|1607->354
+                  LINES: 27->1|32->1|33->2|33->2|33->2|34->3|36->5|36->5|36->5|37->6|37->6|37->6|41->10|41->10
                   -- GENERATED --
               */
           

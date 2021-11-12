@@ -1,5 +1,8 @@
-[0m[[0m[31merror[0m] [0m[0m/home/ujjawal/eclipse-workspace/playFrameworkDemos/conf/routes:10:1: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : String[0m
-[0m[[0m[31merror[0m] [0m[0m required: play.mvc.Http.Request[0m
-[0m[[0m[31merror[0m] [0m[0mGET    /user/:user                   controllers.HomeController.searchUsers(user:String)[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\ANUSHKA SHARMA\eclipse-workspace\APP_Project-AK_G05\app\controllers\HomeController.java:63:1: cannot find symbol[0m
+[0m[[0m[31merror[0m] [0m[0m  symbol:   class Gson[0m
+[0m[[0m[31merror[0m] [0m[0m  location: class controllers.HomeController[0m
+[0m[[0m[31merror[0m] [0m[0mGson[0m
+[0m[[0m[31merror[0m] [0m[0mC:\Users\ANUSHKA SHARMA\eclipse-workspace\APP_Project-AK_G05\app\controllers\HomeController.java:63:1: cannot find symbol[0m
+[0m[[0m[31merror[0m] [0m[0m  symbol:   class Gson[0m
+[0m[[0m[31merror[0m] [0m[0m  location: class controllers.HomeController[0m
+[0m[[0m[31merror[0m] [0m[0mGson[0m

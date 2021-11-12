@@ -29,7 +29,8 @@ object welcome extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.Ht
       {
 
 
-Seq[Any](format.raw/*2.1*/("""<html>
+Seq[Any](format.raw/*1.29*/("""
+"""),format.raw/*2.1*/("""<html>
 <head>
 <title>Welcome</title>
 </head>
@@ -53,9 +54,9 @@ Seq[Any](format.raw/*2.1*/("""<html>
               /*
                   -- GENERATED --
                   SOURCE: app/Home/welcome.scala.html
-                  HASH: 88a8adee1021597dfd0913ad041ea12e87221644
-                  MATRIX: 915->1|1036->29|1126->93|1150->97|1178->99|1204->105
-                  LINES: 27->1|32->2|37->7|37->7|37->7|37->7
+                  HASH: fc86e8bbad6d59007bfad0b4bc82caf3e5e428fc
+                  MATRIX: 915->1|1037->28|1065->30|1160->99|1184->103|1212->105|1238->111
+                  LINES: 27->1|32->1|33->2|38->7|38->7|38->7|38->7
                   -- GENERATED --
               */
           

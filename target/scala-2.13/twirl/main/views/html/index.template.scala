@@ -63,7 +63,7 @@ Seq[Any](format.raw/*1.1*/("""<section style="backgroundColor:green">
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: 72aba04bedaf387fbc0e8cd01b19df39c06839f0
+                  HASH: cea944b83c3b2d112d27814a7cb0e5dd4552b581
                   MATRIX: 989->0
                   LINES: 32->1
                   -- GENERATED --
