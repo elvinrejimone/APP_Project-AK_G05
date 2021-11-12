@@ -59,7 +59,10 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     		for (JsonNode out : obj) {
     			users.add(out.get("login").toString());
     			System.out.println(out.get("login"));
+<<<<<<< HEAD
     			//repos.add(out.get("repos_url").toString());
+=======
+>>>>>>> 3d5524582d56921078b2de14988948d7cab24492
     			
     		}
     		
