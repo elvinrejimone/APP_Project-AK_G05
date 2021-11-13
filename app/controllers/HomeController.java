@@ -102,7 +102,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 			//System.out.println(data.get("topics").toString());
 			
 		}
-		//System.out.println(records);
+		
 		
 		//converts json object to list
 		this.response = new ObjectMapper().convertValue(obj, ArrayList.class);
