@@ -3,7 +3,9 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import play.libs.ws.WSRequest;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import scala.util.parsing.json.JSONObject;
 import models.*;
 
 
@@ -83,17 +86,41 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		req.setMethod("GET");
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+			
+		ArrayList<String> records = new ArrayList<String>();
+		
+		for(JsonNode data:obj) {
+			ArrayList<String> jsondata = new ArrayList<String>();
+			
+			jsondata.add(data.get("name").toString());
+			
+			jsondata.add(data.get("owner").findPath("login").toPrettyString());
+			jsondata.add(data.get("topics").toString());
+			records.add(jsondata.toString());
+		//System.out.println(data.get("name").toString());
+			//System.out.println(data.get("owner").findPath("login"));
+			//System.out.println(data.get("topics").toString());
+			
+		}
+		//System.out.println(records);
 		
 		//converts json object to list
 		this.response = new ObjectMapper().convertValue(obj, ArrayList.class);
+		
 		
 		//takes the first 10 search results from the response
 		this.response = this.response.stream()
 						.limit(10)
 						.collect(Collectors.toList());
-		for(int i=0;i<this.response.size();i++) {
-			System.out.println(this.response.get(i));
+		
+		
+	
+		for(int i=0;i<10;i++) {
+			
+			System.out.println(records.get(i));
 			System.out.println();
 		}
+		
+	
     }
 }
