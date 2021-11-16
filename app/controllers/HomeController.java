@@ -62,8 +62,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     		return ok(views.html.index.render(allResultList, keysList));
     	}
     	else 
-    	{	String results= "https://api.github.com/search/repositories?q="+request.queryString("search").get();
-    		allResultList = searchGithub(results);
+    	{	
+    		allResultList = searchGithub(request.queryString("search").get(),1);
     		keysList.clear();
     		keysList.addAll(allResultList.keySet());
 //    		return ok(Json.prettyPrint(Json.toJson(this.response)));
@@ -72,18 +72,24 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
         
     }
     
-    public HashMap<String, ArrayList<GithubResult>> searchGithub(String query) throws InterruptedException, ExecutionException {
-    	System.out.println(query);
+    public HashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
+    	System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
     	System.out.println();
-		WSRequest req = ws.url(query);
+    	WSRequest req=null;
+		if(type==1) 
+			req = ws.url("https://api.github.com/search/repositories?q=" + query);
+		else if (type==2)
+			req=ws.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",query));
+
 		req.setMethod("GET");
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
 		return srHelper.getArrayofGithubResult(query, obj);
     }
-    public Result topics(String request) throws InterruptedException, ExecutionException {
-		String Topicquery= String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",request);
-		allResultList = searchGithub(Topicquery);
+    
+public Result topics(String request) throws InterruptedException, ExecutionException {
+		
+		allResultList = searchGithub(request,2);
 		keysList.clear();
 		keysList.addAll(allResultList.keySet());
 
@@ -91,5 +97,6 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	
     
 }
+
     
 }
