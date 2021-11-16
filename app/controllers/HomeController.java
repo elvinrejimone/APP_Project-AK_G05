@@ -3,6 +3,7 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     @Inject WSClient ws = null;
     
     List<JsonNode> response = new ArrayList<>();
-    HashMap<String, ArrayList<GithubResult>> allResultList = new HashMap<String, ArrayList<GithubResult>>();
+    LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
     List<String> keysList = new ArrayList<>();
     SearchResultHelper srHelper = new SearchResultHelper();
     
@@ -65,14 +66,15 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     	{	
     		allResultList = searchGithub(request.queryString("search").get(),1);
     		keysList.clear();
-    		keysList.addAll(allResultList.keySet());
+    		keysList.addAll((allResultList.keySet()));
+    		Collections.reverse(keysList);
 //    		return ok(Json.prettyPrint(Json.toJson(this.response)));
     		return ok(views.html.index.render(allResultList, keysList));
     	}
         
     }
     
-    public HashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
+    public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
     	System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
     	System.out.println();
     	WSRequest req=null;
@@ -92,7 +94,7 @@ public Result topics(String request) throws InterruptedException, ExecutionExcep
 		allResultList = searchGithub(request,2);
 		keysList.clear();
 		keysList.addAll(allResultList.keySet());
-
+		Collections.reverse(keysList);
 		return ok(views.html.topic.render(allResultList, keysList));
 	
     

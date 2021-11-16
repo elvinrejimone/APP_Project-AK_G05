@@ -21,15 +21,15 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 import scala.jdk.CollectionConverters._
 
-object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[HashMap[String, ArrayList[Models.GithubResult]],List[String],play.twirl.api.HtmlFormat.Appendable] {
+object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(results: HashMap[String, ArrayList[Models.GithubResult]], keys: List[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.80*/("""
+Seq[Any](format.raw/*1.86*/("""
 
 """),format.raw/*3.1*/("""<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
   <div class="header">
@@ -116,9 +116,9 @@ Seq[Any](format.raw/*1.80*/("""
     }
   }
 
-  def render(results:HashMap[String, ArrayList[Models.GithubResult]],keys:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(results,keys)
+  def render(results:LinkedHashMap[String, ArrayList[Models.GithubResult]],keys:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(results,keys)
 
-  def f:((HashMap[String, ArrayList[Models.GithubResult]],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (results,keys) => apply(results,keys)
+  def f:((LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (results,keys) => apply(results,keys)
 
   def ref: this.type = this
 
@@ -128,8 +128,8 @@ Seq[Any](format.raw/*1.80*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: 15918416a46cdd416c93018f23d09ade87ddb7f0
-                  MATRIX: 961->1|1134->79|1164->83|2395->1288|2426->1310|2466->1312|2497->1316|2564->1356|2577->1360|2605->1367|2634->1368|2690->1398|2722->1414|2761->1415|2796->1423|3109->1709|3133->1712|3843->2395|3888->2424|3927->2425|3973->2443|4107->2550|4119->2553|4150->2563|4267->2653|4279->2656|4309->2665|4434->2763|4482->2795|4521->2796|4570->2817|4804->3023|4831->3028|4863->3032|4890->3037|4954->3070|5000->3088|5074->3131|5147->3176|5261->3259|5284->3265|5296->3270|5334->3271|5365->3275|5421->3301|5454->3307
+                  HASH: 766bc67134f0862a6bd583bf0ca4b3c2bc4821fa
+                  MATRIX: 967->1|1146->85|1176->89|2407->1294|2438->1316|2478->1318|2509->1322|2576->1362|2589->1366|2617->1373|2646->1374|2702->1404|2734->1420|2773->1421|2808->1429|3121->1715|3145->1718|3855->2401|3900->2430|3939->2431|3985->2449|4119->2556|4131->2559|4162->2569|4279->2659|4291->2662|4321->2671|4446->2769|4494->2801|4533->2802|4582->2823|4816->3029|4843->3034|4875->3038|4902->3043|4966->3076|5012->3094|5086->3137|5159->3182|5273->3265|5296->3271|5308->3276|5346->3277|5377->3281|5433->3307|5466->3313
                   LINES: 27->1|32->1|34->3|66->35|66->35|66->35|67->36|67->36|67->36|67->36|67->36|71->40|71->40|71->40|72->41|74->43|74->43|89->58|89->58|89->58|90->59|91->60|91->60|91->60|92->61|92->61|92->61|94->63|94->63|94->63|95->64|95->64|95->64|95->64|95->64|96->65|97->66|99->68|102->71|107->76|109->78|109->78|109->78|110->79|111->80|113->82
                   -- GENERATED --
               */

@@ -2,6 +2,7 @@ package Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
@@ -20,11 +21,11 @@ public class SearchResultHelper{
 	
 	  
     public ArrayList<String> allSearches = new ArrayList<>();
-    HashMap<String, ArrayList<GithubResult>> allResult = new HashMap<String, ArrayList<GithubResult>>();
+    LinkedHashMap<String, ArrayList<GithubResult>> allResult = new LinkedHashMap<String, ArrayList<GithubResult>>();
     
     
     
-	public HashMap<String, ArrayList<GithubResult>> getArrayofGithubResult(String query, JsonNode obj) throws InterruptedException, ExecutionException {
+	public LinkedHashMap<String, ArrayList<GithubResult>> getArrayofGithubResult(String query, JsonNode obj) throws InterruptedException, ExecutionException {
 		List<GithubResult> records = new ArrayList<GithubResult>();
 		System.out.println("Size of Obj :: "+obj.size());
 		
