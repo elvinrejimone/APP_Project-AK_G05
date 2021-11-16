@@ -33,14 +33,11 @@ Seq[Any](format.raw/*1.80*/("""
 
 """),format.raw/*3.1*/("""<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
  
-  
-  
-  """),_display_(/*7.4*/if(!results.isEmpty())/*7.26*/ {_display_(Seq[Any](format.raw/*7.28*/("""
-    	
-      """),_display_(/*9.8*/for(key <- keys) yield /*9.24*/{_display_(Seq[Any](format.raw/*9.25*/("""
-      """),format.raw/*10.7*/("""<div class="container" style="display: flex;justify-content: center; ">
+  """),_display_(/*5.4*/if(!results.isEmpty())/*5.26*/ {_display_(Seq[Any](format.raw/*5.28*/("""    	
+      """),_display_(/*6.8*/for(key <- keys) yield /*6.24*/{_display_(Seq[Any](format.raw/*6.25*/("""
+      """),format.raw/*7.7*/("""<div class="container" style="display: flex;justify-content: center; ">
       <div style="padding: 0px 40px 40px 40px;margin: 20px;background-color: rgb(211, 211, 211);border-radius: 5px;">
-       <center> <span>Showing results for the topic: <h1 style="display:inline-block;margin-left: 10px;">"""),_display_(/*12.107*/key),format.raw/*12.110*/("""</h1> </span></center>
+       <center> <span>Showing results for the topic: <h1 style="display:inline-block;margin-left: 10px;">"""),_display_(/*9.107*/key),format.raw/*9.110*/("""</h1> </span></center>
         <table style="width:800px;
           border-collapse: collapse;
           border: 1px solid #ddd;
@@ -55,31 +52,31 @@ Seq[Any](format.raw/*1.80*/("""
             </thead>
             <tbody style="background-color: #dee2e1; text-align: center;">
               
-              """),_display_(/*27.16*/for(obj <- results.get(key) ) yield /*27.45*/{_display_(Seq[Any](format.raw/*27.46*/("""
-                """),format.raw/*28.17*/("""<tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*29.68*/obj/*29.71*/.ownerName),format.raw/*29.81*/("""</td>
-                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*30.68*/obj/*30.71*/.repoName),format.raw/*30.80*/("""</td>
+              """),_display_(/*24.16*/for(obj <- results.get(key) ) yield /*24.45*/{_display_(Seq[Any](format.raw/*24.46*/("""
+                """),format.raw/*25.17*/("""<tr style="height: 50px ">
+                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*26.68*/obj/*26.71*/.ownerName),format.raw/*26.81*/("""</td>
+                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*27.68*/obj/*27.71*/.repoName),format.raw/*27.80*/("""</td>
                 <td style="border: 1px solid rgb(104, 207, 164);">
-                  """),_display_(/*32.20*/for(topic <- obj.returnTopics()) yield /*32.52*/{_display_(Seq[Any](format.raw/*32.53*/("""
-                   """),format.raw/*33.20*/("""<div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 3px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"> """),_display_(/*33.187*/topic),format.raw/*33.192*/(""" """),format.raw/*33.193*/("""</div> 
-                  """)))}),format.raw/*34.20*/("""
-                """),format.raw/*35.17*/("""</td>
+                  """),_display_(/*29.20*/for(topic <- obj.returnTopics()) yield /*29.52*/{_display_(Seq[Any](format.raw/*29.53*/("""
+                   """),format.raw/*30.20*/("""<div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 3px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"> """),_display_(/*30.187*/topic),format.raw/*30.192*/(""" """),format.raw/*30.193*/("""</div> 
+                  """)))}),format.raw/*31.20*/("""
+                """),format.raw/*32.17*/("""</td>
               </tr>
-              """)))}),format.raw/*37.16*/("""
+              """)))}),format.raw/*34.16*/("""
                
             
-            """),format.raw/*40.13*/("""</tbody> 
+            """),format.raw/*37.13*/("""</tbody> 
           </table>
         </div>
          </div>
         
-        """)))}),format.raw/*45.10*/("""
+        """)))}),format.raw/*42.10*/("""
 
-""")))}/*47.3*/else/*47.8*/{_display_(Seq[Any](format.raw/*47.9*/("""
-  """),format.raw/*48.3*/("""<h1>Not Displaying</h1>
-""")))}),format.raw/*49.2*/("""
+""")))}/*44.3*/else/*44.8*/{_display_(Seq[Any](format.raw/*44.9*/("""
+  """),format.raw/*45.3*/("""<h1>Not Displaying</h1>
+""")))}),format.raw/*46.2*/("""
   
-"""),format.raw/*51.1*/("""</section>
+"""),format.raw/*48.1*/("""</section>
 """))
       }
     }
@@ -97,9 +94,9 @@ Seq[Any](format.raw/*1.80*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/topic.scala.html
-                  HASH: 16f56719584cc8cdcc39607c6eddc9611c83e75e
-                  MATRIX: 961->1|1134->79|1164->83|1349->243|1379->265|1418->267|1459->283|1490->299|1528->300|1563->308|1889->606|1914->609|2624->1292|2669->1321|2708->1322|2754->1340|2876->1435|2888->1438|2919->1448|3020->1522|3032->1525|3062->1534|3183->1628|3231->1660|3270->1661|3319->1682|3514->1849|3541->1854|3571->1855|3630->1883|3676->1901|3750->1944|3823->1989|3937->2072|3960->2078|3972->2083|4010->2084|4041->2088|4097->2114|4130->2120
-                  LINES: 27->1|32->1|34->3|38->7|38->7|38->7|40->9|40->9|40->9|41->10|43->12|43->12|58->27|58->27|58->27|59->28|60->29|60->29|60->29|61->30|61->30|61->30|63->32|63->32|63->32|64->33|64->33|64->33|64->33|65->34|66->35|68->37|71->40|76->45|78->47|78->47|78->47|79->48|80->49|82->51
+                  HASH: e04253169338738212284c10ef84c82b120d5b73
+                  MATRIX: 961->1|1134->79|1164->83|1341->235|1371->257|1410->259|1449->273|1480->289|1518->290|1552->298|1877->596|1901->599|2611->1282|2656->1311|2695->1312|2741->1330|2863->1425|2875->1428|2906->1438|3007->1512|3019->1515|3049->1524|3170->1618|3218->1650|3257->1651|3306->1672|3501->1839|3528->1844|3558->1845|3617->1873|3663->1891|3737->1934|3810->1979|3924->2062|3947->2068|3959->2073|3997->2074|4028->2078|4084->2104|4117->2110
+                  LINES: 27->1|32->1|34->3|36->5|36->5|36->5|37->6|37->6|37->6|38->7|40->9|40->9|55->24|55->24|55->24|56->25|57->26|57->26|57->26|58->27|58->27|58->27|60->29|60->29|60->29|61->30|61->30|61->30|61->30|62->31|63->32|65->34|68->37|73->42|75->44|75->44|75->44|76->45|77->46|79->48
                   -- GENERATED --
               */
           

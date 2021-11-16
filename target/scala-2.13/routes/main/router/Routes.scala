@@ -17,8 +17,6 @@ class Routes(
   HomeController_1: controllers.HomeController,
   // @LINE:9
   Assets_0: controllers.Assets,
-  // @LINE:12
-  TopicController_2: controllers.TopicController,
   val prefix: String
 ) extends GeneratedRouter {
 
@@ -27,15 +25,13 @@ class Routes(
     // @LINE:6
     HomeController_1: controllers.HomeController,
     // @LINE:9
-    Assets_0: controllers.Assets,
-    // @LINE:12
-    TopicController_2: controllers.TopicController
-  ) = this(errorHandler, HomeController_1, Assets_0, TopicController_2, "/")
+    Assets_0: controllers.Assets
+  ) = this(errorHandler, HomeController_1, Assets_0, "/")
 
   def withPrefix(addPrefix: String): Routes = {
     val prefix = play.api.routing.Router.concatPrefix(addPrefix, this.prefix)
     router.RoutesPrefix.setPrefix(prefix)
-    new Routes(errorHandler, HomeController_1, Assets_0, TopicController_2, prefix)
+    new Routes(errorHandler, HomeController_1, Assets_0, prefix)
   }
 
   private[this] val defaultPrefix: String = {
@@ -45,7 +41,7 @@ class Routes(
   def documentation = List(
     ("""GET""", this.prefix, """controllers.HomeController.index(request:Request)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """topic/""" + "$" + """topicname<[^/]+>""", """controllers.TopicController.topics(topicname:String)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """topic/""" + "$" + """topicname<[^/]+>""", """controllers.HomeController.topics(topicname:String)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -92,14 +88,14 @@ class Routes(
   )
 
   // @LINE:12
-  private[this] lazy val controllers_TopicController_topics2_route = Route("GET",
+  private[this] lazy val controllers_HomeController_topics2_route = Route("GET",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("topic/"), DynamicPart("topicname", """[^/]+""",true)))
   )
-  private[this] lazy val controllers_TopicController_topics2_invoker = createInvoker(
-    TopicController_2.topics(fakeValue[String]),
+  private[this] lazy val controllers_HomeController_topics2_invoker = createInvoker(
+    HomeController_1.topics(fakeValue[String]),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
-      "controllers.TopicController",
+      "controllers.HomeController",
       "topics",
       Seq(classOf[String]),
       "GET",
@@ -126,9 +122,9 @@ class Routes(
       }
   
     // @LINE:12
-    case controllers_TopicController_topics2_route(params@_) =>
+    case controllers_HomeController_topics2_route(params@_) =>
       call(params.fromPath[String]("topicname", None)) { (topicname) =>
-        controllers_TopicController_topics2_invoker.call(TopicController_2.topics(topicname))
+        controllers_HomeController_topics2_invoker.call(HomeController_1.topics(topicname))
       }
   }
 }
