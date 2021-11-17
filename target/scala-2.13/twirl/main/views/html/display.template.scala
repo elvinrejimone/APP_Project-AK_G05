@@ -46,7 +46,7 @@ Seq[Any]()
               /*
                   -- GENERATED --
                   SOURCE: app/views/display.scala.html
-                  HASH: 9be21ffad1accf4fc017bc13c0b652c4ff18dc3f
+                  HASH: 6c13ead12e13ba5da961f40f8a02f244837b9bfd
                   MATRIX: 
                   LINES: 
                   -- GENERATED --

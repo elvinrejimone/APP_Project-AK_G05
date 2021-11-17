@@ -21,7 +21,20 @@ public class GithubResult{
 		queryString= query;
 		repoID= id;
 	}
+
+
+	// ############### user #####################//
+	public GithubResult(String repo){	
+		repoName = repo.substring(1, repo.length()-1);
+	}
+
 	
+	public String returnUsers(){
+		return repoName;
+	}	
+
+
+	// ##########################################//
 	public String getRepoName() {
 		return repoName;
 	}

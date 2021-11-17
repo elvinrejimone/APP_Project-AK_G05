@@ -49,7 +49,7 @@
               
               @for(obj <- results.get(key) ){
                 <tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/">@obj.ownerName</a></td>
+                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/user/@obj.ownerName">@obj.ownerName</a></td>
                 <td style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/@obj.queryString/@obj.repoID">@obj.repoName</a></td>
                 <td style="border: 1px solid rgb(104, 207, 164);">
                   @for(topic <- obj.returnTopics()){

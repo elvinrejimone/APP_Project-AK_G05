@@ -18,12 +18,22 @@ package controllers.javascript {
     }
 
   
-    // @LINE:12
+    // @LINE:13
     def topics: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.topics",
       """
         function(topicname0) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "topic/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("topicname", topicname0))})
+        }
+      """
+    )
+  
+    // @LINE:12
+    def users: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.users",
+      """
+        function(username0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "user/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("username", username0))})
         }
       """
     )
@@ -38,7 +48,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:13
+    // @LINE:14
     def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.repoProfileRequestHandler",
       """
