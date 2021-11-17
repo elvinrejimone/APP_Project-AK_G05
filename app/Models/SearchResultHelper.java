@@ -44,22 +44,6 @@ public class SearchResultHelper{
 		
 		return allResult;
 	}
-	// ################  user ######################## //
-	public LinkedHashMap<String, ArrayList<GithubResult>> getArrayofGithubResultV2(String query, JsonNode obj) throws InterruptedException, ExecutionException {
-		List<GithubResult> records = new ArrayList<GithubResult>();
-		System.out.println("Size of Obj :: "+obj.size());
-		
-		for(JsonNode data:obj) {
-			GithubResult result = new GithubResult(data.get("name").toString());
-			records.add(result);			
-		}
-		
-		records = records.stream()
-				.collect(Collectors.toList());
-		addToTotalSearchList(query, (ArrayList<GithubResult>) records);
-		return allResult;
-	}
-	// ############################################# //
 	
 	public void addToTotalSearchList(String query, ArrayList<GithubResult> singleRecord) {
 		if(!allSearches.contains(query)) {

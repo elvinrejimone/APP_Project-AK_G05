@@ -83,14 +83,6 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 			req = ws.url("https://api.github.com/search/repositories?q=" + query);
 		else if (type==2)
 			req=ws.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",query));
-		else if (type==3)
-			req=ws.url(String.format("https://api.github.com/users/%s/repos",query));
-		req.setMethod("GET");
-		if(type==3){
-			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-        	JsonNode obj1 = res.toCompletableFuture().get();
-			return srHelper.getArrayofGithubResultV2(query, obj1);
-		}
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
 		return srHelper.getArrayofGithubResult(query, obj);
@@ -105,14 +97,6 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 			return ok(views.html.topic.render(allResultList, keysList));
 		
 	    
-	}
-	public Result users(String request) throws InterruptedException, ExecutionException {
-			
-		allResultList = searchGithub(request,3);
-		keysList.clear();
-		keysList.addAll(allResultList.keySet());
-		Collections.reverse(keysList);
-		return ok(views.html.user.render(allResultList, keysList));
 	}
 	
 public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
