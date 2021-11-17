@@ -38,6 +38,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:14
+    def issues: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.issues",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "statistics/"})
+        }
+      """
+    )
+  
     // @LINE:13
     def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.repoProfileRequestHandler",

@@ -21,15 +21,15 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 import scala.jdk.CollectionConverters._
 
-object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],play.twirl.api.HtmlFormat.Appendable] {
+object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],Boolean,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String], str: Boolean):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.86*/("""
+Seq[Any](format.raw/*1.100*/("""
 
 """),format.raw/*3.1*/("""<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
   <div class="header">
@@ -55,7 +55,7 @@ Seq[Any](format.raw/*1.86*/("""
   </div>
   
   
-  """),_display_(/*27.4*/if(!results.isEmpty())/*27.26*/ {_display_(Seq[Any](format.raw/*27.28*/("""
+  """),_display_(/*27.4*/if(!results.isEmpty() && str)/*27.33*/ {_display_(Seq[Any](format.raw/*27.35*/("""
   """),format.raw/*28.3*/("""<h5 style="margin-left: 25px;">Showing """),_display_(/*28.43*/keys/*28.47*/.size()),format.raw/*28.54*/(""" """),format.raw/*28.55*/("""Results</h5>
 
 
@@ -106,9 +106,9 @@ Seq[Any](format.raw/*1.86*/("""
     }
   }
 
-  def render(results:LinkedHashMap[String, ArrayList[Models.GithubResult]],keys:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(results,keys)
+  def render(results:LinkedHashMap[String, ArrayList[Models.GithubResult]],keys:List[String],str:Boolean): play.twirl.api.HtmlFormat.Appendable = apply(results,keys,str)
 
-  def f:((LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (results,keys) => apply(results,keys)
+  def f:((LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],Boolean) => play.twirl.api.HtmlFormat.Appendable) = (results,keys,str) => apply(results,keys,str)
 
   def ref: this.type = this
 
@@ -118,8 +118,8 @@ Seq[Any](format.raw/*1.86*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: dc1f6ecbfa5e9fdca90a430bfae4694de60ec963
-                  MATRIX: 967->1|1146->85|1176->89|2148->1035|2179->1057|2219->1059|2250->1063|2317->1103|2330->1107|2358->1114|2387->1115|2443->1145|2475->1161|2514->1162|2549->1170|2862->1456|2886->1459|3596->2142|3641->2171|3680->2172|3726->2190|3860->2297|3872->2300|3903->2310|4023->2403|4035->2406|4068->2418|4098->2420|4111->2423|4140->2430|4171->2433|4184->2436|4215->2445|4340->2543|4388->2575|4427->2576|4476->2597|4710->2803|4737->2808|4769->2812|4796->2817|4860->2850|4906->2868|4980->2911|5053->2956|5167->3039|5202->3044|5235->3050
+                  HASH: bd1a1d6848768a515c408c6c0d89a698840f4ecb
+                  MATRIX: 975->1|1169->99|1199->103|2171->1049|2209->1078|2249->1080|2280->1084|2347->1124|2360->1128|2388->1135|2417->1136|2473->1166|2505->1182|2544->1183|2579->1191|2892->1477|2916->1480|3626->2163|3671->2192|3710->2193|3756->2211|3890->2318|3902->2321|3933->2331|4053->2424|4065->2427|4098->2439|4128->2441|4141->2444|4170->2451|4201->2454|4214->2457|4245->2466|4370->2564|4418->2596|4457->2597|4506->2618|4740->2824|4767->2829|4799->2833|4826->2838|4890->2871|4936->2889|5010->2932|5083->2977|5197->3060|5232->3065|5265->3071
                   LINES: 27->1|32->1|34->3|58->27|58->27|58->27|59->28|59->28|59->28|59->28|59->28|63->32|63->32|63->32|64->33|66->35|66->35|81->50|81->50|81->50|82->51|83->52|83->52|83->52|84->53|84->53|84->53|84->53|84->53|84->53|84->53|84->53|84->53|86->55|86->55|86->55|87->56|87->56|87->56|87->56|87->56|88->57|89->58|91->60|94->63|99->68|101->70|103->72
                   -- GENERATED --
               */

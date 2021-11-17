@@ -29,6 +29,12 @@ package controllers {
       Call("GET", _prefix)
     }
   
+    // @LINE:14
+    def issues(): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "statistics/")
+    }
+  
     // @LINE:13
     def repoProfileRequestHandler(query:String, id:String): Call = {
       

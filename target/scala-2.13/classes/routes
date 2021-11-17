@@ -11,3 +11,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # All Page Routes
 GET     /topic/:topicname                     controllers.HomeController.topics(topicname:String)
 GET     /repo/:query/:id     		controllers.HomeController.repoProfileRequestHandler(query:String, id:String)
+GET		/statistics/			controllers.HomeController.issues(request:Request)

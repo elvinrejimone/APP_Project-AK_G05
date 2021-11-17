@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -23,13 +26,15 @@ import Models.SearchResultHelper;
 import play.libs.Json;
 import play.libs.ws.WSBodyReadables;
 import play.libs.ws.WSBodyWritables;
+import play.libs.ws.WSRequest;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSRequest;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 import scala.util.parsing.json.JSONObject;
-import models.*;
+import Models.*;
+import Utils.Cache;
 
 
 /**
@@ -42,12 +47,13 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     
     
     @Inject WSClient ws = null;
-    
+    Map.Entry<String, Integer> e ;
     List<JsonNode> response = new ArrayList<>();
     LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
     List<String> keysList = new ArrayList<>();
     SearchResultHelper srHelper = new SearchResultHelper();
-    
+	public ArrayList<String> issueTitleList_controller = new ArrayList<>(); 
+	ArrayList<String> al2 ;
     @Inject
     public HomeController(AssetsFinder assetsFinder) {
         this.assetsFinder = assetsFinder;
@@ -60,8 +66,9 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
      */
     public Result index(Http.Request request) throws InterruptedException, ExecutionException {
     	System.out.println(request.queryString("search"));
-    	if(!request.queryString("search").isPresent()) {
-    		return ok(views.html.index.render(allResultList, keysList));
+    	boolean str = request.queryString("search").isPresent();
+		if(!request.queryString("search").isPresent()) {
+    		return ok(views.html.index.render(allResultList, keysList, str));
     	}
     	else 
     	{	
@@ -70,13 +77,13 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     		keysList.addAll((allResultList.keySet()));
     		Collections.reverse(keysList);
 //    		return ok(Json.prettyPrint(Json.toJson(this.response)));
-    		return ok(views.html.index.render(allResultList, keysList));
+    		return ok(views.html.index.render(allResultList, keysList,str));
     	}
         
     }
     
     public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
-    	System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
+    	System.out.println("Query : https://api.github.com/search/repositories?q=%s&&sort=updated" + query);
     	System.out.println();
     	WSRequest req=null;
 		if(type==1) 
@@ -106,6 +113,9 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
     	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	
 	    System.out.println(githubIssueResultHelper(newRepository.issues_URL, newRepository, "Issues"));
 	    System.out.println(githubIssueResultHelper(newRepository.contributors_URL, newRepository, "Collab"));
+
+		issueTitleList_controller = newRepository.issueTitleList;
+		
 		return ok(views.html.repodetails.render(newRepository));
     
     }
@@ -117,6 +127,29 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get());
 		return rp.getDataFromResult(obj, Option);
+	}
+	// Issues
+	public Result issues(Http.Request request) throws InterruptedException, ExecutionException {
+		ArrayList<String> TitleList = issueTitleList_controller;
+		StatisticsInfo obj = new StatisticsInfo(TitleList);
+		StatsModel stats = obj.Calculate_Count(TitleList);
+		//System.out.println(stats.wordfrequency.getkeys());
+		for( Map.Entry<String, Integer> entry1 : stats.wordfrequency.entrySet() ){
+			System.out.println( entry1.getKey() + " => " + entry1.getValue() );
+		}
+		ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
+		int s = Isseus_details.get(4);
+		Iterator iterator = stats.wordfrequency.keySet().iterator();
+		while(iterator.hasNext()){
+		  Object key   = iterator.next();
+		issueTitleList_controller.add((String)key); 
+		al2 = new ArrayList<String>(issueTitleList_controller.subList(20,issueTitleList_controller.size()-1));
+		 }
+		// for (String i : al2){
+		// 	System.out.println("*********************");
+		// 	System.out.println(i);
+		// }
+		return ok(views.html.issuesstats.render(Isseus_details,s,al2,stats.wordfrequency));
 	}
 	
 

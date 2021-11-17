@@ -1,4 +1,4 @@
-@(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String])
+@(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String], str: Boolean)
 
 <section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
   <div class="header">
@@ -24,7 +24,7 @@
   </div>
   
   
-  @if(!results.isEmpty()) {
+  @if(!results.isEmpty() && str) {
   <h5 style="margin-left: 25px;">Showing @keys.size() Results</h5>
 
 

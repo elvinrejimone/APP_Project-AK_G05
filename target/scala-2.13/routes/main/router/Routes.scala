@@ -43,6 +43,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """assets/""" + "$" + """file<.+>""", """controllers.Assets.versioned(path:String = "/public", file:Asset)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """topic/""" + "$" + """topicname<[^/]+>""", """controllers.HomeController.topics(topicname:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """repo/""" + "$" + """query<[^/]+>/""" + "$" + """id<[^/]+>""", """controllers.HomeController.repoProfileRequestHandler(query:String, id:String)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """statistics/""", """controllers.HomeController.issues(request:Request)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -124,6 +125,26 @@ class Routes(
     )
   )
 
+  // @LINE:14
+  private[this] lazy val controllers_HomeController_issues4_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("statistics/")))
+  )
+  private[this] lazy val controllers_HomeController_issues4_invoker = createInvoker(
+    
+    (req:play.mvc.Http.Request) =>
+      HomeController_1.issues(fakeValue[play.mvc.Http.Request]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.HomeController",
+      "issues",
+      Seq(classOf[play.mvc.Http.Request]),
+      "GET",
+      this.prefix + """statistics/""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -150,6 +171,13 @@ class Routes(
     case controllers_HomeController_repoProfileRequestHandler3_route(params@_) =>
       call(params.fromPath[String]("query", None), params.fromPath[String]("id", None)) { (query, id) =>
         controllers_HomeController_repoProfileRequestHandler3_invoker.call(HomeController_1.repoProfileRequestHandler(query, id))
+      }
+  
+    // @LINE:14
+    case controllers_HomeController_issues4_route(params@_) =>
+      call { 
+        controllers_HomeController_issues4_invoker.call(
+          req => HomeController_1.issues(req))
       }
   }
 }
