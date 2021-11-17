@@ -90,8 +90,6 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 			req = ws.url("https://api.github.com/search/repositories?q=" + query);
 		else if (type==2)
 			req=ws.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",query));
-
-		req.setMethod("GET");
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
 		return srHelper.getArrayofGithubResult(query, obj);

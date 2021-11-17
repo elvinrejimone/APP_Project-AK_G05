@@ -21,7 +21,7 @@ public class GithubResult{
 		queryString= query;
 		repoID= id;
 	}
-	
+
 	public String getRepoName() {
 		return repoName;
 	}
