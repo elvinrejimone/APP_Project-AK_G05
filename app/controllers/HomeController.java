@@ -141,7 +141,8 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
 		while(iterator.hasNext()){
 		  Object key   = iterator.next();
 		issueTitleList_controller.add((String)key); 
-		al2 = new ArrayList<String>(issueTitleList_controller.subList(20,issueTitleList_controller.size()-1));
+		int total_issues = TitleList.size();
+		al2 = new ArrayList<String>(issueTitleList_controller.subList(total_issues,issueTitleList_controller.size()-1));
 		 }
 		// for (String i : al2){
 		// 	System.out.println("*********************");
