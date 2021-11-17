@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Models.GithubResult;
+import Models.RepositoryProfile;
 import Models.SearchResultHelper;
 import play.libs.Json;
 import play.libs.ws.WSBodyReadables;
@@ -89,16 +90,39 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		return srHelper.getArrayofGithubResult(query, obj);
     }
     
-public Result topics(String request) throws InterruptedException, ExecutionException {
+	public Result topics(String request) throws InterruptedException, ExecutionException {
+			
+			allResultList = searchGithub(request,2);
+			keysList.clear();
+			keysList.addAll(allResultList.keySet());
+			Collections.reverse(keysList);
+			return ok(views.html.topic.render(allResultList, keysList));
 		
-		allResultList = searchGithub(request,2);
-		keysList.clear();
-		keysList.addAll(allResultList.keySet());
-		Collections.reverse(keysList);
-		return ok(views.html.topic.render(allResultList, keysList));
+	    
+	}
 	
+public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
+		
+    	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	
+	    System.out.println(githubIssueResultHelper(newRepository.issues_URL, newRepository, "Issues"));
+	    System.out.println(githubIssueResultHelper(newRepository.contributors_URL, newRepository, "Collab"));
+		return ok(views.html.repodetails.render(newRepository));
     
-}
+    }
+	
+	public boolean githubIssueResultHelper(String query, RepositoryProfile rp, String Option) throws InterruptedException, ExecutionException {
+		System.out.println("Query : " + query);
+		WSRequest req = ws.url(query);
+		req.setMethod("GET");
+		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+		JsonNode obj = Json.toJson(res.toCompletableFuture().get());
+		return rp.getDataFromResult(obj, Option);
+	}
+	
+
+
+
+
 
     
 }

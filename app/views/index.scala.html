@@ -19,14 +19,6 @@
           margin: 4px 2px;
           cursor: pointer;" type="submit">Search</button>
 	      	</form>
-	      	<button style="background-color: #cc5a69;
-          border: none;
-          color: white;
-          padding: 13px 20px;
-          text-align: center;
-          font-size: 16px;
-          margin:2px;
-          cursor: pointer;" >Clear</button>
       </div>
       
   </div>
@@ -58,7 +50,7 @@
               @for(obj <- results.get(key) ){
                 <tr style="height: 50px ">
                 <td style="border: 1px solid rgb(104, 207, 164);"><a href="/">@obj.ownerName</a></td>
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/">@obj.repoName</a></td>
+                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/@obj.queryString/@obj.repoID">@obj.repoName</a></td>
                 <td style="border: 1px solid rgb(104, 207, 164);">
                   @for(topic <- obj.returnTopics()){
                    <div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 4px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"><a style="color :#dee2e1;" href="/topic/@topic"> @topic</a> </div> 
@@ -75,8 +67,6 @@
         
         }
 
-} else {
-  <h1>Not Displaying</h1>
 }
   
 </section>

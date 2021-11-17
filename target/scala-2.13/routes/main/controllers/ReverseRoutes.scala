@@ -29,6 +29,12 @@ package controllers {
       Call("GET", _prefix)
     }
   
+    // @LINE:13
+    def repoProfileRequestHandler(query:String, id:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "repo/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("query", query)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+    }
+  
   }
 
   // @LINE:9

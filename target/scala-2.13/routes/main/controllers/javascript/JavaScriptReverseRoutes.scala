@@ -38,6 +38,16 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:13
+    def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.repoProfileRequestHandler",
+      """
+        function(query0,id1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "repo/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("query", query0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id1))})
+        }
+      """
+    )
+  
   }
 
   // @LINE:9

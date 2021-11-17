@@ -22,6 +22,8 @@ public class SearchResultHelper{
 	  
     public ArrayList<String> allSearches = new ArrayList<>();
     LinkedHashMap<String, ArrayList<GithubResult>> allResult = new LinkedHashMap<String, ArrayList<GithubResult>>();
+    public HashMap<String, JsonNode> fullSearchData = new HashMap<String, JsonNode>();
+
     
     
     
@@ -30,7 +32,8 @@ public class SearchResultHelper{
 		System.out.println("Size of Obj :: "+obj.size());
 		
 		for(JsonNode data:obj) {
-			GithubResult result = new GithubResult(data.get("name").toString(),data.get("owner").findPath("login").toPrettyString(),data.get("topics"));
+			GithubResult result = new GithubResult(data.get("name").toString(),data.get("owner").findPath("login").toPrettyString(),data.get("topics"),query, data.get("id").toString());
+			fullSearchData.put(query, obj);
 			records.add(result);			
 		}
 		
