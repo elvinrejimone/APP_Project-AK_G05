@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import Models.GithubResult;
 import Models.RepositoryProfile;
 import Models.SearchResultHelper;
+import Models.TopicResultHelper;
 import play.libs.Json;
 import play.libs.ws.WSBodyReadables;
 import play.libs.ws.WSBodyWritables;
@@ -52,7 +53,10 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
     List<String> keysList = new ArrayList<>();
     SearchResultHelper srHelper = new SearchResultHelper();
-	public ArrayList<String> issueTitleList_controller = new ArrayList<>(); 
+	public ArrayList<String> issueTitleList_controller = new ArrayList<>();
+	LinkedHashMap<String, ArrayList<GithubResult>> topicResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
+	List<String> topicList = new ArrayList<>();
+	TopicResultHelper topicHelper = new TopicResultHelper();
 	ArrayList<String> al2 ;
     @Inject
     public HomeController(AssetsFinder assetsFinder) {
@@ -83,28 +87,37 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     }
     
     public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
-    	System.out.println("Query : https://api.github.com/search/repositories?q=%s&&sort=updated" + query);
+    	System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
     	System.out.println();
     	WSRequest req=null;
-		if(type==1) 
+    	LinkedHashMap<String, ArrayList<GithubResult>> finalList=null;
+		if(type==1) {
 			req = ws.url("https://api.github.com/search/repositories?q=" + query);
-		else if (type==2)
+			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+			JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+			finalList= srHelper.getArrayofGithubResult(query, obj);
+		}
+		else if (type==2) {
 			req=ws.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",query));
-		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
-		return srHelper.getArrayofGithubResult(query, obj);
+			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+			JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+			finalList= topicHelper.getArrayofGithubResult(query, obj);
+		}
+		return finalList;
     }
     
 	public Result topics(String request) throws InterruptedException, ExecutionException {
 			
-			allResultList = searchGithub(request,2);
-			keysList.clear();
-			keysList.addAll(allResultList.keySet());
-			Collections.reverse(keysList);
-			return ok(views.html.topic.render(allResultList, keysList));
+		topicResultList = searchGithub(request,2);
+		topicList.clear();
+		topicList.addAll(topicResultList.keySet());
+			Collections.reverse(topicList);
+			return ok(views.html.topic.render(topicResultList, topicList));
 		
 	    
 	}
+    
+    
 	
 public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
 		
