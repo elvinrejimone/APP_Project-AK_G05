@@ -80,28 +80,27 @@ Seq[Any](format.raw/*1.90*/("""
 			</div>
 
 		</div>
-<div  id="Issues" class="container" style="display: flex;justify-content: center; ">
-		<div style="padding: 10px;margin: 20px;background-color: rgb(211, 211, 211);border-radius: 5px;">
-			<center> <h3><span style=" font-size: 40px; color:rgb(18, 105, 69)" </span>  Statistics </h3></center>
-		  <table style="
-			border-collapse: collapse;
-			border: 1px solid #ddd;
-			box-shadow: 0 0 20px rgba(0,0,0,0.1);">
-			<thead style="background-color: #42a386; padding: 10px; height:50px ;">
-				<tr>
+     <div class="container" style="display: flex;justify-content: center; ">
+      <div style="padding: 0px 40px 40px 40px;margin: 20px;background-color: rgb(211, 211, 211);border-radius: 5px;">
+        <table style="width:800px;
+          border-collapse: collapse;
+          border: 1px solid #ddd;
+          box-shadow: 0 0 20px rgba(0,0,0,0.1);">
+            <thead style="background-color: #42a386; padding: 10px; height:50px ;">
+			<tr>
 				<th style="border: 1px solid rgb(211, 211, 211);">Word</th>
 				<th  style="border: 1px solid rgb(211, 211, 211);">Count</th>	
 				</tr>
 			</thead>	
-			  <tbody style="background-color: #dee2e1; text-align: center;">	
-				"""),_display_(/*66.6*/for(key<-keys) yield /*66.20*/{_display_(Seq[Any](format.raw/*66.21*/("""
-					"""),format.raw/*67.6*/("""<tr style="height: 50px ">									
-						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*68.99*/key),format.raw/*68.102*/("""</td>
+			  <tbody style="background-color: #dee2e1; text-align: center;">
+				"""),_display_(/*65.6*/for(key<-keys) yield /*65.20*/{_display_(Seq[Any](format.raw/*65.21*/("""
+					"""),format.raw/*66.6*/("""<tr style="height: 50px ">									
+						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*67.99*/key),format.raw/*67.102*/("""</td>
 
-						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*70.99*/stats/*70.104*/.get(key)),format.raw/*70.113*/("""</td>						
+						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*69.99*/stats/*69.104*/.get(key)),format.raw/*69.113*/("""</td>						
 					</tr>				
-				""")))}),format.raw/*72.6*/("""			  
-			  """),format.raw/*73.6*/("""</tbody> 
+				""")))}),format.raw/*71.6*/("""			  
+			  """),format.raw/*72.6*/("""</tbody> 
 			</table>
 			</div>
 		</div>
@@ -138,22 +137,22 @@ Seq[Any](format.raw/*1.90*/("""
 	var mybutton = document.getElementById("myBtn");
 	
 	// When the user scrolls down 20px from the top of the document, show the button
-	window.onscroll = function() """),format.raw/*110.31*/("""{"""),format.raw/*110.32*/("""scrollFunction()"""),format.raw/*110.48*/("""}"""),format.raw/*110.49*/(""";
+	window.onscroll = function() """),format.raw/*109.31*/("""{"""),format.raw/*109.32*/("""scrollFunction()"""),format.raw/*109.48*/("""}"""),format.raw/*109.49*/(""";
 	
-	function scrollFunction() """),format.raw/*112.28*/("""{"""),format.raw/*112.29*/("""
-	  """),format.raw/*113.4*/("""if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) """),format.raw/*113.83*/("""{"""),format.raw/*113.84*/("""
-		"""),format.raw/*114.3*/("""mybutton.style.display = "block";
-	  """),format.raw/*115.4*/("""}"""),format.raw/*115.5*/(""" """),format.raw/*115.6*/("""else """),format.raw/*115.11*/("""{"""),format.raw/*115.12*/("""
-		"""),format.raw/*116.3*/("""mybutton.style.display = "none";
-	  """),format.raw/*117.4*/("""}"""),format.raw/*117.5*/("""
-	"""),format.raw/*118.2*/("""}"""),format.raw/*118.3*/("""
+	function scrollFunction() """),format.raw/*111.28*/("""{"""),format.raw/*111.29*/("""
+	  """),format.raw/*112.4*/("""if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) """),format.raw/*112.83*/("""{"""),format.raw/*112.84*/("""
+		"""),format.raw/*113.3*/("""mybutton.style.display = "block";
+	  """),format.raw/*114.4*/("""}"""),format.raw/*114.5*/(""" """),format.raw/*114.6*/("""else """),format.raw/*114.11*/("""{"""),format.raw/*114.12*/("""
+		"""),format.raw/*115.3*/("""mybutton.style.display = "none";
+	  """),format.raw/*116.4*/("""}"""),format.raw/*116.5*/("""
+	"""),format.raw/*117.2*/("""}"""),format.raw/*117.3*/("""
 	
-	"""),format.raw/*120.2*/("""// When the user clicks on the button, scroll to the top of the document
-	function topFunction() """),format.raw/*121.25*/("""{"""),format.raw/*121.26*/("""
-	  """),format.raw/*122.4*/("""document.body.scrollTop = 0;
+	"""),format.raw/*119.2*/("""// When the user clicks on the button, scroll to the top of the document
+	function topFunction() """),format.raw/*120.25*/("""{"""),format.raw/*120.26*/("""
+	  """),format.raw/*121.4*/("""document.body.scrollTop = 0;
 	  document.documentElement.scrollTop = 0;
-	"""),format.raw/*124.2*/("""}"""),format.raw/*124.3*/("""
-	"""),format.raw/*125.2*/("""</script>"""))
+	"""),format.raw/*123.2*/("""}"""),format.raw/*123.3*/("""
+	"""),format.raw/*124.2*/("""</script>"""))
       }
     }
   }
@@ -170,9 +169,9 @@ Seq[Any](format.raw/*1.90*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/issuesstats.scala.html
-                  HASH: a3d168caeb9a35dfc122d44951a53072d149e287
-                  MATRIX: 972->1|1155->89|1185->93|2110->991|2126->998|2154->1005|2183->1006|2395->1191|2411->1198|2439->1205|2657->1396|2673->1403|2701->1410|2955->1637|2971->1644|2999->1651|3212->1837|3228->1844|3256->1851|3470->2038|3486->2045|3514->2052|4367->2879|4397->2893|4436->2894|4470->2901|4632->3036|4657->3039|4791->3146|4806->3151|4837->3160|4901->3194|4940->3206|5915->4152|5945->4153|5990->4169|6020->4170|6082->4203|6112->4204|6145->4209|6253->4288|6283->4289|6315->4293|6381->4331|6410->4332|6439->4333|6473->4338|6503->4339|6535->4343|6600->4380|6629->4381|6660->4384|6689->4385|6723->4391|6850->4489|6880->4490|6913->4495|7016->4570|7045->4571|7076->4574
-                  LINES: 27->1|32->1|34->3|54->23|54->23|54->23|54->23|57->26|57->26|57->26|60->29|60->29|60->29|66->35|66->35|66->35|69->38|69->38|69->38|72->41|72->41|72->41|97->66|97->66|97->66|98->67|99->68|99->68|101->70|101->70|101->70|103->72|104->73|141->110|141->110|141->110|141->110|143->112|143->112|144->113|144->113|144->113|145->114|146->115|146->115|146->115|146->115|146->115|147->116|148->117|148->117|149->118|149->118|151->120|152->121|152->121|153->122|155->124|155->124|156->125
+                  HASH: 387797e2b9618897b648aa5ca90b9822a7d1f777
+                  MATRIX: 972->1|1155->89|1185->93|2110->991|2126->998|2154->1005|2183->1006|2395->1191|2411->1198|2439->1205|2657->1396|2673->1403|2701->1410|2955->1637|2971->1644|2999->1651|3212->1837|3228->1844|3256->1851|3470->2038|3486->2045|3514->2052|4314->2826|4344->2840|4383->2841|4417->2848|4579->2983|4604->2986|4738->3093|4753->3098|4784->3107|4848->3141|4887->3153|5862->4099|5892->4100|5937->4116|5967->4117|6029->4150|6059->4151|6092->4156|6200->4235|6230->4236|6262->4240|6328->4278|6357->4279|6386->4280|6420->4285|6450->4286|6482->4290|6547->4327|6576->4328|6607->4331|6636->4332|6670->4338|6797->4436|6827->4437|6860->4442|6963->4517|6992->4518|7023->4521
+                  LINES: 27->1|32->1|34->3|54->23|54->23|54->23|54->23|57->26|57->26|57->26|60->29|60->29|60->29|66->35|66->35|66->35|69->38|69->38|69->38|72->41|72->41|72->41|96->65|96->65|96->65|97->66|98->67|98->67|100->69|100->69|100->69|102->71|103->72|140->109|140->109|140->109|140->109|142->111|142->111|143->112|143->112|143->112|144->113|145->114|145->114|145->114|145->114|145->114|146->115|147->116|147->116|148->117|148->117|150->119|151->120|151->120|152->121|154->123|154->123|155->124
                   -- GENERATED --
               */
           

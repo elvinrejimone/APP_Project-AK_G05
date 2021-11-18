@@ -18,10 +18,6 @@ public class StatisticsInfo {
     long c ,r, unique,char_c;
     ArrayList<Integer> calc = new ArrayList<Integer>();
 
-	public StatisticsInfo(ArrayList<String> titleList) {
-        
-	}
-
     // calc word frequency
     public  StatsModel Calculate_Count (ArrayList<String> titleList){
         Stream<String> stream1 = titleList.stream(); // converting ArrayList into Stream
@@ -34,7 +30,7 @@ public class StatisticsInfo {
            return (Stream<String>) Arrays.asList(split).stream();
                 });
                
-        System.out.println("--------------------");
+        
         //stream.forEach(s -> System.out.println(s)); // printing elements in Stream
         stream_char = stream_char.flatMap(
                 (value)->{
@@ -55,7 +51,7 @@ public class StatisticsInfo {
         //Mapping words with their frequency 
         Map<String, Integer> wordsCountMap = stream.map(eachWord -> eachWord)
         .collect(Collectors.toMap(w -> w.toLowerCase(), w -> 1, Integer::sum));       
-        System.out.println("--------------------");
+    
         
         //Sorting the result in descending order
         wordsCountMap = wordsCountMap.entrySet()
@@ -64,7 +60,7 @@ public class StatisticsInfo {
 					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-> e1, LinkedHashMap::new));
        unique = wordsCountMap.size();
        r = (c-unique);
-        System.out.println("printing map --------------------");
+        
 
     //     Iterator<String> itr = wordsCountMap.keySet().iterator();
     //     while (itr.hasNext()) {
@@ -73,7 +69,6 @@ public class StatisticsInfo {
 
     max_freq = wordsCountMap.entrySet().stream().findFirst().get().getValue();
     min_freq  = Collections.min(wordsCountMap.values());
-    System.out.println("--------------------");
     StatsModel n = new StatsModel(wordsCountMap);
         
     for( Map.Entry<String, Integer> entry : wordsCountMap.entrySet() ){

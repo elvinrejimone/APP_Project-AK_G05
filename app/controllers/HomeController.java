@@ -121,9 +121,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	    
 	}
     
-    
-	
-public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
+	public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
 		
     	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	
 	    System.out.println(githubIssueResultHelper(newRepository.issues_URL, newRepository, "Issues"));
@@ -146,14 +144,14 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
 	// Issues
 	public Result issues(Http.Request request) throws InterruptedException, ExecutionException {
 		ArrayList<String> TitleList = issueTitleList_controller;
-		StatisticsInfo obj = new StatisticsInfo(TitleList);
+		StatisticsInfo obj = new StatisticsInfo();
 		StatsModel stats = obj.Calculate_Count(TitleList);
 		//System.out.println(stats.wordfrequency.getkeys());
 		for( Map.Entry<String, Integer> entry1 : stats.wordfrequency.entrySet() ){
 			System.out.println( entry1.getKey() + " => " + entry1.getValue() );
 		}
 		ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
-		int s = Isseus_details.get(4);
+
 		Iterator iterator = stats.wordfrequency.keySet().iterator();
 		while(iterator.hasNext()){
 		  Object key   = iterator.next();
@@ -165,7 +163,7 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
 		// 	System.out.println("*******");
 		// 	System.out.println(i);
 		// }
-		return ok(views.html.issuesstats.render(Isseus_details,s,issue_controller,stats.wordfrequency));
+		return ok(views.html.issuesstats.render(Isseus_details,issue_controller,stats.wordfrequency));
 	}
 	
 	public Result commits(String ownerName, String repoName) throws InterruptedException, ExecutionException {
