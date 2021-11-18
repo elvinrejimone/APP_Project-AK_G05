@@ -21,16 +21,15 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 import scala.jdk.CollectionConverters._
 
-object issuesstats extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template4[ArrayList[Integer],Integer,ArrayList[String],Map[String, Integer],play.twirl.api.HtmlFormat.Appendable] {
+object issuesstats extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[ArrayList[Integer],ArrayList[String],Map[String, Integer],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(details:ArrayList[Integer], s:Integer,keys:ArrayList[String],stats:Map[String,Integer]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(details:ArrayList[Integer],keys:ArrayList[String],stats:Map[String,Integer]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.90*/("""
-
+Seq[Any](format.raw/*2.1*/("""
 """),format.raw/*3.1*/("""<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
   <div class="header" style="padding: 30px;
 	  text-align: center;
@@ -157,9 +156,9 @@ Seq[Any](format.raw/*1.90*/("""
     }
   }
 
-  def render(details:ArrayList[Integer],s:Integer,keys:ArrayList[String],stats:Map[String, Integer]): play.twirl.api.HtmlFormat.Appendable = apply(details,s,keys,stats)
+  def render(details:ArrayList[Integer],keys:ArrayList[String],stats:Map[String, Integer]): play.twirl.api.HtmlFormat.Appendable = apply(details,keys,stats)
 
-  def f:((ArrayList[Integer],Integer,ArrayList[String],Map[String, Integer]) => play.twirl.api.HtmlFormat.Appendable) = (details,s,keys,stats) => apply(details,s,keys,stats)
+  def f:((ArrayList[Integer],ArrayList[String],Map[String, Integer]) => play.twirl.api.HtmlFormat.Appendable) = (details,keys,stats) => apply(details,keys,stats)
 
   def ref: this.type = this
 
@@ -169,9 +168,9 @@ Seq[Any](format.raw/*1.90*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/issuesstats.scala.html
-                  HASH: 387797e2b9618897b648aa5ca90b9822a7d1f777
-                  MATRIX: 972->1|1155->89|1185->93|2110->991|2126->998|2154->1005|2183->1006|2395->1191|2411->1198|2439->1205|2657->1396|2673->1403|2701->1410|2955->1637|2971->1644|2999->1651|3212->1837|3228->1844|3256->1851|3470->2038|3486->2045|3514->2052|4314->2826|4344->2840|4383->2841|4417->2848|4579->2983|4604->2986|4738->3093|4753->3098|4784->3107|4848->3141|4887->3153|5862->4099|5892->4100|5937->4116|5967->4117|6029->4150|6059->4151|6092->4156|6200->4235|6230->4236|6262->4240|6328->4278|6357->4279|6386->4280|6420->4285|6450->4286|6482->4290|6547->4327|6576->4328|6607->4331|6636->4332|6670->4338|6797->4436|6827->4437|6860->4442|6963->4517|6992->4518|7023->4521
-                  LINES: 27->1|32->1|34->3|54->23|54->23|54->23|54->23|57->26|57->26|57->26|60->29|60->29|60->29|66->35|66->35|66->35|69->38|69->38|69->38|72->41|72->41|72->41|96->65|96->65|96->65|97->66|98->67|98->67|100->69|100->69|100->69|102->71|103->72|140->109|140->109|140->109|140->109|142->111|142->111|143->112|143->112|143->112|144->113|145->114|145->114|145->114|145->114|145->114|146->115|147->116|147->116|148->117|148->117|150->119|151->120|151->120|152->121|154->123|154->123|155->124
+                  HASH: d7ad81a7218ba762412545fab3f1fae7e0e92e7f
+                  MATRIX: 964->1|1135->79|1162->80|2067->958|2083->965|2111->972|2140->973|2349->1155|2365->1162|2393->1169|2608->1357|2624->1364|2652->1371|2900->1592|2916->1599|2944->1606|3154->1789|3170->1796|3198->1803|3409->1987|3425->1994|3453->2001|4229->2751|4259->2765|4298->2766|4331->2772|4492->2906|4517->2909|4649->3014|4664->3019|4695->3028|4757->3060|4795->3071|5733->3980|5763->3981|5808->3997|5838->3998|5898->4029|5928->4030|5960->4034|6068->4113|6098->4114|6129->4117|6194->4154|6223->4155|6252->4156|6286->4161|6316->4162|6347->4165|6411->4201|6440->4202|6470->4204|6499->4205|6531->4209|6657->4306|6687->4307|6719->4311|6820->4384|6849->4385|6879->4387
+                  LINES: 27->1|32->2|33->3|53->23|53->23|53->23|53->23|56->26|56->26|56->26|59->29|59->29|59->29|65->35|65->35|65->35|68->38|68->38|68->38|71->41|71->41|71->41|95->65|95->65|95->65|96->66|97->67|97->67|99->69|99->69|99->69|101->71|102->72|139->109|139->109|139->109|139->109|141->111|141->111|142->112|142->112|142->112|143->113|144->114|144->114|144->114|144->114|144->114|145->115|146->116|146->116|147->117|147->117|149->119|150->120|150->120|151->121|153->123|153->123|154->124
                   -- GENERATED --
               */
           

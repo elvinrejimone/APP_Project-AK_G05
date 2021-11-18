@@ -61,6 +61,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	LinkedHashMap<String, ArrayList<GithubResult>> topicResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
 	List<String> topicList = new ArrayList<>();
 	TopicResultHelper topicHelper = new TopicResultHelper();
+	List<String> userList = new ArrayList<>();
+	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2 ;
     @Inject
     public HomeController(AssetsFinder assetsFinder) {
@@ -107,6 +109,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 			JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
 			finalList= topicHelper.getArrayofGithubResult(query, obj);
 		}
+		else if (type==3) {
+			req=ws.url(String.format("https://api.github.com/users/%s/repos",query));
+			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+        	JsonNode obj = res.toCompletableFuture().get();
+			finalList= userHelper.getUserResult(query, obj);
+		}
 		return finalList;
     }
     
@@ -120,7 +128,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		
 	    
 	}
-    
+    public Result users(String request) throws InterruptedException, ExecutionException {
+			
+		topicResultList = searchGithub(request,3);
+		topicList.clear();
+		topicList.addAll(topicResultList.keySet());
+			Collections.reverse(topicList);
+			return ok(views.html.user.render(topicResultList, topicList));
+		
+	    
+	}
 	public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
 		
     	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	

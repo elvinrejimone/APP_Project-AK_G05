@@ -1,6 +1,7 @@
 @(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String], str: Boolean)
 
 <section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
+  <h1 style="text-align: center; font-size: 50px;">Details of owner Repositories</h1> 
   <div class="header">
     
       <div style="border:dotted 0.1px white;text-align:center">
@@ -49,7 +50,7 @@
               
               @for(obj <- results.get(key) ){
                 <tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/">@obj.ownerName</a></td>
+                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/user/@obj.ownerName">@obj.ownerName</a></td>
                 <td style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/@obj.queryString/@obj.repoID">@obj.repoName</a></td>
                 <td style="border: 1px solid rgb(104, 207, 164);">
                   @for(topic <- obj.returnTopics()){

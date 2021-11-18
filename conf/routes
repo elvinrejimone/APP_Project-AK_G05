@@ -9,6 +9,7 @@ GET     /                           controllers.HomeController.index(request:Req
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # All Page Routes
+GET     /user/:username                     controllers.HomeController.users(username:String)
 GET     /topic/:topicname                     controllers.HomeController.topics(topicname:String)
 GET     /repo/:query/:id     		controllers.HomeController.repoProfileRequestHandler(query:String, id:String)
 GET		/statistics/			controllers.HomeController.issues(request:Request)
