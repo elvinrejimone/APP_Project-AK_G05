@@ -42,8 +42,11 @@ Seq[Any](format.raw/*2.1*/("""
           border: 1px solid #ddd;
           box-shadow: 0 0 20px rgba(0,0,0,0.1);">
             <thead style="background-color: #42a386; padding: 10px; height:50px ;">
+      
+              <div style="border: 1px solid rgb(104, 207, 164); text-align: center;"><img src=""""),_display_(/*16.97*/results/*16.104*/.get(key)/*16.113*/(0)/*16.116*/.ownerName),format.raw/*16.126*/("""" alt="Avatar" width="100" height="100"></div>
+      
               <tr>
-                <th style="border: 1px solid rgb(211, 211, 211);">user</th>
+                
                 <th style="border: 1px solid rgb(211, 211, 211);">Repositories</th>
                 <th style="border: 1px solid rgb(211, 211, 211);">Description</th>
                 
@@ -51,27 +54,26 @@ Seq[Any](format.raw/*2.1*/("""
             </thead>
             <tbody style="background-color: #dee2e1; text-align: center;">
               
-              """),_display_(/*24.16*/for(obj <- results.get(key) ) yield /*24.45*/{_display_(Seq[Any](format.raw/*24.46*/("""
-                """),format.raw/*25.17*/("""<tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);"><img src="""),_display_(/*26.77*/obj/*26.80*/.ownerName),format.raw/*26.90*/(""" """),format.raw/*26.91*/("""alt="Avatar" width="100" height="100"></td>
-                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*27.68*/obj/*27.71*/.repoName),format.raw/*27.80*/("""</td>
-                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*28.68*/obj/*28.71*/.repoID),format.raw/*28.78*/("""</td>
+              """),_display_(/*27.16*/for(obj <- results.get(key) ) yield /*27.45*/{_display_(Seq[Any](format.raw/*27.46*/("""
+              """),format.raw/*28.15*/("""<tr style="height: 50px ">
+                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*29.68*/obj/*29.71*/.repoName),format.raw/*29.80*/("""</td>
+                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*30.68*/obj/*30.71*/.repoID),format.raw/*30.78*/("""</td>
               </tr>
-              """)))}),format.raw/*30.16*/("""
+              """)))}),format.raw/*32.16*/("""
                
             
-            """),format.raw/*33.13*/("""</tbody> 
+            """),format.raw/*35.13*/("""</tbody> 
           </table>
         </div>
          </div>
         
-        """)))}),format.raw/*38.10*/("""
+        """)))}),format.raw/*40.10*/("""
 
-""")))}/*40.3*/else/*40.8*/{_display_(Seq[Any](format.raw/*40.9*/("""
-  """),format.raw/*41.3*/("""<h1>Not Displaying</h1>
-""")))}),format.raw/*42.2*/("""
+""")))}/*42.3*/else/*42.8*/{_display_(Seq[Any](format.raw/*42.9*/("""
+  """),format.raw/*43.3*/("""<h1>Not Displaying</h1>
+""")))}),format.raw/*44.2*/("""
   
-"""),format.raw/*44.1*/("""</section>
+"""),format.raw/*46.1*/("""</section>
 """))
       }
     }
@@ -89,9 +91,9 @@ Seq[Any](format.raw/*2.1*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/user.scala.html
-                  HASH: bfb6044750e80978a3072a82673c9f9acdd27711
-                  MATRIX: 960->1|1132->80|1159->81|1419->316|1449->338|1488->340|1526->353|1557->369|1595->370|1628->377|1951->673|1975->676|2690->1364|2735->1393|2774->1394|2819->1411|2949->1514|2961->1517|2992->1527|3021->1528|3159->1639|3171->1642|3201->1651|3301->1724|3313->1727|3341->1734|3413->1775|3483->1817|3592->1895|3613->1899|3625->1904|3663->1905|3693->1908|3748->1933|3779->1937
-                  LINES: 27->1|32->2|33->3|35->5|35->5|35->5|36->6|36->6|36->6|37->7|39->9|39->9|54->24|54->24|54->24|55->25|56->26|56->26|56->26|56->26|57->27|57->27|57->27|58->28|58->28|58->28|60->30|63->33|68->38|70->40|70->40|70->40|71->41|72->42|74->44
+                  HASH: bed292df9aaf638f701d8996a78f83f8032ac05d
+                  MATRIX: 960->1|1132->80|1159->81|1419->316|1449->338|1488->340|1526->353|1557->369|1595->370|1628->377|1951->673|1975->676|2368->1042|2385->1049|2404->1058|2417->1061|2449->1071|2896->1491|2941->1520|2980->1521|3023->1536|3144->1630|3156->1633|3186->1642|3286->1715|3298->1718|3326->1725|3398->1766|3468->1808|3577->1886|3598->1890|3610->1895|3648->1896|3678->1899|3733->1924|3764->1928
+                  LINES: 27->1|32->2|33->3|35->5|35->5|35->5|36->6|36->6|36->6|37->7|39->9|39->9|46->16|46->16|46->16|46->16|46->16|57->27|57->27|57->27|58->28|59->29|59->29|59->29|60->30|60->30|60->30|62->32|65->35|70->40|72->42|72->42|72->42|73->43|74->44|76->46
                   -- GENERATED --
               */
           

@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/home/ujjawal/Desktop/finalAPP/APP_Project-AK_G05/app/views/user.scala.html:23:75: not found: value obj[0m
-[0m[[0m[31merror[0m] [0m[0m              <td style="border: 1px solid rgb(104, 207, 164);"><img src=@obj.ownerName alt="Avatar" width="100" height="100"></td>[0m
-[0m[[0m[31merror[0m] [0m[0m                                                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/ujjawal/Desktop/finalAPP/APP_Project-AK_G05/app/views/user.scala.html:16:94: value ownerName is not a member of java.util.ArrayList[Models.GithubResult][0m
+[0m[[0m[31merror[0m] [0m[0m              <div style="border: 1px solid rgb(104, 207, 164);"><img src="@results.get(key).ownerName[0]" alt="Avatar" width="100" height="100"></div>[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                             ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

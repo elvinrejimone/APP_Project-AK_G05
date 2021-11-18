@@ -12,8 +12,11 @@
           border: 1px solid #ddd;
           box-shadow: 0 0 20px rgba(0,0,0,0.1);">
             <thead style="background-color: #42a386; padding: 10px; height:50px ;">
+      
+              <div style="border: 1px solid rgb(104, 207, 164); text-align: center;"><img src="@results.get(key)(0).ownerName" alt="Avatar" width="100" height="100"></div>
+      
               <tr>
-                <th style="border: 1px solid rgb(211, 211, 211);">user</th>
+                
                 <th style="border: 1px solid rgb(211, 211, 211);">Repositories</th>
                 <th style="border: 1px solid rgb(211, 211, 211);">Description</th>
                 
@@ -22,8 +25,7 @@
             <tbody style="background-color: #dee2e1; text-align: center;">
               
               @for(obj <- results.get(key) ){
-                <tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);"><img src=@obj.ownerName alt="Avatar" width="100" height="100"></td>
+              <tr style="height: 50px ">
                 <td style="border: 1px solid rgb(104, 207, 164);">@obj.repoName</td>
                 <td style="border: 1px solid rgb(104, 207, 164);">@obj.repoID</td>
               </tr>
