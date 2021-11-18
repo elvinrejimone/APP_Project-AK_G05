@@ -12,3 +12,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /topic/:topicname                     controllers.HomeController.topics(topicname:String)
 GET     /repo/:query/:id     		controllers.HomeController.repoProfileRequestHandler(query:String, id:String)
 GET		/statistics/			controllers.HomeController.issues(request:Request)
+GET 	/repos/:ownerName/:repoName/commits 	controllers.HomeController.commits(ownerName: String, repoName: String)

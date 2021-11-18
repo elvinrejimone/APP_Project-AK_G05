@@ -23,6 +23,18 @@ package controllers {
       Call("GET", _prefix + { _defaultPrefix } + "topic/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topicname", topicname)))
     }
   
+    // @LINE:13
+    def repoProfileRequestHandler(query:String, id:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "repo/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("query", query)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+    }
+  
+    // @LINE:15
+    def commits(ownerName:String, repoName:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "repos/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("ownerName", ownerName)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("repoName", repoName)) + "/commits")
+    }
+  
     // @LINE:6
     def index(): Call = {
       
@@ -33,12 +45,6 @@ package controllers {
     def issues(): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "statistics/")
-    }
-  
-    // @LINE:13
-    def repoProfileRequestHandler(query:String, id:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "repo/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("query", query)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
     }
   
   }

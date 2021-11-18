@@ -28,6 +28,26 @@ package controllers.javascript {
       """
     )
   
+    // @LINE:13
+    def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.repoProfileRequestHandler",
+      """
+        function(query0,id1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "repo/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("query", query0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id1))})
+        }
+      """
+    )
+  
+    // @LINE:15
+    def commits: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.commits",
+      """
+        function(ownerName0,repoName1) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "repos/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("ownerName", ownerName0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("repoName", repoName1)) + "/commits"})
+        }
+      """
+    )
+  
     // @LINE:6
     def index: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.index",
@@ -44,16 +64,6 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "statistics/"})
-        }
-      """
-    )
-  
-    // @LINE:13
-    def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.repoProfileRequestHandler",
-      """
-        function(query0,id1) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "repo/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("query", query0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id1))})
         }
       """
     )

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -49,10 +50,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     
     @Inject WSClient ws = null;
     Map.Entry<String, Integer> e ;
+    JsonNode fullCommitsResult;
     List<JsonNode> response = new ArrayList<>();
     LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
     List<String> keysList = new ArrayList<>();
     SearchResultHelper srHelper = new SearchResultHelper();
+    CommitsResult cr;
 	public ArrayList<String> issueTitleList_controller = new ArrayList<>();
 	LinkedHashMap<String, ArrayList<GithubResult>> topicResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
 	List<String> topicList = new ArrayList<>();
@@ -163,6 +166,77 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
 		// }
 		return ok(views.html.issuesstats.render(Isseus_details,s,al2,stats.wordfrequency));
 	}
+	
+	public Result commits(String ownerName, String repoName) throws InterruptedException, ExecutionException {
+		List<Integer> AddList = new ArrayList<>();
+		List<Integer> DelList = new ArrayList<>();
+		List<CommitsResult> topCommiters = new ArrayList<>();
+		List<String> commitKeysList = new ArrayList<>();
+		Optional<Integer> maxAdd, maxDel, minAdd, minDel, avgAdd, avgDel;
+		String commitUrl = "https://api.github.com/repos" + "/" + ownerName + "/" + repoName + "/commits";
+		get_full_commits_data(commitUrl);
+		List<String> shaList = new ArrayList<>();
+		for (JsonNode sha : fullCommitsResult) {
+			shaList.add(sha.get("sha").toString().replaceAll("^\"|\"$", ""));
+		}
+		System.out.println("Sha size: " + shaList.size());
+		for (int i = 0; i < shaList.size(); i++) {
+			WSRequest req = ws.url(commitUrl + "/" + shaList.get(i)).addHeader("Authorization", "token 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");
+			req.setMethod("GET");
+			CompletionStage<JsonNode> resFromRequest = req.get().thenApply(result -> result.asJson());
+			JsonNode temp = resFromRequest.toCompletableFuture().get();
+			AddList.add(temp.get("stats").findPath("additions").asInt());
+			DelList.add(temp.get("stats").findPath("deletions").asInt());
+			maxAdd = AddList.stream().max(Integer::compare);
+			minAdd = AddList.stream().min(Integer::compare);
+			avgAdd = Optional.of(AddList.stream().reduce(0, Integer::sum) / shaList.size());
+			maxDel = DelList.stream().max(Integer::compare);
+			minDel = DelList.stream().min(Integer::compare);
+			avgDel = Optional.of(DelList.stream().reduce(0, Integer::sum) / shaList.size());
+			cr = new CommitsResult(
+					temp.get("author").findPath("avatar_url").asText(),
+					temp.get("author").findPath("login").asText(),
+					temp.get("commit").findPath("message").asText(),
+					temp.get("stats").findPath("additions").asText(),
+					temp.get("stats").findPath("deletions").asText(),
+					temp.get("stats").findPath("total").asText(),
+					maxAdd,
+					minAdd,
+					maxDel, 
+					minDel,
+					avgAdd,
+					avgDel
+					);
+			topCommiters.add(cr);
+		}
+		List<CommitsResult> topTen = topCommiters.parallelStream()
+				.map(c -> new CommitsResult(c.get_user_name(), c.get_additions(), c.get_deletions()))
+				.collect(Collectors.toList());
+		Map<String, Integer> result = new LinkedHashMap<>();
+		result = topTen.parallelStream().collect(Collectors.toMap(w -> w.get_user_name(), w -> 1, Integer :: sum));
+		result = result.entrySet()
+                .stream()
+                .sorted((Map.Entry.<String, Integer>comparingByValue().reversed()))
+                .limit(10)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+		System.out.println(result);
+		Iterator<String> iterator = result.keySet().iterator();
+		while(iterator.hasNext()){
+		  Object commitKey = iterator.next();
+		  commitKeysList.add((String)commitKey); 
+		}
+		return ok(views.html.commits.render(cr, commitKeysList, result));
+		
+	}
+	
+	 public void get_full_commits_data(String url) throws InterruptedException, ExecutionException {
+	    	WSRequest req = ws.url(url).addHeader("Authorization", "token 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");
+	    	req.addQueryParameter("per_page", "100");
+	    	req.addQueryParameter("page", "1");
+			req.setMethod("GET");
+			CompletionStage<JsonNode> resFromRequest = req.get().thenApply(result -> result.asJson());
+			fullCommitsResult = Json.toJson(resFromRequest.toCompletableFuture().get());
+	    }
 	
 
 

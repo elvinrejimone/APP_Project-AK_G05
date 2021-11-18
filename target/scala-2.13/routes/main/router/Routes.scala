@@ -44,6 +44,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """topic/""" + "$" + """topicname<[^/]+>""", """controllers.HomeController.topics(topicname:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """repo/""" + "$" + """query<[^/]+>/""" + "$" + """id<[^/]+>""", """controllers.HomeController.repoProfileRequestHandler(query:String, id:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """statistics/""", """controllers.HomeController.issues(request:Request)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """repos/""" + "$" + """ownerName<[^/]+>/""" + "$" + """repoName<[^/]+>/commits""", """controllers.HomeController.commits(ownerName:String, repoName:String)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
     case r @ (_,_,_) => s :+ r.asInstanceOf[(String,String,String)]
@@ -145,6 +146,24 @@ class Routes(
     )
   )
 
+  // @LINE:15
+  private[this] lazy val controllers_HomeController_commits5_route = Route("GET",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("repos/"), DynamicPart("ownerName", """[^/]+""",true), StaticPart("/"), DynamicPart("repoName", """[^/]+""",true), StaticPart("/commits")))
+  )
+  private[this] lazy val controllers_HomeController_commits5_invoker = createInvoker(
+    HomeController_1.commits(fakeValue[String], fakeValue[String]),
+    play.api.routing.HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.HomeController",
+      "commits",
+      Seq(classOf[String], classOf[String]),
+      "GET",
+      this.prefix + """repos/""" + "$" + """ownerName<[^/]+>/""" + "$" + """repoName<[^/]+>/commits""",
+      """""",
+      Seq()
+    )
+  )
+
 
   def routes: PartialFunction[RequestHeader, Handler] = {
   
@@ -178,6 +197,12 @@ class Routes(
       call { 
         controllers_HomeController_issues4_invoker.call(
           req => HomeController_1.issues(req))
+      }
+  
+    // @LINE:15
+    case controllers_HomeController_commits5_route(params@_) =>
+      call(params.fromPath[String]("ownerName", None), params.fromPath[String]("repoName", None)) { (ownerName, repoName) =>
+        controllers_HomeController_commits5_invoker.call(HomeController_1.commits(ownerName, repoName))
       }
   }
 }
