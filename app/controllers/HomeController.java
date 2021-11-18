@@ -57,6 +57,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     SearchResultHelper srHelper = new SearchResultHelper();
     CommitsResult cr;
 	public ArrayList<String> issueTitleList_controller = new ArrayList<>();
+	public ArrayList<String> issue_controller = new ArrayList<>(); 
 	LinkedHashMap<String, ArrayList<GithubResult>> topicResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
 	List<String> topicList = new ArrayList<>();
 	TopicResultHelper topicHelper = new TopicResultHelper();
@@ -156,15 +157,15 @@ public Result repoProfileRequestHandler(String queryString, String IDString) thr
 		Iterator iterator = stats.wordfrequency.keySet().iterator();
 		while(iterator.hasNext()){
 		  Object key   = iterator.next();
-		issueTitleList_controller.add((String)key); 
+		  issue_controller.add((String)key); 
 		int total_issues = TitleList.size();
-		al2 = new ArrayList<String>(issueTitleList_controller.subList(total_issues,issueTitleList_controller.size()-1));
+		
 		 }
 		// for (String i : al2){
-		// 	System.out.println("*********************");
+		// 	System.out.println("*******");
 		// 	System.out.println(i);
 		// }
-		return ok(views.html.issuesstats.render(Isseus_details,s,al2,stats.wordfrequency));
+		return ok(views.html.issuesstats.render(Isseus_details,s,issue_controller,stats.wordfrequency));
 	}
 	
 	public Result commits(String ownerName, String repoName) throws InterruptedException, ExecutionException {
