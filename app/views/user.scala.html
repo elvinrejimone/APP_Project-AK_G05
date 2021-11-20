@@ -13,12 +13,13 @@
           box-shadow: 0 0 20px rgba(0,0,0,0.1);">
             <thead style="background-color: #42a386; padding: 10px; height:50px ;">
       
-              <div style="border: 1px solid rgb(104, 207, 164); text-align: center;"><img src="@results.get(key)(0).ownerName" alt="Avatar" width="100" height="100"></div>
+              <div style="border: 1px solid rgb(104, 207, 164); text-align: center;"><span style=" font-size: 40px; margin-right: 100px;">User - @key</span><img src="@results.get(key)(0).ownerName" alt="Avatar" width="100" height="100"></div>
       
               <tr>
                 
                 <th style="border: 1px solid rgb(211, 211, 211);">Repositories</th>
                 <th style="border: 1px solid rgb(211, 211, 211);">Description</th>
+                <th style="border: 1px solid rgb(211, 211, 211);">Repo Topics</th>
                 
               </tr>
             </thead>
@@ -28,6 +29,11 @@
               <tr style="height: 50px ">
                 <td style="border: 1px solid rgb(104, 207, 164);">@obj.repoName</td>
                 <td style="border: 1px solid rgb(104, 207, 164);">@obj.repoID</td>
+                <td style="border: 1px solid rgb(104, 207, 164);">
+                  @for(topic <- obj.returnTopics()){
+                   <div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 3px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"> @topic </div> 
+                  }
+                </td>
               </tr>
               }
                
