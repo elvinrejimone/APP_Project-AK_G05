@@ -30,7 +30,6 @@ import play.libs.ws.WSBodyReadables;
 import play.libs.ws.WSBodyWritables;
 import play.libs.ws.WSRequest;
 import play.libs.ws.WSClient;
-import play.libs.ws.WSRequest;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -48,7 +47,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     private final AssetsFinder assetsFinder;
     
     
-    @Inject WSClient ws = null;
+    @Inject 
+	WSClient ws = null;
     Map.Entry<String, Integer> e ;
     JsonNode fullCommitsResult;
     List<JsonNode> response = new ArrayList<>();
@@ -57,7 +57,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     SearchResultHelper srHelper = new SearchResultHelper();
     CommitsResult cr;
 	public ArrayList<String> issueTitleList_controller = new ArrayList<>();
-	public ArrayList<String> issue_controller = new ArrayList<>(); 
+	public ArrayList<String> issue_controller;
 	LinkedHashMap<String, ArrayList<GithubResult>> topicResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
 	List<String> topicList = new ArrayList<>();
 	TopicResultHelper topicHelper = new TopicResultHelper();
@@ -161,27 +161,35 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	}
 	// Issues
 	public Result issues(Http.Request request) throws InterruptedException, ExecutionException {
-		ArrayList<String> TitleList = issueTitleList_controller;
-		StatisticsInfo obj = new StatisticsInfo();
-		StatsModel stats = obj.Calculate_Count(TitleList);
-		//System.out.println(stats.wordfrequency.getkeys());
-		for( Map.Entry<String, Integer> entry1 : stats.wordfrequency.entrySet() ){
-			System.out.println( entry1.getKey() + " => " + entry1.getValue() );
-		}
-		ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
-
-		Iterator iterator = stats.wordfrequency.keySet().iterator();
-		while(iterator.hasNext()){
-		  Object key   = iterator.next();
-		  issue_controller.add((String)key); 
-		int total_issues = TitleList.size();
-		
-		 }
+		issue_controller =new ArrayList<>(); 
 		// for (String i : al2){
 		// 	System.out.println("*******");
 		// 	System.out.println(i);
 		// }
-		return ok(views.html.issuesstats.render(Isseus_details,issue_controller,stats.wordfrequency));
+		//return ok(views.html.issuesstats.render(Isseus_details,issue_controller,stats.wordfrequency));
+		if(issueTitleList_controller.isEmpty())
+			return ok(views.html.no_issues.render());
+			
+			else {
+				
+			ArrayList<String> TitleList = issueTitleList_controller;
+			StatisticsInfo obj = new StatisticsInfo();
+			StatsModel stats = obj.Calculate_Count(TitleList);
+			//System.out.println(stats.wordfrequency.getkeys());
+			for( Map.Entry<String, Integer> entry1 : stats.wordfrequency.entrySet() ){
+				System.out.println( entry1.getKey() + " => " + entry1.getValue() );
+			}
+			ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
+
+			Iterator iterator = stats.wordfrequency.keySet().iterator();
+			while(iterator.hasNext()){
+			Object key   = iterator.next();
+			issue_controller.add((String)key);
+		 }
+		 int total_issues = TitleList.size();
+			return ok(views.html.issuesstats.render(Isseus_details,issue_controller,stats.wordfrequency));
+			}
+				
 	}
 	
 	public Result commits(String ownerName, String repoName) throws InterruptedException, ExecutionException {
