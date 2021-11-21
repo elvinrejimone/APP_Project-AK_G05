@@ -4,19 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import play.libs.Json;
-import play.libs.ws.WSClient;
-import play.libs.ws.WSRequest;
-
+/**
+ * @author ujjawal
+ * Helps to find the user repositories and other details 
+ */
 public class UserResultHelper{
 	
 	  
@@ -27,6 +23,14 @@ public class UserResultHelper{
     
     
     
+	/**
+	 * filters the data based on query
+	 * @param query for searching the value in input box
+	 * @param obj data from github
+	 * @return returns the value
+	 * @throws InterruptedException 
+	 * @throws ExecutionException
+	 */
 	public LinkedHashMap<String, ArrayList<GithubResult>> getUserResult(String query, JsonNode obj) throws InterruptedException, ExecutionException {
 		List<GithubResult> records = new ArrayList<GithubResult>();
 		System.out.println("Size of Obj :: "+obj.size());
