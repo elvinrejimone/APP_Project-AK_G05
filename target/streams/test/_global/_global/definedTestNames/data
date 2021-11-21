@@ -1,1 +1,1 @@
-["controllers.TopicResultHelperTest","controllers.HomeControllerTest"]
+["Model.SearchResultHelperTest","Model.CommitsResultTest"]

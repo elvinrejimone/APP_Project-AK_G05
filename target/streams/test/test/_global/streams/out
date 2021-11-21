@@ -2,26 +2,34 @@
 [0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
 [0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
 [0m[[0m[0mdebug[0m] [0m[0mRunner for com.novocode.junit.JUnitFramework produced 2 initial tasks for 2 tests.[0m
-[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.TopicResultHelperTest, sbt.ForkMain$AnnotatedFingerscan@6fa501e6, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.SearchResultHelperTest, sbt.ForkMain$AnnotatedFingerscan@2800bc4f, false, [SuiteSelector])[0m
 [0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
-[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mTopicResultHelperTest[0m.[36mtestTopic[0m started[0m
-[0m[[0m[31merror[0m] [0m[0mTest controllers.[33mTopicResultHelperTest[0m.[31mtestTopic[0m failed: java.lang.[31mNullPointerException[0m: null, took 0.263 sec[0m
-[0m[[0m[31merror[0m] [0m[0m    at Models.TopicResultHelper.getArrayofGithubResult(TopicResultHelper.java:35)[0m
-[0m[[0m[31merror[0m] [0m[0m    at controllers.TopicResultHelperTest.testTopic([35mTopicResultHelperTest.java[0m:[33m37[0m)[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mSearchResultHelperTest[0m.[36mobjectCreationandDataTest[0m started[0m
+[0m[[0m[31merror[0m] [0m[0mTest Model.[33mSearchResultHelperTest[0m.[31mobjectCreationandDataTest[0m failed: java.lang.[31mIndexOutOfBoundsException[0m: Index 0 out of bounds for length 0, took 0.011 sec[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)[0m
+[0m[[0m[31merror[0m] [0m[0m    at java.util.Objects.checkIndex(Objects.java:372)[0m
+[0m[[0m[31merror[0m] [0m[0m    at java.util.ArrayList.get(ArrayList.java:459)[0m
+[0m[[0m[31merror[0m] [0m[0m    at Model.SearchResultHelperTest.objectCreationandDataTest([35mSearchResultHelperTest.java[0m:[33m41[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)[0m
+[0m[[0m[31merror[0m] [0m[0m    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)[0m
+[0m[[0m[31merror[0m] [0m[0m    at java.lang.reflect.Method.invoke(Method.java:566)[0m
 [0m[[0m[31merror[0m] [0m[0m    ...[0m
-[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mTopicResultHelperTest[0m.[36mtestTopic[0m finished, took 0.264 sec[0m
-[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[31m1 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.264s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mSearchResultHelperTest[0m.[36mobjectCreationandDataTest[0m finished, took 0.014 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[31m1 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.667s[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
-[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.HomeControllerTest, sbt.ForkMain$AnnotatedFingerscan@a3f52bd, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.CommitsResultTest, sbt.ForkMain$AnnotatedFingerscan@2ad85d77, false, [SuiteSelector])[0m
 [0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
-[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m started[0m
-[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m finished, took 4.329 sec[0m
-[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 4.329s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mCommitsResultTest[0m.[36mtestCommitsApi[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mCommitsResultTest[0m.[36mtestCommitsApi[0m finished, took 0.001 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.008s[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
 [0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
 [0m[[0m[31merror[0m] [0m[0mFailed: Total 2, Failed 1, Errors 0, Passed 1[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	controllers.HomeControllerTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Model.CommitsResultTest[0m
 [0m[[0m[31merror[0m] [0m[0mFailed tests:[0m
-[0m[[0m[31merror[0m] [0m[0m	controllers.TopicResultHelperTest[0m
+[0m[[0m[31merror[0m] [0m[0m	Model.SearchResultHelperTest[0m
 [0m[[0m[31merror[0m] [0m[0m(Test / [31mtest[0m) sbt.TestsFailedException: Tests unsuccessful[0m

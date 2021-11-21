@@ -1,5 +1,10 @@
 package Models;
 
+/**
+ * Class for Issue Values in Repository Profile Page
+ * @author Elvin Rejimone
+ *
+ */
 public class RepoIssue{
 	
 	public String issueTitle;
@@ -10,6 +15,15 @@ public class RepoIssue{
 	public String issueNumber;
 
 	
+	/**
+	 * Constructor to create Indivudual Issues
+	 * @param title
+	 * @param body
+	 * @param created
+	 * @param state
+	 * @param issueNo
+	 * @author Elvin Rejimone
+	 */
 	public RepoIssue(String title, String body, String created, String state, String issueNo) {
 		issueTitle = title.substring(1, title.length()-1);;
 		issueBody = body.substring(1, body.length()-1);;

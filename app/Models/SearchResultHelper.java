@@ -1,11 +1,5 @@
 package Models;
-/**
- * This controller contains an action to handle HTTP requests
- * to the application's home page.
- *
- * @author Elvin Rejimone, Santhosh Santhanam, Anushka Sharma, Ujjawal Aggarwal, Sejal Chopra
- * @version 1.0.0
- */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -23,24 +17,29 @@ import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSRequest;
 
+/**
+ * Class with functions and parameters to facilitate Searched Data Processing and Creation of GithubResult
+ * @author Elvin Rejimone
+ *
+ */
 public class SearchResultHelper{
 	
-	/**
-     * Defining the required paramenters
-     */ 
+	  
     public ArrayList<String> allSearches = new ArrayList<>();
     LinkedHashMap<String, ArrayList<GithubResult>> allResult = new LinkedHashMap<String, ArrayList<GithubResult>>();
     public HashMap<String, JsonNode> fullSearchData = new HashMap<String, JsonNode>();
 
     
-    
-    
+     
 	/**
+	 * Function that takes Response Object of type JsonNode and creates the List of GithubResult Objects and appends it to allResult and FullSearchData .
+	 * It returns allResult of Type LinkedHashMap<String, ArrayList<GithubResult>>
 	 * @param query
 	 * @param obj
-	 * @return allResult
+	 * @return LinkedHashMap<String, ArrayList<GithubResult>> allResult
 	 * @throws InterruptedException
 	 * @throws ExecutionException
+	 * @author Elvin Rejimone
 	 */
 	public LinkedHashMap<String, ArrayList<GithubResult>> getArrayofGithubResult(String query, JsonNode obj) throws InterruptedException, ExecutionException {
 		List<GithubResult> records = new ArrayList<GithubResult>();
@@ -56,15 +55,16 @@ public class SearchResultHelper{
 				.limit(10)
 				.collect(Collectors.toList());
 		addToTotalSearchList(query, (ArrayList<GithubResult>) records);
-		
+		System.out.println(allResult);
 		return allResult;
 	}
 	
 	/**
+	 * Function to add a GithubResult object to search result variable allResult and limit it to 10 results in total
+	 * Also checks for duplicated result and overwrites it in the correct position
 	 * @param query
 	 * @param singleRecord
-	 * 
-	 * Adds the last 10 search queries to the home page
+	 *  @author Elvin Rejimone
 	 */
 	public void addToTotalSearchList(String query, ArrayList<GithubResult> singleRecord) {
 		

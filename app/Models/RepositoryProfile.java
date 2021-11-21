@@ -7,6 +7,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+/**
+ * Class to handle all Data and Helper Functions to Get and Process data for Repository Profile Page
+ * @author Elvin Rejimone
+ *
+ */
 public class RepositoryProfile {
 		
 	public String queryString;
@@ -35,6 +40,15 @@ public class RepositoryProfile {
 	int count=0;
 
 	
+	/**
+	 * Constructor to create RepositoryProfile Object which will contain all Details of a Repository
+	 * @param obj
+	 * @param query
+	 * @param id
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @author Elvin Rejimone
+	 */
 	public RepositoryProfile(JsonNode obj, String query, String id) throws InterruptedException, ExecutionException {
 		queryString =query;
 		repoID = id;
@@ -65,6 +79,13 @@ public class RepositoryProfile {
 	
 	
 	
+	/**
+	 * Function to get JsonNode result and extract Issues and Collaborators and call their respective constructors to create Objects
+	 * @param obj
+	 * @param option
+	 * @return boolean To indicate success of results 
+	 * @author Elvin Rejimone
+	 */
 	public boolean getDataFromResult(JsonNode obj, String option) {
 		int count=0;
 		
@@ -79,7 +100,7 @@ public class RepositoryProfile {
 					count++;
 				}				
 			}
-			
+			return true;
 			
 		}else if(option.equals("Collab")) {
 			
@@ -87,10 +108,18 @@ public class RepositoryProfile {
 				RepoCollaborator contributor = new RepoCollaborator(data.get("login").toString(), data.get("id").toString(), data.get("contributions").toString(), data.get("avatar_url").toString());
 				collabList.add(contributor);
 			}
+			return true;
 		}
-		return true;
+		return false;
 	}
-	 public ArrayList<String> getTopicsList(){
+	
+	 
+	/**
+	 * Function to return Topics
+	 * @return List of Topics
+	 * @author Elvin Rejimone
+	 */
+	public ArrayList<String> getTopicsList(){
 		 return topics;
 	 };
 }
