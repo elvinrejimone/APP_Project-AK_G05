@@ -27,7 +27,7 @@
               
               @for(obj <- results.get(key) ){
               <tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);">@obj.repoName</td>
+                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/java/63477660">@obj.repoName</a></td>
                 <td style="border: 1px solid rgb(104, 207, 164);">@obj.repoID</td>
                 <td style="border: 1px solid rgb(104, 207, 164);">
                   @for(topic <- obj.returnTopics()){
