@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ["sbt.Task[scala.collection.Seq[java.nio.file.Path]]",["/home/ujjawal/Desktop/last/APP_Project-AK_G05/target/streams/test/compileOutputs/_global/streams/inc_compile_2.13.zip"]]
+=======
+["sbt.Task[scala.collection.Seq[java.nio.file.Path]]",["D:\\Concordia\\APP\\APP_Project\\APP_Project-AK_G05\\target\\scala-2.13\\test-classes\\Model\\TopicResultHelperTest.class","D:\\Concordia\\APP\\APP_Project\\APP_Project-AK_G05\\target\\streams\\test\\compileOutputs\\_global\\streams\\inc_compile_2.13.zip"]]
+>>>>>>> bed0182985b961135bf1e212987939a561513e52
