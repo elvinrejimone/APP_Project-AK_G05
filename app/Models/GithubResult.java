@@ -1,5 +1,11 @@
 package Models;
-
+/**
+ * This class contains the required getter methods
+ * to the application's home page.
+ *
+ * @author Elvin Rejimone, Santhosh Santhanam, Anushka Sharma, Ujjawal Aggarwal, Sejal Chopra
+ * @version 1.0.0
+ */
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,14 +28,23 @@ public class GithubResult{
 		repoID= id;
 	}
 
+	/**
+	 * @return repoName
+	 */
 	public String getRepoName() {
 		return repoName;
 	}
 	
+	/**
+	 * @return ownerName
+	 */
 	public String getOwnerName() {
 		return ownerName;
 	}
 	
+	/**
+	 * @return topics
+	 */
 	public ArrayList<String> returnTopics(){
 		return topics;
 	}

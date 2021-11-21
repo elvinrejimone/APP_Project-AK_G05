@@ -146,7 +146,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * in the same format as the results on the main search page.
 	 * @author Sejal Chopra
 	 * @param request
-	 * @return
+	 * @return views.html.topic
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */

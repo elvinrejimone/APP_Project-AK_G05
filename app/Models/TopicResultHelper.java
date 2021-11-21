@@ -1,4 +1,11 @@
 package Models;
+/**
+ * This class contains methods to format the data fetched from response and limit the search reults to 10
+ * to the application's home page.
+ *
+ * @author  Sejal Chopra
+ * @version 1.0.0
+ */
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,9 +24,13 @@ import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSRequest;
 
+
 public class TopicResultHelper{
-	
+	/**
+     * Defining the variables to be used
+     */
 	  
+    
     public ArrayList<String> allSearches = new ArrayList<>();
     LinkedHashMap<String, ArrayList<GithubResult>> allResult = new LinkedHashMap<String, ArrayList<GithubResult>>();
     public HashMap<String, JsonNode> fullSearchData = new HashMap<String, JsonNode>();
@@ -27,6 +38,15 @@ public class TopicResultHelper{
     
     
     
+	/**
+	 * @param query
+	 * @param obj
+	 * @return allResults
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * 
+	 * This methods parses the required data from the API response and adds it to a list
+	 */
 	public LinkedHashMap<String, ArrayList<GithubResult>> getArrayofGithubResult(String query, JsonNode obj) throws InterruptedException, ExecutionException {
 		List<GithubResult> records = new ArrayList<GithubResult>();
 		System.out.println("Size of Obj :: "+obj.size());
@@ -45,6 +65,12 @@ public class TopicResultHelper{
 		return allResult;
 	}
 	
+	/**
+	 * @param query
+	 * @param singleRecord
+	 * 
+	 * Keeps only the latest topic results clicked by the user
+	 */
 	public void addToTotalSearchList(String query, ArrayList<GithubResult> singleRecord) {
 		
 			if(allSearches.size()==1) {
