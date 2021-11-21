@@ -80,7 +80,6 @@ public class RepositoryProfile {
 				}				
 			}
 			
-			System.out.println("IssueTitleList :: "+ issueTitleList.toString());
 			
 		}else if(option.equals("Collab")) {
 			

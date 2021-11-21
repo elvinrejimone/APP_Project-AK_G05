@@ -39,40 +39,38 @@ Seq[Any](format.raw/*1.87*/("""
 	  font-size: 30px;">
     
   		<h2> Repository Commit Statistics</h2>
-
+	</div>
 		  <div class="container" style="display: flex;justify-content: center; ">
-			<div style="padding: 5px;margin: 20px;background-color: #dee2e1;;border-radius: 5px;">
+			<div style="padding: 5px;margin: 20px;background-color:color:rgb(18, 105, 69);border-radius: 5px;">
 			  <table style="
 				border-collapse: collapse;
 				box-shadow: 0 0 20px rgba(0,0,0,0.1);">
-				 <!-- <thead style="background-color: #42a386; padding: 10px; height:50px ;">
-					<tr>
-					  <th style="border: 1px solid rgb(211, 211, 211);">Repository</th>
-					  <th  style="border: 1px solid rgb(211, 211, 211);">Owner</th>
-	  
-					</tr>
-				  </thead> -->
+				  
 				  <tbody style="background-color: #dee2e1; text-align: center;">
-					<tr style="height: 50px ">
+					<tr style="height: 50px ;border: 1px solid rgb(20, 107, 71);">
 						<td style="background-color: rgb(20, 107, 71);color: #dee2e1;width: 200px;">Maximum no.of additions </td>
-						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*27.60*/results/*27.67*/.maxAdd),format.raw/*27.74*/("""</td>
-  
+						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*21.60*/results/*21.67*/.maxAdd),format.raw/*21.74*/("""</td>
+  					</tr> 
+  					<tr   style="height: 50px ;border: 1px solid rgb(20, 107, 71);">
 						<td style="background-color: rgb(20, 107, 71);color: #dee2e1;width: 200px;">Minimum no.of additions</td>
-						<td style="background-color: #dee2e1; width: 200px;">"""),_display_(/*30.61*/results/*30.68*/.minAdd),format.raw/*30.75*/("""</td>
-
+						<td style="background-color: #dee2e1; width: 200px;">"""),_display_(/*25.61*/results/*25.68*/.minAdd),format.raw/*25.75*/("""</td>
+					</tr>
+					<tr  style="height: 50px ;border: 1px solid rgb(20, 107, 71);">
 						<td style="background-color: rgb(20, 107, 71);color: #dee2e1;width: 200px;">Average no.of additions </td>
-						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*33.60*/results/*33.67*/.avgAdd),format.raw/*33.74*/("""</td>
-					  </tr> 
+						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*29.60*/results/*29.67*/.avgAdd),format.raw/*29.74*/("""</td>
+					 </tr> 
 
-					  <tr style="height: 50px ">
+					  <tr  style="height: 50px ;border: 1px solid rgb(20, 107, 71);">
 						<td style="background-color: rgb(20, 107, 71);color: #dee2e1;width: 200px;">Maximum no.of deletions</td>
-						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*38.60*/results/*38.67*/.maxDel),format.raw/*38.74*/("""</td>
-  
+						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*34.60*/results/*34.67*/.maxDel),format.raw/*34.74*/("""</td>
+  					  </tr>
+  					   <tr  style="height: 50px ;border: 1px solid rgb(20, 107, 71);">
 						<td style="background-color: rgb(20, 107, 71);color: #dee2e1;width: 200px;">Minumum no.of deletions</td>
-						<td style="background-color: #dee2e1; width: 200px;">"""),_display_(/*41.61*/results/*41.68*/.minDel),format.raw/*41.75*/("""</td>
-
+						<td style="background-color: #dee2e1; width: 200px;">"""),_display_(/*38.61*/results/*38.68*/.minDel),format.raw/*38.75*/("""</td>
+						</tr>
+						<tr  style="height: 50px ;border: 1px solid rgb(20, 107, 71);">
 						<td style="background-color: rgb(20, 107, 71);color: #dee2e1;width: 200px;">Average no.of deletions</td>
-						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*44.60*/results/*44.67*/.avgDel),format.raw/*44.74*/("""</td>
+						<td style="background-color: #dee2e1;width: 200px;">"""),_display_(/*42.60*/results/*42.67*/.avgDel),format.raw/*42.74*/("""</td>
 					  </tr> 
 
  
@@ -80,11 +78,12 @@ Seq[Any](format.raw/*1.87*/("""
 				</table>
 			</div>
 
-		</div>
-	 <h5 style="margin-left: 25px;">Showing Top """),_display_(/*53.47*/keys/*53.51*/.size()),format.raw/*53.58*/(""" """),format.raw/*53.59*/("""users with highest no.of commits</h5>
+	
+	
 	 
-      <div class="container" style="display: flex;justify-content: center; ">
+    
       <div style="padding: 0px 40px 40px 40px;margin: 20px;background-color: rgb(211, 211, 211);border-radius: 5px;">
+    <center>   <h3 style="margin-left: 25px; color:rgb(18, 105, 69);">Showing Top """),_display_(/*55.84*/keys/*55.88*/.size()),format.raw/*55.95*/(""" """),format.raw/*55.96*/("""users with highest no.of commits</h3> </center>
         <table style="width:800px;
           border-collapse: collapse;
           border: 1px solid #ddd;
@@ -98,22 +97,35 @@ Seq[Any](format.raw/*1.87*/("""
             </thead>
             <tbody style="background-color: #dee2e1; text-align: center;">
               
-             """),_display_(/*70.15*/for(key<-keys) yield /*70.29*/{_display_(Seq[Any](format.raw/*70.30*/("""
-					"""),format.raw/*71.6*/("""<tr style="height: 50px ">									
-						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*72.99*/key),format.raw/*72.102*/("""</td>
-						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*73.99*/commitData/*73.109*/.get(key)),format.raw/*73.118*/("""</td>	
-						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;"><a href = "/">"""),_display_(/*74.113*/key),format.raw/*74.116*/("""</td>					
+             """),_display_(/*69.15*/for(key<-keys) yield /*69.29*/{_display_(Seq[Any](format.raw/*69.30*/("""
+					"""),format.raw/*70.6*/("""<tr style="height: 50px ">									
+						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*71.99*/key),format.raw/*71.102*/("""</td>
+						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;">"""),_display_(/*72.99*/commitData/*72.109*/.get(key)),format.raw/*72.118*/("""</td>	
+						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 30px;"><a href='/user/"""),_display_(/*73.114*/key),format.raw/*73.117*/("""'>"""),_display_(/*73.120*/key),format.raw/*73.123*/("""</td>					
 					</tr>				
-				""")))}),format.raw/*76.6*/("""
+				""")))}),format.raw/*75.6*/("""
                
             
-            """),format.raw/*79.13*/("""</tbody> 
+            """),format.raw/*78.13*/("""</tbody> 
           </table>
         </div>
          </div>
 	
 		
 </section>
+
+	<button style="display: block;
+	position: fixed;
+	top: 20px;
+	left: 30px;
+	z-index: 99;
+	font-size: 15px;
+	border: none;
+	outline: none;
+	background-color: rgb(218, 218, 218);
+	color: rgb(7, 75, 18) ;
+	cursor: pointer;
+	padding: 5px;" onclick="history.back()" title="Go Back"> ⬅ Back </button>
 """))
       }
     }
@@ -131,9 +143,9 @@ Seq[Any](format.raw/*1.87*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/commits.scala.html
-                  HASH: 63828f6e1cece405758d5871d532e487f4a3aaf1
-                  MATRIX: 957->1|1137->86|1167->90|2343->1239|2359->1246|2387->1253|2597->1436|2613->1443|2641->1450|2849->1631|2865->1638|2893->1645|3150->1875|3166->1882|3194->1889|3404->2072|3420->2079|3448->2086|3655->2266|3671->2273|3699->2280|3853->2407|3866->2411|3894->2418|3923->2419|4853->3322|4883->3336|4922->3337|4956->3344|5118->3479|5143->3482|5275->3587|5295->3597|5326->3606|5474->3726|5499->3729|5562->3762|5635->3807
-                  LINES: 27->1|32->1|34->3|58->27|58->27|58->27|61->30|61->30|61->30|64->33|64->33|64->33|69->38|69->38|69->38|72->41|72->41|72->41|75->44|75->44|75->44|84->53|84->53|84->53|84->53|101->70|101->70|101->70|102->71|103->72|103->72|104->73|104->73|104->73|105->74|105->74|107->76|110->79
+                  HASH: 3c432fbfffeb026f3bad6da7e83c52486c52bb67
+                  MATRIX: 957->1|1137->86|1167->90|2132->1028|2148->1035|2176->1042|2470->1309|2486->1316|2514->1323|2802->1584|2818->1591|2846->1598|3139->1864|3155->1871|3183->1878|3480->2148|3496->2155|3524->2162|3813->2424|3829->2431|3857->2438|4173->2727|4186->2731|4214->2738|4243->2739|4981->3450|5011->3464|5050->3465|5084->3472|5246->3607|5271->3610|5403->3715|5423->3725|5454->3734|5603->3855|5628->3858|5659->3861|5684->3864|5747->3897|5820->3942
+                  LINES: 27->1|32->1|34->3|52->21|52->21|52->21|56->25|56->25|56->25|60->29|60->29|60->29|65->34|65->34|65->34|69->38|69->38|69->38|73->42|73->42|73->42|86->55|86->55|86->55|86->55|100->69|100->69|100->69|101->70|102->71|102->71|103->72|103->72|103->72|104->73|104->73|104->73|104->73|106->75|109->78
                   -- GENERATED --
               */
           

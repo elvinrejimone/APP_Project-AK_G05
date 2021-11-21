@@ -6,20 +6,24 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import Models.GithubResult;
 
 public class Cache {
-	private Map<String,List<GithubResult>> cache;
+	private Map<String, JsonNode> cache;
 		public Cache() { 
 			cache = new HashMap<>();
 		}
-		public void put(String key,List<GithubResult> issues) {
-			cache.putIfAbsent(key, issues);
+		public void put(String key,JsonNode results) {
+			cache.putIfAbsent(key, results);
 		}
-		public List<GithubResult> get(String key){
-			return cache.getOrDefault(key,new ArrayList<>());
+				
+		public JsonNode get(String key){
+			return cache.get(key);
 		}	
-		public CompletionStage<List<GithubResult>> getOrElseUpdate(String key,Callable<CompletionStage<List<GithubResult>>> block){
+		public CompletionStage<JsonNode> getOrElseUpdate(String key,Callable<CompletionStage<JsonNode>> block){
 			if(!this.get(key).isEmpty()) {
 				return CompletableFuture.supplyAsync(()-> this.get(key));
 			}else {
@@ -30,7 +34,7 @@ public class Cache {
 					});
 				} catch (Exception e) {
 					e.printStackTrace();
-					return CompletableFuture.supplyAsync(()-> new ArrayList<>());
+					return CompletableFuture.supplyAsync(()-> null);
 				}
 			}
 		}

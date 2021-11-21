@@ -46,15 +46,20 @@ public class SearchResultHelper{
 	}
 	
 	public void addToTotalSearchList(String query, ArrayList<GithubResult> singleRecord) {
-		if(!allSearches.contains(query)) {
-			if(allSearches.size()==10) {
-				String removingQuery = allSearches.get(0);
-				allResult.remove(removingQuery);
-				allSearches.remove(0);
-			}
-			allSearches.add(query);
-			allResult.put(query, singleRecord);
+		
+		if(allSearches.contains(query)) {
+			allResult.remove(query);
+			allSearches.remove(allSearches.indexOf(query));
 		}
+		
+		if(allSearches.size()==10) {
+			String removingQuery = allSearches.get(0);
+			allResult.remove(removingQuery);
+			allSearches.remove(0);
+		}
+		allSearches.add(query);
+		allResult.put(query, singleRecord);
+		
 	System.out.println(allSearches.toString());
 	}
 

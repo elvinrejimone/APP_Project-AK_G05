@@ -1,6 +1,9 @@
 @(Details: Models.RepositoryProfile)
 
+<head>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
   <div class="header" style="padding: 30px;
 	  text-align: center;
@@ -134,7 +137,7 @@
 			cursor: pointer;" > Collaborators 👨‍💻 </button>
 			
 			<button
-			onclick="window.location.href='/repos/@Details.ownerName/@Details.repoName/commits';"
+			onclick="onCommitsClicked()"
 			style="background-color: #075c4e;
 			border: none;
 			color: white;
@@ -176,6 +179,9 @@
 		
 
  	 </div>
+ 	 <section id="CommitsLoading" style="display:none; margin: 0;font-family: sans-serif;font-weight: 100;">
+ 		<center> <h3> <i class="fa fa-spinner fa-spin"></i> Loading  </h3> </center>
+ 	 </section>
 
 
   
@@ -265,7 +271,7 @@
 						<td style="border: 1px solid rgb(104, 207, 164);background-color: #dee2e1; padding: 20px;">
 						
 							<button
-							onclick="window.location.href='/';"
+							onclick="window.location.href='/user/@Collaborator.ContributorName'"
 							style="background-color: #ca1d65;
 							border: none;
 							color: white;
@@ -336,4 +342,13 @@
 	  document.body.scrollTop = 0;
 	  document.documentElement.scrollTop = 0;
 	}
+	
+	//When Commits is Clicked 
+	function onCommitsClicked() {
+	 //Display Loader
+		var commitLoader = document.getElementById("CommitsLoading");	
+		commitLoader.style.display = "block";	
+		window.location.href='/repos/@Details.ownerName/@Details.repoName/commits';
+	}
+	
 	</script>

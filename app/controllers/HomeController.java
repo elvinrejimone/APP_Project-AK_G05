@@ -45,7 +45,7 @@ import Utils.Cache;
 public class HomeController extends Controller implements WSBodyReadables, WSBodyWritables {
 
     private final AssetsFinder assetsFinder;
-    
+    private Cache cache;
     
     @Inject 
 	WSClient ws = null;
@@ -64,9 +64,10 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	List<String> userList = new ArrayList<>();
 	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2 ;
-    @Inject
-    public HomeController(AssetsFinder assetsFinder) {
+	@Inject
+    public HomeController(AssetsFinder assetsFinder, Cache cache) {
         this.assetsFinder = assetsFinder;
+        this.cache= cache;
     }
     /**
      * An action that renders an HTML page with a welcome message.
@@ -74,11 +75,11 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
      * this method will be called when the application receives a
      * <code>GET</code> request with a path of <code>/</code>.
      */
-    public Result index(Http.Request request) throws InterruptedException, ExecutionException {
+	public Result index(Http.Request request) throws InterruptedException, ExecutionException {
     	System.out.println(request.queryString("search"));
-    	boolean str = request.queryString("search").isPresent();
+    	
 		if(!request.queryString("search").isPresent()) {
-    		return ok(views.html.index.render(allResultList, keysList, str));
+    		return ok(views.html.index.render(allResultList, keysList));
     	}
     	else 
     	{	
@@ -86,21 +87,29 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     		keysList.clear();
     		keysList.addAll((allResultList.keySet()));
     		Collections.reverse(keysList);
-//    		return ok(Json.prettyPrint(Json.toJson(this.response)));
-    		return ok(views.html.index.render(allResultList, keysList,str));
+    		return ok(views.html.index.render(allResultList, keysList));
     	}
         
     }
     
     public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
-    	System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
-    	System.out.println();
     	WSRequest req=null;
     	LinkedHashMap<String, ArrayList<GithubResult>> finalList=null;
 		if(type==1) {
-			req = ws.url("https://api.github.com/search/repositories?q=" + query);
-			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-			JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+			String querytoCheckCache = "https://api.github.com/search/repositories?q=" + query; 
+			JsonNode obj = cache.get(querytoCheckCache);
+			if(obj!= null) {
+				System.out.println("Taking from Cache");
+			}else {
+				System.out.println("Not Found in Cache, requesting and Storing in Cache");
+				System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
+		    	System.out.println();
+				req = ws.url("https://api.github.com/search/repositories?q=" + query);
+				CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+				obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+				cache.put(querytoCheckCache, obj);
+			}
+			
 			finalList= srHelper.getArrayofGithubResult(query, obj);
 		}
 		else if (type==2) {
@@ -139,6 +148,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		
 	    
 	}
+    
+    //Repository Profile
 	public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
 		
     	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	
@@ -153,12 +164,21 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	
 	public boolean githubIssueResultHelper(String query, RepositoryProfile rp, String Option) throws InterruptedException, ExecutionException {
 		System.out.println("Query : " + query);
-		WSRequest req = ws.url(query);
-		req.setMethod("GET");
-		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-		JsonNode obj = Json.toJson(res.toCompletableFuture().get());
+		
+		JsonNode obj = cache.get(query);
+		if(obj!= null) {
+			System.out.println("Taking from Cache");
+		}else {
+			System.out.println("Not Available In Cache, Query Github API and Storing Result in Cache");
+			WSRequest req = ws.url(query);
+			req.setMethod("GET");
+			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+			obj = Json.toJson(res.toCompletableFuture().get());
+			cache.put(query, obj);
+		}
 		return rp.getDataFromResult(obj, Option);
 	}
+	
 	// Issues
 	public Result issues(Http.Request request) throws InterruptedException, ExecutionException {
 		issue_controller =new ArrayList<>(); 
@@ -255,12 +275,22 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	}
 	
 	 public void get_full_commits_data(String url) throws InterruptedException, ExecutionException {
+		 	System.out.println("Query : " + url);
+			
+			fullCommitsResult = cache.get(url);
+			if(fullCommitsResult!= null) {
+				System.out.println("Taking from Cache");
+			}else {
+				
+			System.out.println("Not Available In Cache, Query Github API and Storing Result in Cache");
 	    	WSRequest req = ws.url(url).addHeader("Authorization", "token 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");
 	    	req.addQueryParameter("per_page", "100");
 	    	req.addQueryParameter("page", "1");
 			req.setMethod("GET");
 			CompletionStage<JsonNode> resFromRequest = req.get().thenApply(result -> result.asJson());
 			fullCommitsResult = Json.toJson(resFromRequest.toCompletableFuture().get());
+			cache.put(url, fullCommitsResult);
+			}
 	    }
 	
 

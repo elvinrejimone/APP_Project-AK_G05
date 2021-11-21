@@ -21,22 +21,22 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 import scala.jdk.CollectionConverters._
 
-object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],Boolean,play.twirl.api.HtmlFormat.Appendable] {
+object index extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String], str: Boolean):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(results: LinkedHashMap[String, ArrayList[Models.GithubResult]], keys: List[String]):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.100*/("""
+Seq[Any](format.raw/*1.86*/("""
 
 """),format.raw/*3.1*/("""<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
   <div class="header">
     
       <div style="border:dotted 0.1px white;text-align:center">
       		
-      		<h1>Search <span style=" font-size: 30px;">Github</span> </h1>
+      		<h1 style="font-size: 50px;" ><span style=" font-size: 50px; font-family: Georgia;">Gitterific</span> </h1>
       		<form name="search" id="form" action="/" method="GET">
 	      	<input style="text-align: left;margin: 0 px 10px;padding: 15px; font-size: 20px;" id="user" name="search" type="text" placeholder="enter name">
 	      	<button style="background-color: #42a386;
@@ -99,16 +99,16 @@ Seq[Any](format.raw/*1.100*/("""
         """)))}),format.raw/*68.10*/("""
 
 """)))}),format.raw/*70.2*/("""
-  
-"""),format.raw/*72.1*/("""</section>
+"""),format.raw/*71.1*/("""</section>
+
 """))
       }
     }
   }
 
-  def render(results:LinkedHashMap[String, ArrayList[Models.GithubResult]],keys:List[String],str:Boolean): play.twirl.api.HtmlFormat.Appendable = apply(results,keys,str)
+  def render(results:LinkedHashMap[String, ArrayList[Models.GithubResult]],keys:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(results,keys)
 
-  def f:((LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String],Boolean) => play.twirl.api.HtmlFormat.Appendable) = (results,keys,str) => apply(results,keys,str)
+  def f:((LinkedHashMap[String, ArrayList[Models.GithubResult]],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (results,keys) => apply(results,keys)
 
   def ref: this.type = this
 
@@ -118,9 +118,9 @@ Seq[Any](format.raw/*1.100*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: 8f3ba6bf6e95d5ffd9e9d3de397e89959c885ba0
-                  MATRIX: 975->1|1169->99|1199->103|2171->1049|2202->1071|2242->1073|2273->1077|2340->1117|2353->1121|2381->1128|2410->1129|2466->1159|2498->1175|2537->1176|2572->1184|2885->1470|2909->1473|3619->2156|3664->2185|3703->2186|3749->2204|3886->2314|3898->2317|3929->2327|3959->2330|3972->2333|4004->2343|4124->2436|4136->2439|4169->2451|4199->2453|4212->2456|4241->2463|4272->2466|4285->2469|4316->2478|4441->2576|4489->2608|4528->2609|4577->2630|4811->2836|4838->2841|4870->2845|4897->2850|4961->2883|5007->2901|5081->2944|5154->2989|5268->3072|5303->3077|5336->3083
-                  LINES: 27->1|32->1|34->3|58->27|58->27|58->27|59->28|59->28|59->28|59->28|59->28|63->32|63->32|63->32|64->33|66->35|66->35|81->50|81->50|81->50|82->51|83->52|83->52|83->52|83->52|83->52|83->52|84->53|84->53|84->53|84->53|84->53|84->53|84->53|84->53|84->53|86->55|86->55|86->55|87->56|87->56|87->56|87->56|87->56|88->57|89->58|91->60|94->63|99->68|101->70|103->72
+                  HASH: 3f682e35f5a5e99a00a02b8962249878d1d22e3b
+                  MATRIX: 967->1|1146->85|1176->89|2193->1080|2224->1102|2264->1104|2295->1108|2362->1148|2375->1152|2403->1159|2432->1160|2488->1190|2520->1206|2559->1207|2594->1215|2907->1501|2931->1504|3641->2187|3686->2216|3725->2217|3771->2235|3908->2345|3920->2348|3951->2358|3981->2361|3994->2364|4026->2374|4146->2467|4158->2470|4191->2482|4221->2484|4234->2487|4263->2494|4294->2497|4307->2500|4338->2509|4463->2607|4511->2639|4550->2640|4599->2661|4833->2867|4860->2872|4892->2876|4919->2881|4983->2914|5029->2932|5103->2975|5176->3020|5290->3103|5325->3108|5354->3110
+                  LINES: 27->1|32->1|34->3|58->27|58->27|58->27|59->28|59->28|59->28|59->28|59->28|63->32|63->32|63->32|64->33|66->35|66->35|81->50|81->50|81->50|82->51|83->52|83->52|83->52|83->52|83->52|83->52|84->53|84->53|84->53|84->53|84->53|84->53|84->53|84->53|84->53|86->55|86->55|86->55|87->56|87->56|87->56|87->56|87->56|88->57|89->58|91->60|94->63|99->68|101->70|102->71
                   -- GENERATED --
               */
           

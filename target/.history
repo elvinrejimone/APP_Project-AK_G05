@@ -15,3 +15,5 @@ eclipse
 run
 sbt run
 run
+eclipse
+run
