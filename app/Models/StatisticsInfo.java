@@ -5,10 +5,20 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.Iterator;
 import java.util.*;
+
+/**
+ * @author ANUSHKA SHARMA
+ * 
+ * Calculate total number or words in issues, total_repetition of words, total characters
+ * max_frequency of a word, minimum frequency of a word, unique words as 
+ * Statistics along with Map (key- words, value- count).
+ */
 public class StatisticsInfo {
+
     public Integer total_words;
 	public Integer total_repetition;
 	public Integer total_char;

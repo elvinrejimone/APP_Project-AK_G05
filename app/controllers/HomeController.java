@@ -41,9 +41,14 @@ import Utils.Cache;
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
+ *
+ * @author Elvin Rejimone, Santhosh Santhanam, Anushka Sharma, Ujjawal Aggarwal, Sejal Chopra
+ * @version 1.0.0
  */
 public class HomeController extends Controller implements WSBodyReadables, WSBodyWritables {
-
+	 /**
+     * Defining the public parameters
+     */
     private final AssetsFinder assetsFinder;
     private Cache cache;
     
@@ -70,10 +75,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
         this.cache= cache;
     }
     /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
+	 * enter new search terms which will result in 10 more results being displayed
+	 * @author
+     * @param request
+     * @return search.scala.html
+     * @throws InterruptedException
+     * @throws ExecutionException
      */
 	public Result index(Http.Request request) throws InterruptedException, ExecutionException {
     	System.out.println(request.queryString("search"));
@@ -91,7 +98,15 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     	}
         
     }
-    
+        /**
+	 * Search- hit the api and search the for the word
+	 * @author 
+     * @param query - search string
+     * @param type
+     * @return
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query,int type) throws InterruptedException, ExecutionException {
     	WSRequest req=null;
     	LinkedHashMap<String, ArrayList<GithubResult>> finalList=null;
@@ -126,7 +141,15 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		}
 		return finalList;
     }
-    
+    /**
+	 * display the 10 latest repositories containing this topic, 
+	 * in the same format as the results on the main search page.
+	 * @author Sejal Chopra
+	 * @param request
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	public Result topics(String request) throws InterruptedException, ExecutionException {
 			
 		topicResultList = searchGithub(request,2);
@@ -138,6 +161,14 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		
 	    
 	}
+	/**
+	 * Display all available public profile information about a user and the other repositories of that user
+	 * @author Ujjawal
+     * @param request
+     * @return
+     * @throws InterruptedException
+     * @throws ExecutionException
+     */
     public Result users(String request) throws InterruptedException, ExecutionException {
 			
 		topicResultList = searchGithub(request,3);
@@ -148,8 +179,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		
 	    
 	}
-    
-    //Repository Profile
+    /**
+	 * Repository Profile: all available details for a repository
+	 * Display 20 latest issues of that repository with their information
+	 * @author Elvin
+	 * @param queryString
+	 * @param IDString
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
 		
     	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	
@@ -161,7 +200,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		return ok(views.html.repodetails.render(newRepository));
     
     }
-	
+	/**
+	 * Fetching repository's issue details
+	 * @author Elvin
+	 * @param query
+	 * @param rp
+	 * @param Option
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	public boolean githubIssueResultHelper(String query, RepositoryProfile rp, String Option) throws InterruptedException, ExecutionException {
 		System.out.println("Query : " + query);
 		
@@ -178,7 +226,19 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		}
 		return rp.getDataFromResult(obj, Option);
 	}
-	
+		
+	/**
+	 * Initialised issue page with words statistics and further stats
+	 * @author Anushka Sharma
+	 * @param request
+	 * @param TitleList - list of titles
+	 * @param issue_controller -storing the keys(words in titlelist)
+	 * @param stats - words count
+	 * @param Isseus_details - more statistical data of words
+	 * @return word statistics of issues titles
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	// Issues
 	public Result issues(Http.Request request) throws InterruptedException, ExecutionException {
 		issue_controller =new ArrayList<>(); 
@@ -211,7 +271,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 			}
 				
 	}
-	
+	/**
+	 * 
+	 * @author Santhosh
+	 * @throws InterruptedException
+	 * @param ownerName
+	 * @param repoName
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	public Result commits(String ownerName, String repoName) throws InterruptedException, ExecutionException {
 		List<Integer> AddList = new ArrayList<>();
 		List<Integer> DelList = new ArrayList<>();
@@ -273,7 +342,13 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		return ok(views.html.commits.render(cr, commitKeysList, result));
 		
 	}
-	
+	/**
+	 * 
+	 * @author Santhosh
+	 * @param url
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
 	 public void get_full_commits_data(String url) throws InterruptedException, ExecutionException {
 		 	System.out.println("Query : " + url);
 			
