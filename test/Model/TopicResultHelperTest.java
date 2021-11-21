@@ -1,4 +1,4 @@
-package controllers;
+package Model;
 /**
  * Test Class for Models.TopicResultHelper.java
  *
