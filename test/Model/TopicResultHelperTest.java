@@ -6,7 +6,6 @@ package Model;
  * @version 1.0.0
  */
 import static org.junit.Assert.*;
-import static play.mvc.Http.Status.OK;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,6 +13,10 @@ import java.util.concurrent.ExecutionException;
 
 import Models.GithubResult;
 import Models.TopicResultHelper;
+import play.mvc.Http;
+import play.mvc.Result;
+import play.test.Helpers;
+
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -71,8 +74,5 @@ public class TopicResultHelperTest {
 		//assertEquals(resultfetch,trh.allSearches.get(0));
 		
 	}
-	
-	
-
 }
 

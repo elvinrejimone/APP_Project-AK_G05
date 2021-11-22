@@ -44,7 +44,7 @@ class Routes(
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """user/""" + "$" + """username<[^/]+>""", """controllers.HomeController.users(username:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """topic/""" + "$" + """topicname<[^/]+>""", """controllers.HomeController.topics(topicname:String)"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """repo/""" + "$" + """query<[^/]+>/""" + "$" + """id<[^/]+>""", """controllers.HomeController.repoProfileRequestHandler(query:String, id:String)"""),
-    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """statistics/""", """controllers.HomeController.issues(request:Request)"""),
+    ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """statistics/""", """controllers.HomeController.issues()"""),
     ("""GET""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """repos/""" + "$" + """ownerName<[^/]+>/""" + "$" + """repoName<[^/]+>/commits""", """controllers.HomeController.commits(ownerName:String, repoName:String)"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -150,14 +150,12 @@ class Routes(
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("statistics/")))
   )
   private[this] lazy val controllers_HomeController_issues5_invoker = createInvoker(
-    
-    (req:play.mvc.Http.Request) =>
-      HomeController_1.issues(fakeValue[play.mvc.Http.Request]),
+    HomeController_1.issues(),
     play.api.routing.HandlerDef(this.getClass.getClassLoader,
       "router",
       "controllers.HomeController",
       "issues",
-      Seq(classOf[play.mvc.Http.Request]),
+      Nil,
       "GET",
       this.prefix + """statistics/""",
       """""",
@@ -220,8 +218,7 @@ class Routes(
     // @LINE:15
     case controllers_HomeController_issues5_route(params@_) =>
       call { 
-        controllers_HomeController_issues5_invoker.call(
-          req => HomeController_1.issues(req))
+        controllers_HomeController_issues5_invoker.call(HomeController_1.issues())
       }
   
     // @LINE:16

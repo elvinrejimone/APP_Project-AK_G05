@@ -23,3 +23,34 @@ run
 test
 run
 test
+eclipse
+run
+test
+testOnly TopicResultHelperTest
+testOnly CommitsResultTest
+test *
+test*
+sbt -v
+test
+clean
+compile
+test
+sbt
+test
+jacoco
+test
+jacoco
+test
+eclipse
+compile
+eclipse
+test
+jacoco
+test
+jacoco
+test
+jacoco
+test
+jacoco
+test
+jacoco

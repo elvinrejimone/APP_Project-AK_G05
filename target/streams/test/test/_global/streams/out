@@ -1,20 +1,69 @@
-[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector()[0m
+[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector(-Djacoco-agent.destfile=E:\Masters\Concordia\Fall 2021\SOEN 6441\Project\FinalSubmission\APP_Project-AK_G05\target\scala-2.13\jacoco\data\jacoco.exec)[0m
 [0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
-<<<<<<< HEAD
-[0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
-=======
 [0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
-[0m[[0m[0mdebug[0m] [0m[0mRunner for com.novocode.junit.JUnitFramework produced 1 initial tasks for 1 tests.[0m
-[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.TopicResultHelperTest, sbt.ForkMain$AnnotatedFingerscan@6effe465, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunner for com.novocode.junit.JUnitFramework produced 6 initial tasks for 6 tests.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(controllers.HomeControllerTest, sbt.ForkMain$AnnotatedFingerscan@53a19f79, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndex[0m finished, took 6.595 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser1[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser1[0m finished, took 0.256 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser2[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser2[0m finished, took 0.205 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser3[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser3[0m finished, took 0.184 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser4[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestUser4[0m finished, took 3.2 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndexSearch[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestIndexSearch[0m finished, took 1.507 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestCommitStats[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestCommitStats[0m finished, took 2.474 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestTopics[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest controllers.[33mHomeControllerTest[0m.[36mtestTopics[0m finished, took 0.952 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 8 total, 15.39s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 8 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.Issue_Stats, sbt.ForkMain$AnnotatedFingerscan@3808431f, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mIssue_Stats[0m.[36mtestIssues[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mIssue_Stats[0m.[36mtestIssues[0m finished, took 0.047 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.048s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.RepositoryProfileTest, sbt.ForkMain$AnnotatedFingerscan@72a88857, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mRepositoryProfileTest[0m.[36mtestRepoProfile[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mRepositoryProfileTest[0m.[36mtestRepoProfile[0m finished, took 0.16 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mRepositoryProfileTest[0m.[36mtestIssues[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mRepositoryProfileTest[0m.[36mtestIssues[0m finished, took 0.155 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mRepositoryProfileTest[0m.[36mtestRepoProfileRequest[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mRepositoryProfileTest[0m.[36mtestRepoProfileRequest[0m finished, took 1.113 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 3 total, 1.432s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 3 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.GitHubResultTest, sbt.ForkMain$AnnotatedFingerscan@11e1bba2, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mGitHubResultTest[0m.[36mtestGithubResultFunctions[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mGitHubResultTest[0m.[36mtestGithubResultFunctions[0m finished, took 0.002 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.004s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.TopicResultHelperTest, sbt.ForkMain$AnnotatedFingerscan@7f76c3db, false, [SuiteSelector])[0m
 [0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mTopicResultHelperTest[0m.[36mtestTopic[0m started[0m
-[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mTopicResultHelperTest[0m.[36mtestTopic[0m finished, took 0.143 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mTopicResultHelperTest[0m.[36mtestTopic[0m finished, took 0.004 sec[0m
 [0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mTopicResultHelperTest[0m.[36maddToTotalSearchListTest[0m started[0m
-[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mTopicResultHelperTest[0m.[36maddToTotalSearchListTest[0m finished, took 0.0 sec[0m
-[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 2 total, 0.158s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mTopicResultHelperTest[0m.[36maddToTotalSearchListTest[0m finished, took 0.004 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 2 total, 0.011s[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 2 events.[0m
+[0m[[0m[0mdebug[0m] [0m[0m  Running TaskDef(Model.CommitsResultTest, sbt.ForkMain$AnnotatedFingerscan@3ba6d60d, false, [SuiteSelector])[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run started[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mCommitsResultTest[0m.[36mtestCommitsApi[0m started[0m
+[0m[[0m[0mdebug[0m] [0m[0mTest Model.[33mCommitsResultTest[0m.[36mtestCommitsApi[0m finished, took 0.001 sec[0m
+[0m[[0m[0mdebug[0m] [0m[0m[34mTest run finished: [0m[34m0 failed[0m[34m, [0m[34m0 ignored[0m[34m, 1 total, 0.004s[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0m    Produced 0 nested tasks and 1 events.[0m
 [0m[[0m[0mdebug[0m] [0m[0mSummary for JUnit not available.[0m
-[0m[[0m[0minfo[0m] [0m[0mPassed: Total 2, Failed 0, Errors 0, Passed 2[0m
+[0m[[0m[0minfo[0m] [0m[0mPassed: Total 16, Failed 0, Errors 0, Passed 16[0m
 [0m[[0m[0mdebug[0m] [0m[0mPassed tests:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	controllers.HomeControllerTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Model.Issue_Stats[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Model.RepositoryProfileTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Model.GitHubResultTest[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Model.TopicResultHelperTest[0m
->>>>>>> bed0182985b961135bf1e212987939a561513e52
+[0m[[0m[0mdebug[0m] [0m[0m	Model.CommitsResultTest[0m

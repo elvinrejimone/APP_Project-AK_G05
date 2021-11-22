@@ -14,4 +14,5 @@ caffeine,
 "com.google.code.gson" % "gson" % "2.2.4"
 
 )
+libraryDependencies += "org.mockito" % "mockito-core" % "2.10.0" % Test
 

@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[]
-=======
-["Model.TopicResultHelperTest"]
->>>>>>> bed0182985b961135bf1e212987939a561513e52
+["controllers.HomeControllerTest","Model.Issue_Stats","Model.RepositoryProfileTest","Model.GitHubResultTest","Model.TopicResultHelperTest","Model.CommitsResultTest"]

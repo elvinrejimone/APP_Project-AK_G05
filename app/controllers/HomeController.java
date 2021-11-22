@@ -69,6 +69,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	List<String> userList = new ArrayList<>();
 	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2 ;
+	public Map<String, Integer> result = new LinkedHashMap<>();
+	
+	public HomeController() {
+		this.assetsFinder = null;
+	}
+	
 	@Inject
     public HomeController(AssetsFinder assetsFinder, Cache cache) {
         this.assetsFinder = assetsFinder;
@@ -76,8 +82,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     }
     /**
 	 * enter new search terms which will result in 10 more results being displayed
-	 * @author
-     * @param request
+	 * @author Santhosh Santhanam
+	 * @author Elvin Rejimone
+	 * @author Anushka Sharma
+	 * @author Ujjawal Agarwal
+	 * @author Sejal Chopra
+     * @param request Http request parameter 
      * @return search.scala.html
      * @throws InterruptedException
      * @throws ExecutionException
@@ -100,9 +110,10 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     }
         /**
 	 * Search- hit the api and search the for the word
-	 * @author 
+	 * @author Santhosh Santhanam
+	 * @author Elvin Rejimone
      * @param query - search string
-     * @param type
+     * @param type To identify the API call
      * @return
      * @throws InterruptedException
      * @throws ExecutionException
@@ -145,7 +156,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * display the 10 latest repositories containing this topic, 
 	 * in the same format as the results on the main search page.
 	 * @author Sejal Chopra
-	 * @param request
+	 * @param request Http request parameter
 	 * @return views.html.topic
 	 * @throws InterruptedException
 	 * @throws ExecutionException
@@ -165,7 +176,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * Display all available public profile information about a user and the other repositories of that user
 	 * @author Ujjawal
      * @param request
-     * @return
+     * @return Users details
      * @throws InterruptedException
      * @throws ExecutionException
      */
@@ -182,16 +193,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     /**
 	 * Repository Profile: all available details for a repository
 	 * Display 20 latest issues of that repository with their information
-	 * @author Elvin
+	 * @author Elvin Rejimone
 	 * @param queryString
 	 * @param IDString
-	 * @return
+	 * @return Return result object
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
 	public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
 		
-    	RepositoryProfile newRepository = new RepositoryProfile(srHelper.fullSearchData.get(queryString),queryString, IDString);        	
+    	RepositoryProfile newRepository = new RepositoryProfile(SearchResultHelper.fullSearchData.get(queryString),queryString, IDString);        	
 	    System.out.println(githubIssueResultHelper(newRepository.issues_URL, newRepository, "Issues"));
 	    System.out.println(githubIssueResultHelper(newRepository.contributors_URL, newRepository, "Collab"));
 
@@ -202,11 +213,11 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
     }
 	/**
 	 * Fetching repository's issue details
-	 * @author Elvin
+	 * @author Elvin Rejimone
 	 * @param query
 	 * @param rp
 	 * @param Option
-	 * @return
+	 * @return Return a boolean confirmation message
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
@@ -231,16 +242,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * Initialised issue page with words statistics and further stats
 	 * @author Anushka Sharma
 	 * @param request
-	 * @param TitleList - list of titles
-	 * @param issue_controller -storing the keys(words in titlelist)
-	 * @param stats - words count
-	 * @param Isseus_details - more statistical data of words
 	 * @return word statistics of issues titles
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
 	// Issues
-	public Result issues(Http.Request request) throws InterruptedException, ExecutionException {
+	public Result issues() throws InterruptedException, ExecutionException {
 		issue_controller =new ArrayList<>(); 
 		// for (String i : al2){
 		// 	System.out.println("*******");
@@ -272,12 +279,13 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 				
 	}
 	/**
-	 * 
-	 * @author Santhosh
+	 * Commits function to calculate the statistics for a repositories commits
+	 * @author Santhosh Santhanam
 	 * @throws InterruptedException
 	 * @param ownerName
 	 * @param repoName
-	 * @return
+	 * @return Returns a result rendering the top 10 users with highest number of commits
+	 * and maximum, minimum and average number of addtions, deletions across all the 100 commits
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
@@ -326,7 +334,6 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		List<CommitsResult> topTen = topCommiters.parallelStream()
 				.map(c -> new CommitsResult(c.get_user_name(), c.get_additions(), c.get_deletions()))
 				.collect(Collectors.toList());
-		Map<String, Integer> result = new LinkedHashMap<>();
 		result = topTen.parallelStream().collect(Collectors.toMap(w -> w.get_user_name(), w -> 1, Integer :: sum));
 		result = result.entrySet()
                 .stream()
@@ -343,9 +350,9 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		
 	}
 	/**
-	 * 
-	 * @author Santhosh
-	 * @param url
+	 * Get all the commits data from Github API and add those values as a Node
+	 * @author Santhosh Santhanam
+	 * @param url for querying the data
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */

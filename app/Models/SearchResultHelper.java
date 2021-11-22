@@ -27,7 +27,7 @@ public class SearchResultHelper{
 	  
     public ArrayList<String> allSearches = new ArrayList<>();
     LinkedHashMap<String, ArrayList<GithubResult>> allResult = new LinkedHashMap<String, ArrayList<GithubResult>>();
-    public HashMap<String, JsonNode> fullSearchData = new HashMap<String, JsonNode>();
+    public static HashMap<String, JsonNode> fullSearchData = new HashMap<String, JsonNode>();
 
     
      
