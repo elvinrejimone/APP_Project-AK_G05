@@ -33,7 +33,7 @@ public class RepoProfileActor extends AbstractActor{
 	}
 	
 	
-	public static Props getProps(RepoProfileService rps) {
+	public static Props getProps() {
 		return Props.create(RepoProfileActor.class);
 	}
 	

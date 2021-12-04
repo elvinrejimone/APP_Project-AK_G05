@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+import Utils.Cache;
 
 import javax.inject.Inject;
 
@@ -29,7 +30,12 @@ public class SearchResultHelper{
     LinkedHashMap<String, ArrayList<GithubResult>> allResult = new LinkedHashMap<String, ArrayList<GithubResult>>();
     public static HashMap<String, JsonNode> fullSearchData = new HashMap<String, JsonNode>();
 
-    
+	private WSClient ws;
+	
+	@Inject
+	public SearchResultHelper(WSClient ws) {
+		this.ws = ws;
+	}
      
 	/**
 	 * Function that takes Response Object of type JsonNode and creates the List of GithubResult Objects and appends it to allResult and FullSearchData .
@@ -83,5 +89,39 @@ public class SearchResultHelper{
 		
 	System.out.println(allSearches.toString());
 	}
+	
+	
+	
+	/**
+	 * Search- hit the api and search the for the word
+	 * 
+	 * @author Elvin Rejimone
+	 * @param query - search string
+	 * @param type  To identify the API call
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query, Cache cache)
+			throws InterruptedException, ExecutionException {
+		WSRequest req = null;
+		LinkedHashMap<String, ArrayList<GithubResult>> finalList = null;
+			String querytoCheckCache = "https://api.github.com/search/repositories?q=" + query;
+			JsonNode obj = cache.get(querytoCheckCache);
+			if (obj != null) {
+				System.out.println("Taking from Cache");
+			} else {
+				System.out.println("Not Found in Cache, requesting and Storing in Cache");
+				System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
+				System.out.println();
+				req = ws.url("https://api.github.com/search/repositories?q=" + query);
+				CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
+				obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+				cache.put(querytoCheckCache, obj);
+			}
 
+			finalList = getArrayofGithubResult(query, obj);
+		return finalList;
+	
+	}
 }

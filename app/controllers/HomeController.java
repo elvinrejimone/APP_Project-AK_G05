@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,8 @@ import actors.CommitsActor;
 import actors.CommitsActor.CommitInfo;
 import actors.RepoProfileActor;
 import actors.RepoProfileActor.RepoProfileInfo;
+import actors.SearchResultActor;
+import actors.SearchResultActor.SearchResultInfo;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.stream.Materializer;
@@ -67,7 +70,6 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	List<JsonNode> response = new ArrayList<>();
 	LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
 	List<String> keysList = new ArrayList<>();
-	SearchResultHelper srHelper = new SearchResultHelper();
 	CommitsResult cr;
 	public ArrayList<String> issueTitleList_controller = new ArrayList<>();
 	public ArrayList<String> issue_controller;
@@ -78,10 +80,15 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2;
 	public Map<String, Integer> result = new LinkedHashMap<>();
+	//Services 
+	
+	@Inject 
+	SearchResultHelper srHelper = new SearchResultHelper(ws);
 	@Inject
 	RepoProfileService repoService = new RepoProfileService(ws);
 	@Inject
 	CommitService commitService = new CommitService(ws);
+
 
 	@Inject
 	private ActorSystem actorSystem;
@@ -90,6 +97,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 
 	ActorRef repoProfileActor;
 	ActorRef commitsActor;
+	ActorRef searchActor;
 
 	public HomeController() {
 		this.assetsFinder = null;
@@ -99,8 +107,9 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	public HomeController(AssetsFinder assetsFinder, Cache cache, ActorSystem system) {
 		this.assetsFinder = assetsFinder;
 		this.cache = cache;
-		repoProfileActor = system.actorOf(RepoProfileActor.getProps(repoService));
+		repoProfileActor = system.actorOf(RepoProfileActor.getProps());
 		commitsActor = system.actorOf(CommitsActor.getProps(commitService));
+		searchActor = system.actorOf(SearchResultActor.getProps());
 	}
 
 	/**
@@ -116,18 +125,39 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
-	public Result index(Http.Request request) throws InterruptedException, ExecutionException {
+	public CompletionStage<Result> index(Http.Request request) throws InterruptedException, ExecutionException {
 		System.out.println(request.queryString("search"));
 
-		if (!request.queryString("search").isPresent()) {
-			return ok(views.html.index.render(allResultList, keysList));
-		} else {
-			allResultList = searchGithub(request.queryString("search").get(), 1);
-			keysList.clear();
-			keysList.addAll((allResultList.keySet()));
-			Collections.reverse(keysList);
-			return ok(views.html.index.render(allResultList, keysList));
-		}
+//		if (!request.queryString("search").isPresent()) {
+//			return CompletableFuture.supplyAsync(ok(views.html.index.render(allResultList, keysList)));
+//		} else {
+			
+			String QueryString = "none";; 
+			if(request.queryString("search").isPresent()) {
+				QueryString = request.queryString("search").get();
+			}
+			
+			return FutureConverters
+					.toJava(ask(searchActor, new SearchResultInfo(QueryString, cache, srHelper), 10000))
+					.thenApply(response -> {
+						allResultList = (LinkedHashMap<String, ArrayList<GithubResult>>)response;
+
+						if(allResultList.size() == 0) {
+						   return ok(views.html.index.render(allResultList, keysList));
+						}else {
+						keysList.clear();
+						keysList.addAll((allResultList.keySet()));
+						Collections.reverse(keysList);
+						return ok(views.html.index.render(allResultList, keysList));
+						}
+					});
+			
+//			allResultList = srHelper.searchGithub(request.queryString("search").get(), cache);
+//			keysList.clear();
+//			keysList.addAll((allResultList.keySet()));
+//			Collections.reverse(keysList);
+//			return ok(views.html.index.render(allResultList, keysList));
+//		}
 
 	}
 
