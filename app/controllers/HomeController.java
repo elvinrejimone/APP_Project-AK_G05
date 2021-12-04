@@ -36,6 +36,14 @@ import play.mvc.Result;
 import scala.util.parsing.json.JSONObject;
 import Models.*;
 import Utils.Cache;
+import actors.RepoProfileActor;
+import actors.RepoProfileActor.RepoProfileInfo;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.stream.Materializer;
+import services.RepoProfileService;
+import static akka.pattern.Patterns.ask;
+import scala.compat.java8.FutureConverters;
 
 
 /**
@@ -45,6 +53,7 @@ import Utils.Cache;
  * @author Elvin Rejimone, Santhosh Santhanam, Anushka Sharma, Ujjawal Aggarwal, Sejal Chopra
  * @version 1.0.0
  */
+
 public class HomeController extends Controller implements WSBodyReadables, WSBodyWritables {
 	 /**
      * Defining the public parameters
@@ -70,15 +79,24 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2 ;
 	public Map<String, Integer> result = new LinkedHashMap<>();
+	@Inject RepoProfileService repoService = new RepoProfileService(ws);
+	
+	@Inject
+	private ActorSystem actorSystem;
+	@Inject
+	private Materializer materializer;
+
+	ActorRef repoProfileActor;
 	
 	public HomeController() {
 		this.assetsFinder = null;
 	}
 	
 	@Inject
-    public HomeController(AssetsFinder assetsFinder, Cache cache) {
+    public HomeController(AssetsFinder assetsFinder, Cache cache, ActorSystem system) {
         this.assetsFinder = assetsFinder;
         this.cache= cache;
+        repoProfileActor = system.actorOf(RepoProfileActor.getProps(repoService));
     }
     /**
 	 * enter new search terms which will result in 10 more results being displayed
@@ -200,43 +218,14 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
-	public Result repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
-		
-    	RepositoryProfile newRepository = new RepositoryProfile(SearchResultHelper.fullSearchData.get(queryString),queryString, IDString);        	
-	    System.out.println(githubIssueResultHelper(newRepository.issues_URL, newRepository, "Issues"));
-	    System.out.println(githubIssueResultHelper(newRepository.contributors_URL, newRepository, "Collab"));
-
-		issueTitleList_controller = newRepository.issueTitleList;
-		
-		return ok(views.html.repodetails.render(newRepository));
-    
+	public CompletionStage<Result> repoProfileRequestHandler(String queryString, String IDString) throws InterruptedException, ExecutionException {
+		return FutureConverters.toJava(ask(repoProfileActor, new RepoProfileInfo(queryString, IDString, cache, repoService), 10000)).thenApply(response -> {
+			RepositoryProfile repoProfile = (RepositoryProfile) response;
+			issueTitleList_controller = repoProfile.issueTitleList;
+			return ok(views.html.repodetails.render(repoProfile));
+		});  
     }
-	/**
-	 * Fetching repository's issue details
-	 * @author Elvin Rejimone
-	 * @param query
-	 * @param rp
-	 * @param Option
-	 * @return Return a boolean confirmation message
-	 * @throws InterruptedException
-	 * @throws ExecutionException
-	 */
-	public boolean githubIssueResultHelper(String query, RepositoryProfile rp, String Option) throws InterruptedException, ExecutionException {
-		System.out.println("Query : " + query);
-		
-		JsonNode obj = cache.get(query);
-		if(obj!= null) {
-			System.out.println("Taking from Cache");
-		}else {
-			System.out.println("Not Available In Cache, Query Github API and Storing Result in Cache");
-			WSRequest req = ws.url(query);
-			req.setMethod("GET");
-			CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-			obj = Json.toJson(res.toCompletableFuture().get());
-			cache.put(query, obj);
-		}
-		return rp.getDataFromResult(obj, Option);
-	}
+
 		
 	/**
 	 * Initialised issue page with words statistics and further stats
