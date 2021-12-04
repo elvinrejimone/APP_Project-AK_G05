@@ -23,6 +23,10 @@ public class CommitsResult {
 	public String commitMsg;
 	public String nAdd, nDel, total;
 	public Optional<Integer> maxAdd, minAdd, maxDel, minDel, avgAdd, avgDel;
+	
+	public CommitsResult() {
+		
+	}
 	/**
 	 * Constructor for getting and setting the username, no.of additions and deletions
 	 * @param userName
