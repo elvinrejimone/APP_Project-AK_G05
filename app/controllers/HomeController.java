@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import play.mvc.WebSocket;
-import java.util.HashMap;
+import java.util.HashMap;//
 import javax.inject.Inject;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -34,8 +34,8 @@ import actors.RepoProfileActor.RepoProfileInfo;
 import actors.SearchResultActor;
 import actors.SearchResultActor.SearchResultInfo;
 import actors.SearchSupervisor;
-import actors.StatisticsActor;
-import actors.StatisticsActor.StatsInfo;
+import actors.StatisticsActor;//actor
+import actors.StatisticsActor.StatsInfo;//
 //import actors.TimeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -52,7 +52,7 @@ import play.libs.streams.ActorFlow;
 import scala.compat.java8.FutureConverters;
 import services.CommitService;
 import services.RepoProfileService;
-import services.StatsService;
+import services.StatsService;// service
 
 /**
  * This controller contains an action to handle HTTP requests to the
@@ -87,7 +87,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2;
 	public Map<String, Integer> result = new LinkedHashMap<>();
-	HashMap<String,Object> data  ;
+	HashMap<String,Object> data  ;//
 
 	//Services 
 	
@@ -97,7 +97,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	RepoProfileService repoService = new RepoProfileService(ws);
 	@Inject
 	CommitService commitService = new CommitService(ws);
-	@Inject
+	@Inject//
 	StatsService statsService= new StatsService();
 
 	@Inject
@@ -108,7 +108,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	ActorRef repoProfileActor;
 	ActorRef commitsActor;
 	ActorRef searchActor;
-	ActorRef statsActor;
+	ActorRef statsActor;//
 
 	public HomeController() {
 		this.assetsFinder = null;
@@ -122,7 +122,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		repoProfileActor = system.actorOf(RepoProfileActor.getProps());
 		commitsActor = system.actorOf(CommitsActor.getProps(commitService));
 		searchActor = system.actorOf(SearchResultActor.getProps(), "searchActor");
-		statsActor = system.actorOf(StatisticsActor.getProps());
+		statsActor = system.actorOf(StatisticsActor.getProps());//
 
 	}
 	
@@ -299,11 +299,13 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws ExecutionException
 	 */
 	// Issues
-	public CompletionStage<Result> issues() throws InterruptedException, ExecutionException {
+	public CompletionStage<Result> issues() throws InterruptedException, ExecutionException {//
 		issue_controller = new ArrayList<>();
-		// if (issueTitleList_controller.isEmpty())
-		// 	return ok(views.html.no_issues.render());
-		// else{
+		 if (issueTitleList_controller.isEmpty()){
+			return CompletableFuture.supplyAsync(() -> {
+		 		return ok(views.html.no_issues.render());
+		});}
+		 else{
 return FutureConverters
 		.toJava(ask(statsActor, new StatsInfo(issueTitleList_controller), 10000))
 		.thenApply(response -> {
@@ -312,9 +314,9 @@ return FutureConverters
 			StatsModel s= (StatsModel)data.get("list");
 			ArrayList<Integer>Isseus_details = (ArrayList<Integer>)data.get("count");
 
-			for (Map.Entry<String, Integer> entry1 : s.wordfrequency.entrySet()) {
-			 	System.out.println(entry1.getKey() + " => " + entry1.getValue());
-			}
+			// for (Map.Entry<String, Integer> entry1 : s.wordfrequency.entrySet()) {
+			//  	System.out.println(entry1.getKey() + " => " + entry1.getValue());
+			// }
 
 			Iterator iterator = s.wordfrequency.keySet().iterator();
 			while (iterator.hasNext()) {
@@ -324,9 +326,9 @@ return FutureConverters
 			//StatisticsInfo obj = new StatisticsInfo();
 			//ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
 			return ok(views.html.issuesstats.render(Isseus_details, issue_controller, s.wordfrequency));
-			//return true;
+			
 
-		});
+		});}
 }
 	/**
 	 * Commits function to calculate the statistics for a repositories commits
