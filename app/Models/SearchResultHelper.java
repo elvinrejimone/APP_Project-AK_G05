@@ -114,7 +114,9 @@ public class SearchResultHelper{
 				System.out.println("Not Found in Cache, requesting and Storing in Cache");
 				System.out.println("Query : https://api.github.com/search/repositories?q=" + query);
 				System.out.println();
-				req = ws.url("https://api.github.com/search/repositories?q=" + query);
+				req = ws.url("https://api.github.com/search/repositories?q=" + query + "&sort=updated")
+						.addHeader("Authorization",
+								"token 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");
 				CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 				obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
 				cache.put(querytoCheckCache, obj);

@@ -12,6 +12,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+import play.mvc.WebSocket;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,8 @@ import actors.RepoProfileActor;
 import actors.RepoProfileActor.RepoProfileInfo;
 import actors.SearchResultActor;
 import actors.SearchResultActor.SearchResultInfo;
+import actors.SearchSupervisor;
+//import actors.TimeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.stream.Materializer;
@@ -43,6 +46,7 @@ import play.libs.ws.WSRequest;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.libs.streams.ActorFlow;
 import scala.compat.java8.FutureConverters;
 import services.CommitService;
 import services.RepoProfileService;
@@ -107,10 +111,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	public HomeController(AssetsFinder assetsFinder, Cache cache, ActorSystem system) {
 		this.assetsFinder = assetsFinder;
 		this.cache = cache;
+		//actorSystem.actorOf(TimeActor.props(), "timeActor");
 		repoProfileActor = system.actorOf(RepoProfileActor.getProps());
 		commitsActor = system.actorOf(CommitsActor.getProps(commitService));
-		searchActor = system.actorOf(SearchResultActor.getProps());
+		searchActor = system.actorOf(SearchResultActor.getProps(), "searchActor");
 	}
+	
+	 public WebSocket ws(){
+		 System.out.println("Inside Websocket!! ");
+	        return WebSocket.Json.accept(request -> ActorFlow.actorRef(SearchSupervisor::props, actorSystem, materializer));
+	    }
 
 	/**
 	 * enter new search terms which will result in 10 more results being displayed
@@ -143,12 +153,12 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 						allResultList = (LinkedHashMap<String, ArrayList<GithubResult>>)response;
 
 						if(allResultList.size() == 0) {
-						   return ok(views.html.index.render(allResultList, keysList));
+						   return ok(views.html.index.render(allResultList, keysList, request));
 						}else {
 						keysList.clear();
 						keysList.addAll((allResultList.keySet()));
 						Collections.reverse(keysList);
-						return ok(views.html.index.render(allResultList, keysList));
+						return ok(views.html.index.render(allResultList, keysList, request));
 						}
 					});
 			

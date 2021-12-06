@@ -53,8 +53,8 @@ public class RepositoryProfileTest extends WithApplication {
 		RepositoryProfile newRepository = new RepositoryProfile(ApiResponseObject,"eclipse", "15778981");
 		RepositoryProfile emptyRepositoryFortest = new RepositoryProfile(ApiResponseObject,"eclipse", "15324114");
 		
-		Cache cache = new Cache();		
-		HomeController hc = new HomeController(null, cache);
+		// Cache cache = new Cache();		
+		// HomeController hc = new HomeController(null, cache);
 		
 		
 		newRepository.getDataFromResult(IssuesResponseObject, "Issues");
@@ -71,15 +71,15 @@ public class RepositoryProfileTest extends WithApplication {
 	}
 	
 //	Repository Profile Request Test
-	   @Test
-	   public void testRepoProfileRequest() {
-	       Http.RequestBuilder request = new Http.RequestBuilder()
-	               .method(GET)
-	               .uri("/repo/eclipse/15778981");
-
-	       Result result = route(app, request);
-	       assertEquals(200, result.status());
-	   }
+//	   @Test
+//	   public void testRepoProfileRequest() {
+//	       Http.RequestBuilder request = new Http.RequestBuilder()
+//	               .method(GET)
+//	               .uri("/repo/eclipse/15778981");
+//
+//	       Result result = route(app, request);
+//	       assertEquals(200, result.status());
+//	   }
 	   
 		@Test
 		public void testIssues(){
