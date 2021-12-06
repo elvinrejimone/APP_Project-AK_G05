@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import play.mvc.WebSocket;
-
+import java.util.HashMap;
 import javax.inject.Inject;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -34,6 +34,8 @@ import actors.RepoProfileActor.RepoProfileInfo;
 import actors.SearchResultActor;
 import actors.SearchResultActor.SearchResultInfo;
 import actors.SearchSupervisor;
+import actors.StatisticsActor;
+import actors.StatisticsActor.StatsInfo;
 //import actors.TimeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -50,6 +52,7 @@ import play.libs.streams.ActorFlow;
 import scala.compat.java8.FutureConverters;
 import services.CommitService;
 import services.RepoProfileService;
+import services.StatsService;
 
 /**
  * This controller contains an action to handle HTTP requests to the
@@ -84,6 +87,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	UserResultHelper userHelper = new UserResultHelper();
 	ArrayList<String> al2;
 	public Map<String, Integer> result = new LinkedHashMap<>();
+	HashMap<String,Object> data  ;
+
 	//Services 
 	
 	@Inject 
@@ -92,7 +97,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	RepoProfileService repoService = new RepoProfileService(ws);
 	@Inject
 	CommitService commitService = new CommitService(ws);
-
+	@Inject
+	StatsService statsService= new StatsService();
 
 	@Inject
 	private ActorSystem actorSystem;
@@ -102,6 +108,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	ActorRef repoProfileActor;
 	ActorRef commitsActor;
 	ActorRef searchActor;
+	ActorRef statsActor;
 
 	public HomeController() {
 		this.assetsFinder = null;
@@ -115,6 +122,8 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		repoProfileActor = system.actorOf(RepoProfileActor.getProps());
 		commitsActor = system.actorOf(CommitsActor.getProps(commitService));
 		searchActor = system.actorOf(SearchResultActor.getProps(), "searchActor");
+		statsActor = system.actorOf(StatisticsActor.getProps());
+
 	}
 	
 	 public WebSocket ws(){
@@ -290,39 +299,35 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws ExecutionException
 	 */
 	// Issues
-	public Result issues() throws InterruptedException, ExecutionException {
+	public CompletionStage<Result> issues() throws InterruptedException, ExecutionException {
 		issue_controller = new ArrayList<>();
-		// for (String i : al2){
-		// System.out.println("*******");
-		// System.out.println(i);
-		// }
-		// return
-		// ok(views.html.issuesstats.render(Isseus_details,issue_controller,stats.wordfrequency));
-		if (issueTitleList_controller.isEmpty())
-			return ok(views.html.no_issues.render());
+		// if (issueTitleList_controller.isEmpty())
+		// 	return ok(views.html.no_issues.render());
+		// else{
+return FutureConverters
+		.toJava(ask(statsActor, new StatsInfo(issueTitleList_controller), 10000))
+		.thenApply(response -> {
+			//StatsModel stats = (StatsModel) response;
+			 data = (HashMap<String,Object>) response;
+			StatsModel s= (StatsModel)data.get("list");
+			ArrayList<Integer>Isseus_details = (ArrayList<Integer>)data.get("count");
 
-		else {
-
-			ArrayList<String> TitleList = issueTitleList_controller;
-			StatisticsInfo obj = new StatisticsInfo();
-			StatsModel stats = obj.Calculate_Count(TitleList);
-			// System.out.println(stats.wordfrequency.getkeys());
-			for (Map.Entry<String, Integer> entry1 : stats.wordfrequency.entrySet()) {
-				System.out.println(entry1.getKey() + " => " + entry1.getValue());
+			for (Map.Entry<String, Integer> entry1 : s.wordfrequency.entrySet()) {
+			 	System.out.println(entry1.getKey() + " => " + entry1.getValue());
 			}
-			ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
 
-			Iterator iterator = stats.wordfrequency.keySet().iterator();
+			Iterator iterator = s.wordfrequency.keySet().iterator();
 			while (iterator.hasNext()) {
 				Object key = iterator.next();
 				issue_controller.add((String) key);
 			}
-			int total_issues = TitleList.size();
-			return ok(views.html.issuesstats.render(Isseus_details, issue_controller, stats.wordfrequency));
-		}
+			//StatisticsInfo obj = new StatisticsInfo();
+			//ArrayList<Integer> Isseus_details = obj.Calculate_Stats();
+			return ok(views.html.issuesstats.render(Isseus_details, issue_controller, s.wordfrequency));
+			//return true;
 
-	}
-
+		});
+}
 	/**
 	 * Commits function to calculate the statistics for a repositories commits
 	 * 
