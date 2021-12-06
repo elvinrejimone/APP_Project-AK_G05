@@ -253,7 +253,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		topicList.addAll(topicResultList.keySet());
 			Collections.reverse(topicList);
 			
-			return ok(views.html.topic.render(topicResultList, topicList,request));
+			return ok(views.html.topic.render(requests,request));
 		
 	    
 	}

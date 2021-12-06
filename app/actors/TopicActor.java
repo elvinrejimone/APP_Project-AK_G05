@@ -32,6 +32,7 @@ import java.util.Set;
 public class TopicActor extends AbstractActorWithTimers{
 	@com.google.inject.Inject WSClient wsTopic; 
 	private Set<ActorRef> userActors;
+	public String topicName;
 	private static final class Tick{
 	}
 
@@ -40,7 +41,7 @@ public class TopicActor extends AbstractActorWithTimers{
 	}
 
 	static public Props getProps() {
-
+		
 		return Props.create(TopicActor.class, () -> new TopicActor());
 
 	}

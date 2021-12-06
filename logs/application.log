@@ -1,55 +1,14 @@
-2021-12-06 16:28:26,862 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-5 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2021-12-06 17:49:08,084 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-7 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
 
-2021-12-06 16:28:26,910 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-5 - Application started (Dev) (no global state)
-2021-12-06 16:28:26,979 [INFO] from application in application-akka.actor.default-dispatcher-8 - TopicActor Actor[akka://application/user/topicActor#1012727173] started
-2021-12-06 16:28:26,988 [INFO] from application in application-akka.actor.default-dispatcher-8 - TopicActor Actor[akka://application/user/topicActor#1012727173] started
-2021-12-06 16:28:27,425 [WARN] from play.api.mvc.DefaultJWTCookieDataCodec in application-akka.actor.default-dispatcher-8 - decode: cookie has invalid signature! message = JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
-2021-12-06 16:28:27,426 [INFO] from play.api.mvc.DefaultJWTCookieDataCodec in application-akka.actor.default-dispatcher-8 - The JWT signature in the cookie does not match the locally computed signature with the server. This usually indicates the browser has a leftover cookie from another Play application, so clearing cookies may resolve this error message.
-2021-12-06 16:28:29,657 [WARN] from play.api.mvc.DefaultJWTCookieDataCodec in application-akka.actor.default-dispatcher-8 - decode: cookie has invalid signature! message = JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
-2021-12-06 16:28:29,657 [INFO] from play.api.mvc.DefaultJWTCookieDataCodec in application-akka.actor.default-dispatcher-8 - The JWT signature in the cookie does not match the locally computed signature with the server. This usually indicates the browser has a leftover cookie from another Play application, so clearing cookies may resolve this error message.
-2021-12-06 16:30:52,950 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-8 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2021-12-06 16:30:52,962 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-8 - Application started (Dev) (no global state)
-2021-12-06 16:30:52,976 [INFO] from application in application-akka.actor.default-dispatcher-9 - TopicActor Actor[akka://application/user/topicActor#-1465315102] started
-2021-12-06 16:30:52,977 [INFO] from application in application-akka.actor.default-dispatcher-9 - TopicActor Actor[akka://application/user/topicActor#-1465315102] started
-2021-12-06 16:33:48,003 [ERROR] from play.shaded.ahc.io.netty.util.HashedWheelTimer in application-akka.actor.default-dispatcher-11 - You are creating too many HashedWheelTimer instances. HashedWheelTimer is a shared resource that must be reused across the JVM,so that only a few instances are created.
-2021-12-06 16:34:05,041 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-40 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2021-12-06 16:34:05,049 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-40 - Application started (Dev) (no global state)
-2021-12-06 16:34:05,060 [INFO] from application in application-akka.actor.default-dispatcher-8 - TopicActor Actor[akka://application/user/topicActor#2128482460] started
-2021-12-06 16:34:05,061 [INFO] from application in application-akka.actor.default-dispatcher-8 - TopicActor Actor[akka://application/user/topicActor#2128482460] started
-2021-12-06 16:34:05,927 [DEBUG] from application in application-akka.actor.default-dispatcher-7 - New UserActor Actor[akka://application/user/$d/flowActor#-846454101] forWebSocket Actor[akka://application/system/Materializers/StreamSupervisor-4/$$a-actorRefSource#1152486212] ; timeActor : {}
-2021-12-06 16:36:36,506 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-44 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2021-12-06 16:36:36,513 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-44 - Application started (Dev) (no global state)
-2021-12-06 16:36:36,525 [INFO] from application in application-akka.actor.default-dispatcher-7 - TopicActor Actor[akka://application/user/topicActor#-124652185] started
-2021-12-06 16:36:36,527 [INFO] from application in application-akka.actor.default-dispatcher-7 - TopicActor Actor[akka://application/user/topicActor#-124652185] started
-2021-12-06 16:36:57,774 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-52 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2021-12-06 16:36:57,783 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-52 - Application started (Dev) (no global state)
-2021-12-06 16:36:57,800 [INFO] from application in application-akka.actor.default-dispatcher-7 - TopicActor Actor[akka://application/user/topicActor#1292884830] started
-2021-12-06 16:36:57,801 [INFO] from application in application-akka.actor.default-dispatcher-7 - TopicActor Actor[akka://application/user/topicActor#1292884830] started
-2021-12-06 16:36:58,881 [DEBUG] from application in application-akka.actor.default-dispatcher-7 - New UserActor Actor[akka://application/user/$d/flowActor#1620553177] forWebSocket Actor[akka://application/system/Materializers/StreamSupervisor-6/$$a-actorRefSource#967829993] ; timeActor : {}
-2021-12-06 16:39:07,359 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-shutdown-hook-1 - Stopping Akka HTTP server...
-2021-12-06 16:39:07,361 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-37 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
-2021-12-06 16:39:07,396 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-55 - Running provided shutdown stop hooks
+2021-12-06 17:49:08,194 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-7 - Application started (Dev) (no global state)
+2021-12-06 17:49:08,367 [INFO] from application in application-akka.actor.default-dispatcher-5 - TopicActor Actor[akka://application/user/topicActor#842102974] started
+2021-12-06 17:49:08,377 [INFO] from application in application-akka.actor.default-dispatcher-5 - TopicActor Actor[akka://application/user/topicActor#842102974] started
+2021-12-06 17:49:17,681 [DEBUG] from application in application-akka.actor.default-dispatcher-11 - New UserActor Actor[akka://application/user/$h/flowActor#1336892001] forWebSocket Actor[akka://application/system/Materializers/StreamSupervisor-2/$$e-actorRefSource#-1107071438] ; timeActor : {}
+2021-12-06 17:49:31,819 [DEBUG] from application in application-akka.actor.default-dispatcher-9 - New UserActor Actor[akka://application/user/$i/flowActor#699909540] forWebSocket Actor[akka://application/system/Materializers/StreamSupervisor-2/$$f-actorRefSource#-882702486] ; timeActor : {}
+2021-12-06 17:49:51,865 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-shutdown-hook-1 - Stopping Akka HTTP server...
+2021-12-06 17:49:51,879 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-2 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
+2021-12-06 17:49:52,040 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-2 - Running provided shutdown stop hooks
