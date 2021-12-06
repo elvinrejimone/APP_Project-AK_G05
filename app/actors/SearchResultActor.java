@@ -64,7 +64,6 @@ public class SearchResultActor extends AbstractActorWithTimers{
 	    }
 
 	 public void preStart(){
-//	        getTimers().startPeriodicTimer("Timer", new Tick(), Duration.create(25, TimeUnit.SECONDS));
 	    }
 	
 	public static Props getProps() {
@@ -112,6 +111,7 @@ public class SearchResultActor extends AbstractActorWithTimers{
 	@SuppressWarnings("deprecation")
 	private void UpdateSearchResults(SearchResultInfo sri) {
 		try {
+			Boolean Has_Changed = false;
 			String OutputMSG;
 			Integer changeCount=0;
 			LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
@@ -122,32 +122,38 @@ public class SearchResultActor extends AbstractActorWithTimers{
 		    System.out.println("SearchResultUPDATE-ACTOR ::: replyActors ::"+ replyActors.size());
 		    
 		    final ObjectNode response = Json.newObject();
-
-		    if(allResultList.equals(currentResultList)) {
-		    	System.out.println("");
+		    
+		    ArrayList<ObjectNode> arrayOfChanges = new ArrayList<>();
+	
+	    	for(String key : allResultList.keySet()) {
+	    		for(int i =0; i< allResultList.get(key).size();i++) {
+	    			if(!currentRepoList.get(key).contains(allResultList.get(key).get(i).repoID)){
+	    				Has_Changed = true;
+	    				 changeCount++;
+	    				 ObjectNode ChangeObject = Json.newObject(); 
+	    				 ChangeObject.put("queryString", allResultList.get(key).get(i).queryString);
+	    				 ChangeObject.put("repoID", allResultList.get(key).get(i).repoID);
+	    				 ChangeObject.put("ownerName", allResultList.get(key).get(i).ownerName);
+	    				 ChangeObject.put("repoName", allResultList.get(key).get(i).repoName);
+	    				 ChangeObject.put("topics", allResultList.get(key).get(i).returnTopics().toString());
+	    				 ChangeObject.put("repoToChange",currentRepoList.get(key).get(changeCount));		    				 
+	    				 arrayOfChanges.add(ChangeObject);		    				 
+	    		}
+	    	}
+	    	
+	    	}
+		    
+		    if(Has_Changed) {
+		    	System.out.println(changeCount + " - Changes");
+		    	response.put("status", changeCount.toString());
+				 response.put("value", arrayOfChanges.toString());
+				 currentResultList = allResultList;
+				 updateRepoIDs();
+		    }else {
+		    	System.out.println("No Change in List");
 		    	OutputMSG = "No-Change";
 		    	response.put("status", "No-Change");
-		    }else {
-		    	
-		    	for(String key : allResultList.keySet()) {
-		    		for(int i =0; i< allResultList.get(key).size();i++) {
-		    			if(!currentRepoList.get(key).contains(allResultList.get(key).get(i).repoID)){
-		    				 changeCount++;
-		    				 ObjectNode ChangeObject = Json.newObject(); 
-		    				 ChangeObject.put("queryString", allResultList.get(key).get(i).queryString);
-		    				 ChangeObject.put("repoID", allResultList.get(key).get(i).repoID);
-		    				 ChangeObject.put("ownerName", allResultList.get(key).get(i).ownerName);
-		    				 ChangeObject.put("repoName", allResultList.get(key).get(i).repoName);		    				 
-		    				 response.put(changeCount.toString(), ChangeObject);		    				 
-		    		}
-		    	}
-		    	
-		    	}
-		    	response.put("status", changeCount.toString());
-		    } 
-		    
-		    currentResultList = allResultList;
-		    updateRepoIDs();
+		    }
 		    
 		    SearchSupervisor.GithubSearchMessage tMsg = new SearchSupervisor.GithubSearchMessage(response);
 		    replyActors.forEach(ar -> ar.tell(tMsg, self()));
@@ -163,6 +169,7 @@ public class SearchResultActor extends AbstractActorWithTimers{
 
 	}
 	
+	
 	private void updateRepoIDs() {
 		for(String key : currentResultList.keySet()) {
 			ArrayList<String> repoIDListforString = new ArrayList<>();
@@ -175,5 +182,3 @@ public class SearchResultActor extends AbstractActorWithTimers{
     	}
 	}
 	
-	
-//if(!allResultList.get(key).get(i).repoID.equals(currentResultList.get(key).get(i).repoID)){

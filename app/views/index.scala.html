@@ -30,7 +30,6 @@
   @if(!results.isEmpty()) {
   <h5 style="margin-left: 25px;">Showing @keys.size() Results</h5>
 
-
   	
       @for(key <- keys){
       <div class="container" style="display: flex;justify-content: center; ">
@@ -52,9 +51,9 @@
               
               @for(obj <- results.get(key) ){
                 <tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/user/@obj.ownerName">@obj.ownerName</a></td>
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/@obj.queryString/@obj.repoID">@obj.repoName</a></td>
-                <td style="border: 1px solid rgb(104, 207, 164);">
+                <td id="Owner@obj.repoID" style="border: 1px solid rgb(104, 207, 164);"><a href="/user/@obj.ownerName">@obj.ownerName</a></td>
+                <td  id="Name@obj.repoID" style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/@obj.queryString/@obj.repoID">@obj.repoName</a></td>
+                <td id="Topics@obj.repoID" style="border: 1px solid rgb(104, 207, 164);">
                   @for(topic <- obj.returnTopics()){
                    <div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 4px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"><a style="color :#dee2e1;" href="/topic/@topic"> @topic</a> </div> 
                   }
@@ -71,22 +70,11 @@
         }
 
 }
-<div id="time" ></div>
+
 </section>
 <script>
   
   
-  // window.onload = function() {
-	 
-	// 	var ws;
-	//     console.log("Inside Coffee Script");
-	//     ws = new WebSocket($("section").data("ws-url"));
-	//     return ws.onmessage = function(event) {
-	//       var message;
-	//       message = JSON.parse(event.data);
-	//       return $('#time').append(message.time + "<br/>");
-	//     };
-	//   };
 
   (function() {
   $(function() {
@@ -96,7 +84,30 @@
     return ws.onmessage = function(event) {
       var message;
       message = JSON.parse(event.data);
-      return $('#time').append(message.status + "<br/>");
+      if(message.status == "No-Change"){
+        console.log("No Change from last Update!");
+        $('#time').append(message.status + "<br/>");
+      }else{
+        console.log(message.value);   
+        var allChanges = JSON.parse(message.value);
+        console.log("Updating "+ message.status + "Repositories" );
+        for(var i =0; i< parseInt(message.status); i++){                    
+             var githubResult = allChanges[i];
+             console.log(githubResult);
+             $("#Owner"+ githubResult.repoToChange).html("<a href='/user/"+ githubResult.ownerName + "'>"+ githubResult.ownerName+"</a>");
+             $("#Name"+ githubResult.repoToChange).html("<a href='/repo/"+ githubResult.queryString+"/"+ githubResult.repoID +"'>" + githubResult.repoName+ "</a>");
+             var data= '';
+             var topics= githubResult.topics.substring(1, githubResult.topics.length-1).split(",");
+             console.log("Topics :: "+topics+ " : " +topics.length);
+             if(topics.length>1){
+              console.log("Topics :: " +topics[4]);
+               for(var j=0; j<topics.length; j++){
+                  data += "<div style='display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 4px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;'><a style='color :#dee2e1;' href='/topic/" + topics[j] + "'> " + topics[j] + "</a> </div> ";
+               }
+               $("#Topics"+ githubResult.repoToChange).html(data);
+             }
+        }
+      }
     };
   });
 
