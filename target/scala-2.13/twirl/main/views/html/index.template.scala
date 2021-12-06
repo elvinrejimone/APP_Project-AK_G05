@@ -61,12 +61,11 @@ Seq[Any](format.raw/*1.118*/("""
   """),_display_(/*30.4*/if(!results.isEmpty())/*30.26*/ {_display_(Seq[Any](format.raw/*30.28*/("""
   """),format.raw/*31.3*/("""<h5 style="margin-left: 25px;">Showing """),_display_(/*31.43*/keys/*31.47*/.size()),format.raw/*31.54*/(""" """),format.raw/*31.55*/("""Results</h5>
 
-
   	
-      """),_display_(/*35.8*/for(key <- keys) yield /*35.24*/{_display_(Seq[Any](format.raw/*35.25*/("""
-      """),format.raw/*36.7*/("""<div class="container" style="display: flex;justify-content: center; ">
+      """),_display_(/*34.8*/for(key <- keys) yield /*34.24*/{_display_(Seq[Any](format.raw/*34.25*/("""
+      """),format.raw/*35.7*/("""<div class="container" style="display: flex;justify-content: center; ">
       <div style="padding: 0px 40px 40px 40px;margin: 20px;background-color: rgb(211, 211, 211);border-radius: 5px;">
-       <center> <span>Showing Results of <h1 style="display:inline-block;margin-left: 10px;">"""),_display_(/*38.95*/key),format.raw/*38.98*/("""</h1> </span></center>
+       <center> <span>Showing Results of <h1 style="display:inline-block;margin-left: 10px;">"""),_display_(/*37.95*/key),format.raw/*37.98*/("""</h1> </span></center>
         <table style="width:800px;
           border-collapse: collapse;
           border: 1px solid #ddd;
@@ -81,57 +80,69 @@ Seq[Any](format.raw/*1.118*/("""
             </thead>
             <tbody style="background-color: #dee2e1; text-align: center;">
               
-              """),_display_(/*53.16*/for(obj <- results.get(key) ) yield /*53.45*/{_display_(Seq[Any](format.raw/*53.46*/("""
-                """),format.raw/*54.17*/("""<tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/user/"""),_display_(/*55.83*/obj/*55.86*/.ownerName),format.raw/*55.96*/("""">"""),_display_(/*55.99*/obj/*55.102*/.ownerName),format.raw/*55.112*/("""</a></td>
-                <td style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/"""),_display_(/*56.83*/obj/*56.86*/.queryString),format.raw/*56.98*/("""/"""),_display_(/*56.100*/obj/*56.103*/.repoID),format.raw/*56.110*/("""">"""),_display_(/*56.113*/obj/*56.116*/.repoName),format.raw/*56.125*/("""</a></td>
-                <td style="border: 1px solid rgb(104, 207, 164);">
-                  """),_display_(/*58.20*/for(topic <- obj.returnTopics()) yield /*58.52*/{_display_(Seq[Any](format.raw/*58.53*/("""
-                   """),format.raw/*59.20*/("""<div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 4px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"><a style="color :#dee2e1;" href="/topic/"""),_display_(/*59.226*/topic),format.raw/*59.231*/(""""> """),_display_(/*59.235*/topic),format.raw/*59.240*/("""</a> </div> 
-                  """)))}),format.raw/*60.20*/("""
-                """),format.raw/*61.17*/("""</td>
+              """),_display_(/*52.16*/for(obj <- results.get(key) ) yield /*52.45*/{_display_(Seq[Any](format.raw/*52.46*/("""
+                """),format.raw/*53.17*/("""<tr style="height: 50px ">
+                <td id="Owner"""),_display_(/*54.31*/obj/*54.34*/.repoID),format.raw/*54.41*/("""" style="border: 1px solid rgb(104, 207, 164);"><a href="/user/"""),_display_(/*54.105*/obj/*54.108*/.ownerName),format.raw/*54.118*/("""">"""),_display_(/*54.121*/obj/*54.124*/.ownerName),format.raw/*54.134*/("""</a></td>
+                <td  id="Name"""),_display_(/*55.31*/obj/*55.34*/.repoID),format.raw/*55.41*/("""" style="border: 1px solid rgb(104, 207, 164);"><a href="/repo/"""),_display_(/*55.105*/obj/*55.108*/.queryString),format.raw/*55.120*/("""/"""),_display_(/*55.122*/obj/*55.125*/.repoID),format.raw/*55.132*/("""">"""),_display_(/*55.135*/obj/*55.138*/.repoName),format.raw/*55.147*/("""</a></td>
+                <td id="Topics"""),_display_(/*56.32*/obj/*56.35*/.repoID),format.raw/*56.42*/("""" style="border: 1px solid rgb(104, 207, 164);">
+                  """),_display_(/*57.20*/for(topic <- obj.returnTopics()) yield /*57.52*/{_display_(Seq[Any](format.raw/*57.53*/("""
+                   """),format.raw/*58.20*/("""<div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 4px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"><a style="color :#dee2e1;" href="/topic/"""),_display_(/*58.226*/topic),format.raw/*58.231*/(""""> """),_display_(/*58.235*/topic),format.raw/*58.240*/("""</a> </div> 
+                  """)))}),format.raw/*59.20*/("""
+                """),format.raw/*60.17*/("""</td>
               </tr>
-              """)))}),format.raw/*63.16*/("""
+              """)))}),format.raw/*62.16*/("""
                
             
-            """),format.raw/*66.13*/("""</tbody> 
+            """),format.raw/*65.13*/("""</tbody> 
           </table>
         </div>
          </div>
         
-        """)))}),format.raw/*71.10*/("""
+        """)))}),format.raw/*70.10*/("""
 
-""")))}),format.raw/*73.2*/("""
-"""),format.raw/*74.1*/("""<div id="time" ></div>
-</section>
+""")))}),format.raw/*72.2*/("""
+
+"""),format.raw/*74.1*/("""</section>
 <script>
   
   
-  // window.onload = function() """),format.raw/*79.33*/("""{"""),format.raw/*79.34*/("""
-	 
-	"""),format.raw/*81.2*/("""// 	var ws;
-	//     console.log("Inside Coffee Script");
-	//     ws = new WebSocket($("section").data("ws-url"));
-	//     return ws.onmessage = function(event) """),format.raw/*84.47*/("""{"""),format.raw/*84.48*/("""
-	"""),format.raw/*85.2*/("""//       var message;
-	//       message = JSON.parse(event.data);
-	//       return $('#time').append(message.time + "<br/>");
-	//     """),format.raw/*88.9*/("""}"""),format.raw/*88.10*/(""";
-	//   """),format.raw/*89.7*/("""}"""),format.raw/*89.8*/(""";
 
-  (function() """),format.raw/*91.15*/("""{"""),format.raw/*91.16*/("""
-  """),format.raw/*92.3*/("""$(function() """),format.raw/*92.16*/("""{"""),format.raw/*92.17*/("""
-    """),format.raw/*93.5*/("""var ws;
+  (function() """),format.raw/*79.15*/("""{"""),format.raw/*79.16*/("""
+  """),format.raw/*80.3*/("""$(function() """),format.raw/*80.16*/("""{"""),format.raw/*80.17*/("""
+    """),format.raw/*81.5*/("""var ws;
     console.log("Inside Custom Script");
     ws = new WebSocket($("section").data("ws-url"));
-    return ws.onmessage = function(event) """),format.raw/*96.43*/("""{"""),format.raw/*96.44*/("""
-      """),format.raw/*97.7*/("""var message;
+    return ws.onmessage = function(event) """),format.raw/*84.43*/("""{"""),format.raw/*84.44*/("""
+      """),format.raw/*85.7*/("""var message;
       message = JSON.parse(event.data);
-      return $('#time').append(message.status + "<br/>");
-    """),format.raw/*100.5*/("""}"""),format.raw/*100.6*/(""";
-  """),format.raw/*101.3*/("""}"""),format.raw/*101.4*/(""");
+      if(message.status == "No-Change")"""),format.raw/*87.40*/("""{"""),format.raw/*87.41*/("""
+        """),format.raw/*88.9*/("""console.log("No Change from last Update!");
+        $('#time').append(message.status + "<br/>");
+      """),format.raw/*90.7*/("""}"""),format.raw/*90.8*/("""else"""),format.raw/*90.12*/("""{"""),format.raw/*90.13*/("""
+        """),format.raw/*91.9*/("""console.log(message.value);   
+        var allChanges = JSON.parse(message.value);
+        console.log("Updating "+ message.status + "Repositories" );
+        for(var i =0; i< parseInt(message.status); i++)"""),format.raw/*94.56*/("""{"""),format.raw/*94.57*/("""                    
+             """),format.raw/*95.14*/("""var githubResult = allChanges[i];
+             console.log(githubResult);
+             $("#Owner"+ githubResult.repoToChange).html("<a href='/user/"+ githubResult.ownerName + "'>"+ githubResult.ownerName+"</a>");
+             $("#Name"+ githubResult.repoToChange).html("<a href='/repo/"+ githubResult.queryString+"/"+ githubResult.repoID +"'>" + githubResult.repoName+ "</a>");
+             var data= '';
+             var topics= githubResult.topics.substring(1, githubResult.topics.length-1).split(",");
+             console.log("Topics :: "+topics+ " : " +topics.length);
+             if(topics.length>1)"""),format.raw/*102.33*/("""{"""),format.raw/*102.34*/("""
+              """),format.raw/*103.15*/("""console.log("Topics :: " +topics[4]);
+               for(var j=0; j<topics.length; j++)"""),format.raw/*104.50*/("""{"""),format.raw/*104.51*/("""
+                  """),format.raw/*105.19*/("""data += "<div style='display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 4px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;'><a style='color :#dee2e1;' href='/topic/" + topics[j] + "'> " + topics[j] + "</a> </div> ";
+               """),format.raw/*106.16*/("""}"""),format.raw/*106.17*/("""
+               """),format.raw/*107.16*/("""$("#Topics"+ githubResult.repoToChange).html(data);
+             """),format.raw/*108.14*/("""}"""),format.raw/*108.15*/("""
+        """),format.raw/*109.9*/("""}"""),format.raw/*109.10*/("""
+      """),format.raw/*110.7*/("""}"""),format.raw/*110.8*/("""
+    """),format.raw/*111.5*/("""}"""),format.raw/*111.6*/(""";
+  """),format.raw/*112.3*/("""}"""),format.raw/*112.4*/(""");
 
-"""),format.raw/*103.1*/("""}"""),format.raw/*103.2*/(""").call(this);
+"""),format.raw/*114.1*/("""}"""),format.raw/*114.2*/(""").call(this);
 
 
 </script>
@@ -153,9 +164,9 @@ Seq[Any](format.raw/*1.118*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/index.scala.html
-                  HASH: b519460a6d2b2b1373402be94fc405b423ee690d
-                  MATRIX: 989->1|1201->117|1230->120|1386->250|1400->256|1461->297|1529->339|1543->345|1603->385|2613->1369|2644->1391|2684->1393|2715->1397|2782->1437|2795->1441|2823->1448|2852->1449|2908->1479|2940->1495|2979->1496|3014->1504|3327->1790|3351->1793|4061->2476|4106->2505|4145->2506|4191->2524|4328->2634|4340->2637|4371->2647|4401->2650|4414->2653|4446->2663|4566->2756|4578->2759|4611->2771|4641->2773|4654->2776|4683->2783|4714->2786|4727->2789|4758->2798|4883->2896|4931->2928|4970->2929|5019->2950|5253->3156|5280->3161|5312->3165|5339->3170|5403->3203|5449->3221|5523->3264|5596->3309|5710->3392|5745->3397|5774->3399|5888->3485|5917->3486|5951->3493|6142->3656|6171->3657|6201->3660|6365->3797|6394->3798|6430->3807|6458->3808|6505->3827|6534->3828|6565->3832|6606->3845|6635->3846|6668->3852|6843->3999|6872->4000|6907->4008|7053->4126|7082->4127|7115->4132|7144->4133|7178->4139|7207->4140
-                  LINES: 27->1|32->1|33->2|34->3|34->3|34->3|37->6|37->6|37->6|61->30|61->30|61->30|62->31|62->31|62->31|62->31|62->31|66->35|66->35|66->35|67->36|69->38|69->38|84->53|84->53|84->53|85->54|86->55|86->55|86->55|86->55|86->55|86->55|87->56|87->56|87->56|87->56|87->56|87->56|87->56|87->56|87->56|89->58|89->58|89->58|90->59|90->59|90->59|90->59|90->59|91->60|92->61|94->63|97->66|102->71|104->73|105->74|110->79|110->79|112->81|115->84|115->84|116->85|119->88|119->88|120->89|120->89|122->91|122->91|123->92|123->92|123->92|124->93|127->96|127->96|128->97|131->100|131->100|132->101|132->101|134->103|134->103
+                  HASH: 7e35748df8f45fefc33a04fc7a0ef117e7129564
+                  MATRIX: 989->1|1201->117|1230->120|1386->250|1400->256|1461->297|1529->339|1543->345|1603->385|2613->1369|2644->1391|2684->1393|2715->1397|2782->1437|2795->1441|2823->1448|2852->1449|2906->1477|2938->1493|2977->1494|3012->1502|3325->1788|3349->1791|4059->2474|4104->2503|4143->2504|4189->2522|4274->2580|4286->2583|4314->2590|4406->2654|4419->2657|4451->2667|4482->2670|4495->2673|4527->2683|4595->2724|4607->2727|4635->2734|4727->2798|4740->2801|4774->2813|4804->2815|4817->2818|4846->2825|4877->2828|4890->2831|4921->2840|4990->2882|5002->2885|5030->2892|5126->2961|5174->2993|5213->2994|5262->3015|5496->3221|5523->3226|5555->3230|5582->3235|5646->3268|5692->3286|5766->3329|5839->3374|5953->3457|5988->3462|6019->3466|6093->3512|6122->3513|6153->3517|6194->3530|6223->3531|6256->3537|6431->3684|6460->3685|6495->3693|6617->3787|6646->3788|6683->3798|6815->3903|6843->3904|6875->3908|6904->3909|6941->3919|7178->4128|7207->4129|7270->4164|7912->4777|7942->4778|7987->4794|8104->4882|8134->4883|8183->4903|8494->5185|8524->5186|8570->5203|8665->5269|8695->5270|8733->5280|8763->5281|8799->5289|8828->5290|8862->5296|8891->5297|8924->5302|8953->5303|8987->5309|9016->5310
+                  LINES: 27->1|32->1|33->2|34->3|34->3|34->3|37->6|37->6|37->6|61->30|61->30|61->30|62->31|62->31|62->31|62->31|62->31|65->34|65->34|65->34|66->35|68->37|68->37|83->52|83->52|83->52|84->53|85->54|85->54|85->54|85->54|85->54|85->54|85->54|85->54|85->54|86->55|86->55|86->55|86->55|86->55|86->55|86->55|86->55|86->55|86->55|86->55|86->55|87->56|87->56|87->56|88->57|88->57|88->57|89->58|89->58|89->58|89->58|89->58|90->59|91->60|93->62|96->65|101->70|103->72|105->74|110->79|110->79|111->80|111->80|111->80|112->81|115->84|115->84|116->85|118->87|118->87|119->88|121->90|121->90|121->90|121->90|122->91|125->94|125->94|126->95|133->102|133->102|134->103|135->104|135->104|136->105|137->106|137->106|138->107|139->108|139->108|140->109|140->109|141->110|141->110|142->111|142->111|143->112|143->112|145->114|145->114
                   -- GENERATED --
               */
           

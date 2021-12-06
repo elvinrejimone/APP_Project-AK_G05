@@ -17,16 +17,16 @@ package controllers {
     }
 
   
-    // @LINE:17
-    def topics(topicname:String): Call = {
-      
-      Call("GET", _prefix + { _defaultPrefix } + "topic/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topicname", topicname)))
-    }
-  
     // @LINE:18
     def repoProfileRequestHandler(query:String, id:String): Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "repo/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("query", query)) + "/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("id", id)))
+    }
+  
+    // @LINE:8
+    def wsTopic: Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "wsTopic")
     }
   
     // @LINE:16
@@ -39,6 +39,12 @@ package controllers {
     def ws: Call = {
       
       Call("GET", _prefix + { _defaultPrefix } + "ws")
+    }
+  
+    // @LINE:17
+    def topics(topicname:String): Call = {
+      
+      Call("GET", _prefix + { _defaultPrefix } + "topic/" + play.core.routing.dynamicString(implicitly[play.api.mvc.PathBindable[String]].unbind("topicname", topicname)))
     }
   
     // @LINE:20

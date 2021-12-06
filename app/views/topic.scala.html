@@ -1,6 +1,8 @@
-@(results: HashMap[String, ArrayList[Models.GithubResult]], keys: List[String])
+@(results: HashMap[String, ArrayList[Models.GithubResult]], keys: List[String],request: play.mvc.Http.Request)
+<script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>  
 
-<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
+<section data-ws-url="@routes.HomeController.wsTopic.webSocketURL(request)" style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
  
   @if(!results.isEmpty()) {    	
       @for(key <- keys){
@@ -44,5 +46,5 @@
 } else {
   <h1>Not Displaying</h1>
 }
-  
+ <div id="time"> </div>
 </section>

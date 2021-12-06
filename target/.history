@@ -100,3 +100,4 @@ test
 clean
 compile
 test
+run

@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import play.mvc.WebSocket;
 import java.util.HashMap;//
 import javax.inject.Inject;
+import actors.UserActor;
+import actors.TopicActor;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -123,12 +125,19 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		commitsActor = system.actorOf(CommitsActor.getProps(commitService));
 		searchActor = system.actorOf(SearchResultActor.getProps(), "searchActor");
 		statsActor = system.actorOf(StatisticsActor.getProps());//
+		system.actorOf(TopicActor.getProps(),"topicActor");
+		
 
 	}
 	
 	 public WebSocket ws(){
 		 System.out.println("Inside Websocket!! ");
 	        return WebSocket.Json.accept(request -> ActorFlow.actorRef(SearchSupervisor::props, actorSystem, materializer));
+	    }
+	 
+	  public WebSocket wsTopic(){
+		  
+	        return WebSocket.Json.accept(request->ActorFlow.actorRef(UserActor::props,actorSystem,materializer));
 	    }
 
 	/**
@@ -185,6 +194,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * 
 	 * @author Santhosh Santhanam
 	 * @author Elvin Rejimone
+	 * @author Sejal Chopra
 	 * @param query - search string
 	 * @param type  To identify the API call
 	 * @return
@@ -236,15 +246,16 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
-	public Result topics(String request) throws InterruptedException, ExecutionException {
-
-		topicResultList = searchGithub(request, 2);
+	public Result topics(String requests,Http.Request request) throws InterruptedException, ExecutionException {
+		
+		topicResultList = searchGithub(requests,2);
 		topicList.clear();
 		topicList.addAll(topicResultList.keySet());
-		Collections.reverse(topicList);
-
-		return ok(views.html.topic.render(topicResultList, topicList));
-
+			Collections.reverse(topicList);
+			
+			return ok(views.html.topic.render(topicResultList, topicList,request));
+		
+	    
 	}
 
 	/**

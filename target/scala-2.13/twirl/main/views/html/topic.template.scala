@@ -21,23 +21,25 @@ import play.data._
 import play.core.j.PlayFormsMagicForJava._
 import scala.jdk.CollectionConverters._
 
-object topic extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template2[HashMap[String, ArrayList[Models.GithubResult]],List[String],play.twirl.api.HtmlFormat.Appendable] {
+object topic extends _root_.play.twirl.api.BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,_root_.play.twirl.api.Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with _root_.play.twirl.api.Template3[HashMap[String, ArrayList[Models.GithubResult]],List[String],play.mvc.Http.Request,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply/*1.2*/(results: HashMap[String, ArrayList[Models.GithubResult]], keys: List[String]):play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(results: HashMap[String, ArrayList[Models.GithubResult]], keys: List[String],request: play.mvc.Http.Request):play.twirl.api.HtmlFormat.Appendable = {
     _display_ {
       {
 
 
-Seq[Any](format.raw/*1.80*/("""
+Seq[Any](format.raw/*1.111*/("""
+"""),format.raw/*2.1*/("""<script type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script type='text/javascript' src='"""),_display_(/*3.38*/routes/*3.44*/.Assets.versioned("javascripts/index.js")),format.raw/*3.85*/("""'></script>  
 
-"""),format.raw/*3.1*/("""<section style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
+<section data-ws-url=""""),_display_(/*5.24*/routes/*5.30*/.HomeController.wsTopic.webSocketURL(request)),format.raw/*5.75*/("""" style=" margin: 0;background: linear-gradient(45deg, #7ab1af, #aea7ec);font-family: sans-serif;font-weight: 100; padding-bottom: 40px">
  
-  """),_display_(/*5.4*/if(!results.isEmpty())/*5.26*/ {_display_(Seq[Any](format.raw/*5.28*/("""    	
-      """),_display_(/*6.8*/for(key <- keys) yield /*6.24*/{_display_(Seq[Any](format.raw/*6.25*/("""
-      """),format.raw/*7.7*/("""<div class="container" style="display: flex;justify-content: center; ">
+  """),_display_(/*7.4*/if(!results.isEmpty())/*7.26*/ {_display_(Seq[Any](format.raw/*7.28*/("""    	
+      """),_display_(/*8.8*/for(key <- keys) yield /*8.24*/{_display_(Seq[Any](format.raw/*8.25*/("""
+      """),format.raw/*9.7*/("""<div class="container" style="display: flex;justify-content: center; ">
       <div style="padding: 0px 40px 40px 40px;margin: 20px;background-color: rgb(211, 211, 211);border-radius: 5px;">
-       <center> <span>Showing results for the topic: <h1 style="display:inline-block;margin-left: 10px;">"""),_display_(/*9.107*/key),format.raw/*9.110*/("""</h1> </span></center>
+       <center> <span>Showing results for the topic: <h1 style="display:inline-block;margin-left: 10px;">"""),_display_(/*11.107*/key),format.raw/*11.110*/("""</h1> </span></center>
         <table style="width:800px;
           border-collapse: collapse;
           border: 1px solid #ddd;
@@ -52,39 +54,39 @@ Seq[Any](format.raw/*1.80*/("""
             </thead>
             <tbody style="background-color: #dee2e1; text-align: center;">
               
-              """),_display_(/*24.16*/for(obj <- results.get(key) ) yield /*24.45*/{_display_(Seq[Any](format.raw/*24.46*/("""
-                """),format.raw/*25.17*/("""<tr style="height: 50px ">
-                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*26.68*/obj/*26.71*/.ownerName),format.raw/*26.81*/("""</td>
-                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*27.68*/obj/*27.71*/.repoName),format.raw/*27.80*/("""</td>
+              """),_display_(/*26.16*/for(obj <- results.get(key) ) yield /*26.45*/{_display_(Seq[Any](format.raw/*26.46*/("""
+                """),format.raw/*27.17*/("""<tr style="height: 50px ">
+                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*28.68*/obj/*28.71*/.ownerName),format.raw/*28.81*/("""</td>
+                <td style="border: 1px solid rgb(104, 207, 164);">"""),_display_(/*29.68*/obj/*29.71*/.repoName),format.raw/*29.80*/("""</td>
                 <td style="border: 1px solid rgb(104, 207, 164);">
-                  """),_display_(/*29.20*/for(topic <- obj.returnTopics()) yield /*29.52*/{_display_(Seq[Any](format.raw/*29.53*/("""
-                   """),format.raw/*30.20*/("""<div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 3px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"> """),_display_(/*30.187*/topic),format.raw/*30.192*/(""" """),format.raw/*30.193*/("""</div> 
-                  """)))}),format.raw/*31.20*/("""
-                """),format.raw/*32.17*/("""</td>
+                  """),_display_(/*31.20*/for(topic <- obj.returnTopics()) yield /*31.52*/{_display_(Seq[Any](format.raw/*31.53*/("""
+                   """),format.raw/*32.20*/("""<div style="display: inline-block;background-color: #0b7e5b;color: #dee2e1; border-radius:6px; padding: 3px; margin-right: 3px; margin-top: 3px;margin-bottom: 3px;"> """),_display_(/*32.187*/topic),format.raw/*32.192*/(""" """),format.raw/*32.193*/("""</div> 
+                  """)))}),format.raw/*33.20*/("""
+                """),format.raw/*34.17*/("""</td>
               </tr>
-              """)))}),format.raw/*34.16*/("""
+              """)))}),format.raw/*36.16*/("""
                
             
-            """),format.raw/*37.13*/("""</tbody> 
+            """),format.raw/*39.13*/("""</tbody> 
           </table>
         </div>
          </div>
         
-        """)))}),format.raw/*42.10*/("""
+        """)))}),format.raw/*44.10*/("""
 
-""")))}/*44.3*/else/*44.8*/{_display_(Seq[Any](format.raw/*44.9*/("""
-  """),format.raw/*45.3*/("""<h1>Not Displaying</h1>
-""")))}),format.raw/*46.2*/("""
-  
-"""),format.raw/*48.1*/("""</section>
+""")))}/*46.3*/else/*46.8*/{_display_(Seq[Any](format.raw/*46.9*/("""
+  """),format.raw/*47.3*/("""<h1>Not Displaying</h1>
+""")))}),format.raw/*48.2*/("""
+ """),format.raw/*49.2*/("""<div id="time"> </div>
+</section>
 """))
       }
     }
   }
 
-  def render(results:HashMap[String, ArrayList[Models.GithubResult]],keys:List[String]): play.twirl.api.HtmlFormat.Appendable = apply(results,keys)
+  def render(results:HashMap[String, ArrayList[Models.GithubResult]],keys:List[String],request:play.mvc.Http.Request): play.twirl.api.HtmlFormat.Appendable = apply(results,keys,request)
 
-  def f:((HashMap[String, ArrayList[Models.GithubResult]],List[String]) => play.twirl.api.HtmlFormat.Appendable) = (results,keys) => apply(results,keys)
+  def f:((HashMap[String, ArrayList[Models.GithubResult]],List[String],play.mvc.Http.Request) => play.twirl.api.HtmlFormat.Appendable) = (results,keys,request) => apply(results,keys,request)
 
   def ref: this.type = this
 
@@ -94,9 +96,9 @@ Seq[Any](format.raw/*1.80*/("""
               /*
                   -- GENERATED --
                   SOURCE: app/views/topic.scala.html
-                  HASH: e04253169338738212284c10ef84c82b120d5b73
-                  MATRIX: 961->1|1134->79|1164->83|1341->235|1371->257|1410->259|1449->273|1480->289|1518->290|1552->298|1877->596|1901->599|2611->1282|2656->1311|2695->1312|2741->1330|2863->1425|2875->1428|2906->1438|3007->1512|3019->1515|3049->1524|3170->1618|3218->1650|3257->1651|3306->1672|3501->1839|3528->1844|3558->1845|3617->1873|3663->1891|3737->1934|3810->1979|3924->2062|3947->2068|3959->2073|3997->2074|4028->2078|4084->2104|4117->2110
-                  LINES: 27->1|32->1|34->3|36->5|36->5|36->5|37->6|37->6|37->6|38->7|40->9|40->9|55->24|55->24|55->24|56->25|57->26|57->26|57->26|58->27|58->27|58->27|60->29|60->29|60->29|61->30|61->30|61->30|61->30|62->31|63->32|65->34|68->37|73->42|75->44|75->44|75->44|76->45|77->46|79->48
+                  HASH: 5e348a6a2603b94f6c625d4c1b0092d17cd15385
+                  MATRIX: 983->1|1188->110|1216->112|1371->241|1385->247|1446->288|1512->328|1526->334|1591->379|1761->524|1791->546|1830->548|1869->562|1900->578|1938->579|1972->587|2298->885|2323->888|3033->1571|3078->1600|3117->1601|3163->1619|3285->1714|3297->1717|3328->1727|3429->1801|3441->1804|3471->1813|3592->1907|3640->1939|3679->1940|3728->1961|3923->2128|3950->2133|3980->2134|4039->2162|4085->2180|4159->2223|4232->2268|4346->2351|4369->2357|4381->2362|4419->2363|4450->2367|4506->2393|4536->2396
+                  LINES: 27->1|32->1|33->2|34->3|34->3|34->3|36->5|36->5|36->5|38->7|38->7|38->7|39->8|39->8|39->8|40->9|42->11|42->11|57->26|57->26|57->26|58->27|59->28|59->28|59->28|60->29|60->29|60->29|62->31|62->31|62->31|63->32|63->32|63->32|63->32|64->33|65->34|67->36|70->39|75->44|77->46|77->46|77->46|78->47|79->48|80->49
                   -- GENERATED --
               */
           
