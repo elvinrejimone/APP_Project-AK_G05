@@ -1,1 +1,1 @@
-["controllers.HomeControllerTest","Model.Issue_Stats","Model.RepositoryProfileTest","Model.GitHubResultTest","Model.TopicResultHelperTest","Model.CommitsResultTest"]
+["controllers.HomeControllerTest","Model.Issue_Stats","Model.RepositoryProfileTest","Model.GitHubResultTest","Model.TopicResultHelperTest","Model.CommitsResultTest","actors.SearchResultTest","actors.SearchSupervisorTest"]

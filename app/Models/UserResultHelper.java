@@ -48,7 +48,11 @@ public class UserResultHelper{
 		
 		return allResult;
 	}
-	
+	/**
+	 * 
+	 * @param query searches for the query
+	 * @param singleRecord argument
+	 */
 	public void addToTotalSearchList(String query, ArrayList<GithubResult> singleRecord) {
 		if(!allSearches.contains(query)) {
 			if(allSearches.size()==10) {

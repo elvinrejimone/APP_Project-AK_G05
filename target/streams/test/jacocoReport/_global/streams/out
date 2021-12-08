@@ -1,0 +1,12 @@
+[0m[[0m[0minfo[0m] [0m[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m------- Jacoco Coverage Report -------[0m
+[0m[[0m[0minfo[0m] [0m[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mLines: 61.11% (>= required 0.0%) covered, 413 of 1062 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mInstructions: 53.79% (>= required 0.0%) covered, 4203 of 9095 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mBranches: 45.77% (>= required 0.0%) covered, 141 of 260 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mMethods: 36.32% (>= required 0.0%) covered, 291 of 457 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mComplexity: 32.88% (>= required 0.0%) covered, 394 of 587 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0mClass: 73.68% (>= required 0.0%) covered, 15 of 57 missed, OK[0m
+[0m[[0m[0minfo[0m] [0m[0m[0m
+[0m[[0m[0minfo[0m] [0m[0mCheck E:\Masters\Concordia\Fall 2021\SOEN 6441\Project\Actor based implementation\APP_Project-AK_G05\target\scala-2.13\jacoco\report for detailed report[0m
+[0m[[0m[0minfo[0m] [0m[0m [0m

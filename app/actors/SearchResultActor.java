@@ -31,6 +31,7 @@ import scala.concurrent.duration.Duration;
 public class SearchResultActor extends AbstractActorWithTimers{ 
 		  private Set<ActorRef> replyActors;
 		  private SearchResultInfo srf;
+		  static boolean IS_TIMER_RUNNING= false;
 		  LinkedHashMap<String, ArrayList<GithubResult>> currentResultList;
 		  HashMap<String, ArrayList<String>> currentRepoList = new HashMap<String, ArrayList<String>>(); ;
 		  
@@ -88,11 +89,14 @@ public class SearchResultActor extends AbstractActorWithTimers{
 			if(sri.queryString.equals("none")) {
 				 sender().tell(allResultList, self());
 			}else {
-				allResultList = sri.srHelper.searchGithub(sri.queryString, sri.cache);					
+				allResultList = sri.srHelper.searchGithub(sri.queryString, sri.cache, true);					
 			    System.out.println("SearchResult-ACTOR ::: KeySet ::"+ allResultList.keySet());
 			    currentResultList = allResultList;
 			    updateRepoIDs();
-		        getTimers().startPeriodicTimer("Timer", new Tick(sri), Duration.create(15, TimeUnit.SECONDS));
+			    if(!IS_TIMER_RUNNING) {
+			        getTimers().startPeriodicTimer("Timer", new Tick(sri), Duration.create(15, TimeUnit.SECONDS));
+			        IS_TIMER_RUNNING=true;
+			    }
 			    sender().tell(allResultList, self());
 			}
 			
@@ -117,7 +121,7 @@ public class SearchResultActor extends AbstractActorWithTimers{
 			LinkedHashMap<String, ArrayList<GithubResult>> allResultList = new LinkedHashMap<String, ArrayList<GithubResult>>();
 			System.out.println("Inside SearchActorUPDATE-ACTOR:: Key ="+ sri.queryString);
 			
-			allResultList = sri.srHelper.searchGithub(sri.queryString, sri.cache);					
+			allResultList = sri.srHelper.searchGithub(sri.queryString, sri.cache, false);					
 		    System.out.println("SearchResultUPDATE-ACTOR ::: KeySet ::"+ allResultList.keySet());
 		    System.out.println("SearchResultUPDATE-ACTOR ::: replyActors ::"+ replyActors.size());
 		    

@@ -102,13 +102,13 @@ public class SearchResultHelper{
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
-	public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query, Cache cache)
+	public LinkedHashMap<String, ArrayList<GithubResult>> searchGithub(String query, Cache cache, Boolean USE_CACHE)
 			throws InterruptedException, ExecutionException {
 		WSRequest req = null;
 		LinkedHashMap<String, ArrayList<GithubResult>> finalList = null;
 			String querytoCheckCache = "https://api.github.com/search/repositories?q=" + query;
 			JsonNode obj = cache.get(querytoCheckCache);
-			if (obj != null) {
+			if (obj != null && USE_CACHE) {
 				System.out.println("Taking from Cache");
 			} else {
 				System.out.println("Not Found in Cache, requesting and Storing in Cache");

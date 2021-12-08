@@ -1,1 +1,48 @@
-[0m[[0m[0mdebug[0m] [0m[0mNo changes[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe actors.SearchSupervisor$RegisterMsg has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(notify,[Default]), UsedName(equals,[Default]), UsedName(getClass,[Default]), UsedName(notifyAll,[Default]), UsedName(actors;SearchSupervisor$RegisterMsg;init;,[Default]), UsedName(wait,[Default]), UsedName(RegisterMsg,[Default]), UsedName(toString,[Default]), UsedName(hashCode,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0m[0mdebug[0m] [0m[0mFiles invalidated by inheriting from (external) actors.SearchSupervisor$RegisterMsg: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting direct dependencies of all classes transitively invalidated by inheritance.[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting classes that directly depend on (external) actors.SearchSupervisor$RegisterMsg.[0m
+[0m[[0m[0mdebug[0m] [0m[0mName hashing optimization doesn't apply to non-Scala dependency: actors.SearchSupervisorTest[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe actors.SearchResultActor has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(IS_TIMER_RUNNING,[Default]), UsedName(actors;SearchResultActor;init;,[Default]), UsedName(Tick,[Default]), UsedName(sendSearchResults,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0m[0mdebug[0m] [0m[0mFiles invalidated by inheriting from (external) actors.SearchResultActor: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting direct dependencies of all classes transitively invalidated by inheritance.[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting classes that directly depend on (external) actors.SearchResultActor.[0m
+[0m[[0m[0mdebug[0m] [0m[0mName hashing optimization doesn't apply to non-Scala dependency: actors.SearchResultTest[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe actors.SearchSupervisor has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(RegisterMsg,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0m[0mdebug[0m] [0m[0mFiles invalidated by inheriting from (external) actors.SearchSupervisor: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting direct dependencies of all classes transitively invalidated by inheritance.[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting classes that directly depend on (external) actors.SearchSupervisor.[0m
+[0m[[0m[0mdebug[0m] [0m[0mName hashing optimization doesn't apply to non-Scala dependency: actors.SearchSupervisorTest[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe actors.SearchResultActor$Tick has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName(actors;SearchResultActor$Tick;init;,[Default]), UsedName(Tick,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0m[0mdebug[0m] [0m[0mFiles invalidated by inheriting from (external) actors.SearchResultActor$Tick: Set(); now invalidating by inheritance (internally).[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting direct dependencies of all classes transitively invalidated by inheritance.[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting classes that directly depend on (external) actors.SearchResultActor$Tick.[0m
+[0m[[0m[0mdebug[0m] [0m[0mName hashing optimization doesn't apply to non-Scala dependency: actors.SearchResultTest[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial source changes: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	removed:Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set(NamesChange(actors.SearchSupervisor$RegisterMsg,ModifiedNames(changes = UsedName(notify,[Default]), UsedName(equals,[Default]), UsedName(getClass,[Default]), UsedName(notifyAll,[Default]), UsedName(actors;SearchSupervisor$RegisterMsg;init;,[Default]), UsedName(wait,[Default]), UsedName(RegisterMsg,[Default]), UsedName(toString,[Default]), UsedName(hashCode,[Default]))), NamesChange(actors.SearchResultActor,ModifiedNames(changes = UsedName(IS_TIMER_RUNNING,[Default]), UsedName(actors;SearchResultActor;init;,[Default]), UsedName(Tick,[Default]), UsedName(sendSearchResults,[Default]))), NamesChange(actors.SearchSupervisor,ModifiedNames(changes = UsedName(RegisterMsg,[Default]))), NamesChange(actors.SearchResultActor$Tick,ModifiedNames(changes = UsedName(actors;SearchResultActor$Tick;init;,[Default]), UsedName(Tick,[Default]))))[0m
+[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set(E:\Masters\Concordia\Fall 2021\SOEN 6441\Project\Actor based implementation\APP_Project-AK_G05\target\scala-2.13\classes)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	external source: Set(actors.SearchSupervisorTest, actors.SearchResultTest)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(actors.SearchSupervisorTest, actors.SearchResultTest)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: actors.SearchSupervisorTest, actors.SearchResultTest[0m
+[0m[[0m[0minfo[0m] [0m[0mCompiling 2 Java sources to E:\Masters\Concordia\Fall 2021\SOEN 6441\Project\Actor based implementation\APP_Project-AK_G05\target\scala-2.13\test-classes ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mAttempting to call com.sun.tools.javac.api.JavacTool@e1b235c directly...[0m
+[0m[[0m[31merror[0m] [0m[0m(Test / [31mcompileIncremental[0m) javac returned non-zero exit code[0m

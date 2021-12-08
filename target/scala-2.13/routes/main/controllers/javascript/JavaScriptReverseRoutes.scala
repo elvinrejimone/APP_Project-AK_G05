@@ -18,22 +18,22 @@ package controllers.javascript {
     }
 
   
-    // @LINE:17
-    def topics: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.HomeController.topics",
-      """
-        function(topicname0) {
-          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "topic/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("topicname", topicname0))})
-        }
-      """
-    )
-  
     // @LINE:18
     def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.HomeController.repoProfileRequestHandler",
       """
         function(query0,id1) {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "repo/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("query", query0)) + "/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("id", id1))})
+        }
+      """
+    )
+  
+    // @LINE:8
+    def wsTopic: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.wsTopic",
+      """
+        function() {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "wsTopic"})
         }
       """
     )
@@ -54,6 +54,16 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "ws"})
+        }
+      """
+    )
+  
+    // @LINE:17
+    def topics: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.HomeController.topics",
+      """
+        function(topicname0) {
+          return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "topic/" + encodeURIComponent((""" + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + """)("topicname", topicname0))})
         }
       """
     )
