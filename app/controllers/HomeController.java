@@ -43,6 +43,9 @@ import actors.SearchResultActor.SearchResultInfo;
 import actors.SearchSupervisor;
 import actors.StatisticsActor;//actor
 import actors.StatisticsActor.StatsInfo;//
+import actors.TopicActor;
+import actors.TopicActor.TopicInfo;
+
 //import actors.TimeActor;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -125,6 +128,10 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	ActorRef commitsActor;
 	ActorRef searchActor;
 	ActorRef statsActor;//
+	ActorRef topicActor;//
+
+	
+	boolean IS_TOPIC_ACTOR_STARTED = false;
 
 	public HomeController() {
 		this.assetsFinder = null;
@@ -263,17 +270,23 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
-	public Result topics(String requests,Http.Request request) throws InterruptedException, ExecutionException,TimeoutException {
+	public CompletionStage<Result> topics(String requests,Http.Request request) throws InterruptedException, ExecutionException,TimeoutException {
 		
-		actorSystem.actorOf(TopicActor.getProps(requests),"topicActor");
-		topicResultList = searchGithub(requests,2);
-		topicList.clear();
-		topicList.addAll(topicResultList.keySet());
-			Collections.reverse(topicList);
-			
-			return ok(views.html.topic.render(requests,request));
+		if(!IS_TOPIC_ACTOR_STARTED) {
+			topicActor = actorSystem.actorOf(TopicActor.getProps(requests),"topicActor");
+			IS_TOPIC_ACTOR_STARTED = true;
+		}
 		
-	    
+		return FutureConverters
+				.toJava(ask(topicActor, new TopicInfo(requests), 10000))
+				.thenApply(response -> {
+					topicResultList = (LinkedHashMap<String, ArrayList<GithubResult>>) response;
+					topicList.clear();
+					topicList.addAll(topicResultList.keySet());
+					Collections.reverse(topicList);
+					
+					return ok(views.html.topic.render(topicResultList, topicList, request));
+				});	    
 	}
 
 	/**

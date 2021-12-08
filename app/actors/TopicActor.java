@@ -11,10 +11,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import play.libs.ws.WSClient;
 import scala.concurrent.duration.Duration;
+import services.RepoProfileService;
 import play.libs.Json;
 import akka.actor.AbstractActorWithTimers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Models.GithubResult;
+import Models.TopicResultHelper;
+import Utils.Cache;
 import akka.actor.ActorRef;
 import javax.inject.Inject;
 import akka.actor.Props;
@@ -22,9 +27,10 @@ import akka.actor.Props;
 //import controllers.WSRequest;
 import play.Logger;
 import play.libs.Json;
+
+import java.util.ArrayList;
 import java.util.HashSet;
-
-
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 
@@ -33,6 +39,7 @@ public class TopicActor extends AbstractActorWithTimers{
 	@com.google.inject.Inject WSClient wsTopic; 
 	private Set<ActorRef> userActors;
 	public String topicName;
+	TopicResultHelper topicHelper = new TopicResultHelper();
 	
 	private static final class Tick{
 	}
@@ -47,12 +54,17 @@ public class TopicActor extends AbstractActorWithTimers{
 
 	}
 
+	static public class TopicInfo{
+		public final String topicName;
+		public TopicInfo(String topicName) {
+			this.topicName = topicName;
+		}
+	}
 	
 
 	private TopicActor(String requests) {
 		this.topicName=requests;
 		this.userActors = new HashSet<>();
-		Logger.info("TopicActor {} started",self());
 
 	}
 
@@ -61,9 +73,6 @@ public class TopicActor extends AbstractActorWithTimers{
 	@Override
 
 	public void preStart() {
-
-		Logger.info("TopicActor {} started",self());
-		getTimers().startPeriodicTimer("Timer", new Tick(), Duration.create(5, TimeUnit.SECONDS));
 	}
 	@Override
 
@@ -71,26 +80,14 @@ public class TopicActor extends AbstractActorWithTimers{
 
 		return receiveBuilder()
 				.match(Tick.class,msg -> notifyClients())
+				.match(TopicInfo.class, this::getTopicData)
 				.match(RegisterMsg.class, msg -> userActors.add(sender()))
 				.build();
 
 	}
 
-	
-
-	private void notifyClients() throws Exception,InterruptedException, ExecutionException {
-//		WSClient ws = null;
-//		WSRequest req=ws.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated","java"));
-//		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
-//		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
-//		
-//		String jsonString = "{\"k1\":\"v1\",\"k2\":\"v2\"}";
-//		ObjectMapper mapper = new ObjectMapper();
-//		JsonNode obj = mapper.readTree(jsonString);
-//		
-//		UserActor.TimeMessage tMsg = new UserActor.TimeMessage(obj);
-//
-//		userActors.forEach(ar -> ar.tell(tMsg, self()));
+	private void getTopicData(TopicInfo tpi) throws Exception,InterruptedException, ExecutionException {
+		System.out.println("**********Here in getTopicData!!");
 		AsyncHttpClientConfig asyncHttpClientConfig =
 				new DefaultAsyncHttpClientConfig.Builder()
 				.setMaxRequestRetry(0)
@@ -99,14 +96,13 @@ public class TopicActor extends AbstractActorWithTimers{
 				.build();
 		AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient(asyncHttpClientConfig);
 		WSClient client = new AhcWSClient(asyncHttpClient, Materializer.matFromSystem(context().system()));
-		WSRequest req = client.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",this.topicName));
+		WSRequest req = client.url(String.format("https://api.github.com/search/repositories?q=topic:%s&per_page=10&sort=updated",tpi.topicName));
 		//JsonNode j = req.get().thenApply(r-> r.getBody(json())).toCompletableFuture().get();
 		CompletionStage<JsonNode> res = req.get().thenApply(r -> r.asJson());
 		JsonNode obj = Json.toJson(res.toCompletableFuture().get().findPath("items"));
+		LinkedHashMap<String, ArrayList<GithubResult>> finalList = topicHelper.getArrayofGithubResult(tpi.topicName, obj);
 		
-		
-		UserActor.TimeMessage tMsg = new UserActor.TimeMessage(obj);
-		userActors.forEach(ar -> ar.tell(tMsg, self()));
+		  sender().tell(finalList, self());
 	}
 
 
