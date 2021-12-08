@@ -299,6 +299,26 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
+	
+	// public CompletionStage<Result> users(String requests,Http.Request request) throws InterruptedException, ExecutionException,TimeoutException {
+		
+	// 	if(!IS_TOPIC_ACTOR_STARTED) {
+	// 		topicActor = actorSystem.actorOf(UsersActor.getProps(requests),"userActor");
+	// 		IS_TOPIC_ACTOR_STARTED = true;
+	// 	}
+		
+	// 	return FutureConverters
+	// 			.toJava(ask(topicActor, new TopicInfo(requests), 10000))
+	// 			.thenApply(response -> {
+	// 				topicResultList = (LinkedHashMap<String, ArrayList<GithubResult>>) response;
+	// 				topicList.clear();
+	// 				topicList.addAll(topicResultList.keySet());
+	// 				Collections.reverse(topicList);
+					
+	// 				return ok(views.html.users.render(topicResultList, topicList, request));
+	// 			});	    
+	// }
+
 	public Result users(String request) throws InterruptedException, ExecutionException {
 
 		topicResultList = searchGithub(request, 3);
@@ -306,7 +326,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 		topicList.addAll(topicResultList.keySet());
 		Collections.reverse(topicList);
 		return ok(views.html.user.render(topicResultList, topicList));
-
+		
 	}
 
 	/**
