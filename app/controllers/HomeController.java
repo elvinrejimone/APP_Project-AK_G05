@@ -24,6 +24,7 @@ import actors.UserActor;
 import actors.TopicActor;
 import scala.concurrent.duration.Duration;
 import com.fasterxml.jackson.databind.JsonNode;
+import scala.concurrent.Await;
 
 import Models.CommitsResult;
 import Models.GithubResult;
@@ -45,6 +46,7 @@ import actors.StatisticsActor;//actor
 import actors.StatisticsActor.StatsInfo;//
 import actors.TopicActor;
 import actors.TopicActor.TopicInfo;
+import actors.SupervisorActor;
 
 //import actors.TimeActor;
 import akka.actor.ActorRef;
@@ -129,24 +131,40 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	ActorRef searchActor;
 	ActorRef statsActor;//
 	ActorRef topicActor;//
+	
+	//SUPERVISOR ACTOR
+		ActorRef supervisor;
 
 	
-	boolean IS_TOPIC_ACTOR_STARTED = false;
+	boolean IS_SUPERVISOR_CREATED = false;
 
 	public HomeController() {
 		this.assetsFinder = null;
 	}
 
 	@Inject
-	public HomeController(AssetsFinder assetsFinder, Cache cache, ActorSystem system) {
+	public HomeController(AssetsFinder assetsFinder, Cache cache, ActorSystem system)  throws InterruptedException,ExecutionException {
 		this.assetsFinder = assetsFinder;
 		this.cache = cache;
-		//actorSystem.actorOf(TimeActor.props(), "timeActor");
+
+		if(!IS_SUPERVISOR_CREATED) {
+			
+			supervisor = system.actorOf(SupervisorActor.getProps(), "supervisor");
+			IS_SUPERVISOR_CREATED =true;
+		}	
+			CompletionStage<ActorRef> searchActorImpl = FutureConverters
+			.toJava((ask(supervisor, SearchResultActor.getProps(), 5000)))
+			.thenApply(response -> {
+				return (ActorRef) response;
+			});
+		
+			searchActor = searchActorImpl.toCompletableFuture().get();
+			
 		repoProfileActor = system.actorOf(RepoProfileActor.getProps());
 		commitsActor = system.actorOf(CommitsActor.getProps(commitService));
-		searchActor = system.actorOf(SearchResultActor.getProps(), "searchActor");
+//		searchActor = system.actorOf(SearchResultActor.getProps(), "searchActor");
 		statsActor = system.actorOf(StatisticsActor.getProps());//
-		//system.actorOf(TopicActor.getProps(),"topicActor");
+		topicActor = system.actorOf(TopicActor.getProps(),"topicActor");	
 		
 
 	}
@@ -271,12 +289,7 @@ public class HomeController extends Controller implements WSBodyReadables, WSBod
 	 * @throws ExecutionException
 	 */
 	public CompletionStage<Result> topics(String requests,Http.Request request) throws InterruptedException, ExecutionException,TimeoutException {
-		
-		if(!IS_TOPIC_ACTOR_STARTED) {
-			topicActor = actorSystem.actorOf(TopicActor.getProps(requests),"topicActor");
-			IS_TOPIC_ACTOR_STARTED = true;
-		}
-		
+			
 		return FutureConverters
 				.toJava(ask(topicActor, new TopicInfo(requests), 10000))
 				.thenApply(response -> {

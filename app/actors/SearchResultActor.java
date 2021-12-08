@@ -48,6 +48,7 @@ public class SearchResultActor extends AbstractActorWithTimers{
 	}
 	
 	private SearchResultActor() {
+		System.out.println("SearchActor CREATED by Supervisor Actor!!");
 		this.replyActors = new HashSet<>();
 	}
 	

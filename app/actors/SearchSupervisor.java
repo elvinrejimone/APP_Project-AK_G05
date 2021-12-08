@@ -30,12 +30,13 @@ public class SearchSupervisor extends AbstractActor {
 	@Override
 	public void preStart() throws Exception {
 		System.out.println("In SearchSupervisor Pre-Start!!");
-		context().actorSelection("/user/searchActor").tell(new SearchResultActor.RegisterMsg(), self());
+		context().actorSelection("/user/supervisor/searchActor").tell(new SearchResultActor.RegisterMsg(), self());
 	}
 
 	@Override
 	public Receive createReceive() {
-		return receiveBuilder().match(GithubSearchMessage.class, this::sendTime).build();
+		return receiveBuilder()
+				.match(GithubSearchMessage.class, this::sendTime).build();
 	}
 
 	static public class CommitMessage {
@@ -66,5 +67,7 @@ public class SearchSupervisor extends AbstractActor {
 		System.out.println("Here in SEARCHSUPERVISOR :: " + msg.response.size());
 		ws.tell(msg.response, self());
 	}
+	
+  }
+	
 
-}

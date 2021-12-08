@@ -48,9 +48,8 @@ public class TopicActor extends AbstractActorWithTimers{
 
 	}
 
-	static public Props getProps(String requests) {
-		
-		return Props.create(TopicActor.class, () -> new TopicActor(requests));
+	static public Props getProps() {
+		return Props.create(TopicActor.class);
 
 	}
 
@@ -62,8 +61,7 @@ public class TopicActor extends AbstractActorWithTimers{
 	}
 	
 
-	private TopicActor(String requests) {
-		this.topicName=requests;
+	private TopicActor() {
 		this.userActors = new HashSet<>();
 
 	}
