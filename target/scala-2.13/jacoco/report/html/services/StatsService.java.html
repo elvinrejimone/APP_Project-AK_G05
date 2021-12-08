@@ -36,47 +36,47 @@ import Models.*;
 <span class="fc" id="L36">    ArrayList&lt;Integer&gt; calc = new ArrayList&lt;Integer&gt;();</span>
 
  	public StatsModel get_Count(ArrayList&lt;String&gt; titleList) {
-<span class="nc" id="L39">        Stream&lt;String&gt; stream1 = titleList.stream(); // converting ArrayList into Stream</span>
-<span class="nc" id="L40">        Stream&lt;String&gt; stream_char = titleList.stream(); // converting ArrayList into Stream</span>
+<span class="fc" id="L39">        Stream&lt;String&gt; stream1 = titleList.stream(); // converting ArrayList into Stream</span>
+<span class="fc" id="L40">        Stream&lt;String&gt; stream_char = titleList.stream(); // converting ArrayList into Stream</span>
        
 
         //Splitting stream on respect to &quot; &quot;
-<span class="nc" id="L44">        stream1 = stream1.flatMap(</span>
+<span class="fc" id="L44">        stream1 = stream1.flatMap(</span>
            (value)-&gt;{
-<span class="nc" id="L46">           String[] split = value.split(&quot; &quot;);</span>
-<span class="nc" id="L47">           return (Stream&lt;String&gt;) Arrays.asList(split).stream();</span>
+<span class="fc" id="L46">           String[] split = value.split(&quot; &quot;);</span>
+<span class="fc" id="L47">           return (Stream&lt;String&gt;) Arrays.asList(split).stream();</span>
                 });
                
         
         //stream.forEach(s -&gt; System.out.println(s)); // printing elements in Stream
-<span class="nc" id="L52">        stream_char = stream_char.flatMap(</span>
+<span class="fc" id="L52">        stream_char = stream_char.flatMap(</span>
                 (value)-&gt;{
-<span class="nc" id="L54">                String[] splitc = value.split(&quot;&quot;);</span>
-<span class="nc" id="L55">                return (Stream&lt;String&gt;) Arrays.asList(splitc).stream();</span>
+<span class="fc" id="L54">                String[] splitc = value.split(&quot;&quot;);</span>
+<span class="fc" id="L55">                return (Stream&lt;String&gt;) Arrays.asList(splitc).stream();</span>
                      });
 
-<span class="nc" id="L58">        c= stream1.map((value)-&gt;{</span>
-<span class="nc" id="L59">            return value.toLowerCase();}).count(); // total_words</span>
-<span class="nc" id="L60">        char_c =stream_char.map((value)-&gt;{</span>
-<span class="nc" id="L61">            return value.toLowerCase();}).count(); // total_words</span>
-<span class="nc" id="L62">        Stream&lt;String&gt; stream = titleList.stream(); // converting ArrayList into Stream</span>
-<span class="nc" id="L63">        stream = stream.flatMap(</span>
+<span class="fc" id="L58">        c= stream1.map((value)-&gt;{</span>
+<span class="fc" id="L59">            return value.toLowerCase();}).count(); // total_words</span>
+<span class="fc" id="L60">        char_c =stream_char.map((value)-&gt;{</span>
+<span class="fc" id="L61">            return value.toLowerCase();}).count(); // total_words</span>
+<span class="fc" id="L62">        Stream&lt;String&gt; stream = titleList.stream(); // converting ArrayList into Stream</span>
+<span class="fc" id="L63">        stream = stream.flatMap(</span>
             (value)-&gt;{
-<span class="nc" id="L65">            String[] split = value.split(&quot; &quot;);</span>
-<span class="nc" id="L66">            return (Stream&lt;String&gt;) Arrays.asList(split).stream();</span>
+<span class="fc" id="L65">            String[] split = value.split(&quot; &quot;);</span>
+<span class="fc" id="L66">            return (Stream&lt;String&gt;) Arrays.asList(split).stream();</span>
                  });
         //Mapping words with their frequency 
-<span class="nc" id="L69">        Map&lt;String, Integer&gt; wordsCountMap = stream.map(eachWord -&gt; eachWord)</span>
-<span class="nc" id="L70">        .collect(Collectors.toMap(w -&gt; w.toLowerCase(), w -&gt; 1, Integer::sum));       </span>
+<span class="fc" id="L69">        Map&lt;String, Integer&gt; wordsCountMap = stream.map(eachWord -&gt; eachWord)</span>
+<span class="fc" id="L70">        .collect(Collectors.toMap(w -&gt; w.toLowerCase(), w -&gt; 1, Integer::sum));       </span>
     
         
         //Sorting the result in descending order
-<span class="nc" id="L74">        wordsCountMap = wordsCountMap.entrySet()</span>
-<span class="nc" id="L75">					.stream()</span>
-<span class="nc" id="L76">					.sorted(Map.Entry.&lt;String, Integer&gt; comparingByValue().reversed())</span>
-<span class="nc" id="L77">					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-&gt; e1, LinkedHashMap::new));</span>
-<span class="nc" id="L78">       unique = wordsCountMap.size();</span>
-<span class="nc" id="L79">       r = (c-unique);</span>
+<span class="fc" id="L74">        wordsCountMap = wordsCountMap.entrySet()</span>
+<span class="fc" id="L75">					.stream()</span>
+<span class="fc" id="L76">					.sorted(Map.Entry.&lt;String, Integer&gt; comparingByValue().reversed())</span>
+<span class="pc" id="L77">					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2)-&gt; e1, LinkedHashMap::new));</span>
+<span class="fc" id="L78">       unique = wordsCountMap.size();</span>
+<span class="fc" id="L79">       r = (c-unique);</span>
         
 
     //     Iterator&lt;String&gt; itr = wordsCountMap.keySet().iterator();
@@ -84,32 +84,32 @@ import Models.*;
     //         System.out.println(itr.next());
     // }
 
-<span class="nc" id="L87">    max_freq = wordsCountMap.entrySet().stream().findFirst().get().getValue();</span>
-<span class="nc" id="L88">    min_freq  = Collections.min(wordsCountMap.values());</span>
-<span class="nc" id="L89">    StatsModel n = new StatsModel(wordsCountMap);</span>
+<span class="fc" id="L87">    max_freq = wordsCountMap.entrySet().stream().findFirst().get().getValue();</span>
+<span class="fc" id="L88">    min_freq  = Collections.min(wordsCountMap.values());</span>
+<span class="fc" id="L89">    StatsModel n = new StatsModel(wordsCountMap);</span>
         
     // for( Map.Entry&lt;String, Integer&gt; entry : wordsCountMap.entrySet() ){
     //     System.out.println( entry.getKey() + &quot; =&gt; &quot; + entry.getValue() );
     // }
-<span class="nc" id="L94">    return n;</span>
+<span class="fc" id="L94">    return n;</span>
 
 
 
 }
 public ArrayList&lt;Integer&gt; getstatsData() {
 
-<span class="nc" id="L101">    total_words = ((Long)c).intValue();        </span>
-<span class="nc" id="L102">    total_repetition =((Long)r).intValue();  </span>
-<span class="nc" id="L103">    total_char=((Long)char_c).intValue();</span>
-<span class="nc" id="L104">    unique_words= ((Long)unique).intValue();  </span>
-<span class="nc" id="L105">    calc.add(total_words);</span>
-<span class="nc" id="L106">    calc.add(total_repetition);</span>
-<span class="nc" id="L107">    calc.add(total_char);</span>
-<span class="nc" id="L108">    calc.add(unique_words);</span>
-<span class="nc" id="L109">    calc.add(max_freq);</span>
-<span class="nc" id="L110">    calc.add(min_freq);</span>
+<span class="fc" id="L101">    total_words = ((Long)c).intValue();        </span>
+<span class="fc" id="L102">    total_repetition =((Long)r).intValue();  </span>
+<span class="fc" id="L103">    total_char=((Long)char_c).intValue();</span>
+<span class="fc" id="L104">    unique_words= ((Long)unique).intValue();  </span>
+<span class="fc" id="L105">    calc.add(total_words);</span>
+<span class="fc" id="L106">    calc.add(total_repetition);</span>
+<span class="fc" id="L107">    calc.add(total_char);</span>
+<span class="fc" id="L108">    calc.add(unique_words);</span>
+<span class="fc" id="L109">    calc.add(max_freq);</span>
+<span class="fc" id="L110">    calc.add(min_freq);</span>
     
-<span class="nc" id="L112">    return calc;</span>
+<span class="fc" id="L112">    return calc;</span>
 
 }
 }

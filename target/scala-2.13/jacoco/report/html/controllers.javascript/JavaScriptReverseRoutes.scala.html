@@ -18,22 +18,22 @@ package controllers.javascript {
     }
 
   
-    // @LINE:17
-<span class="nc" id="L22">    def topics: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L23">      &quot;controllers.HomeController.topics&quot;,</span>
+    // @LINE:18
+<span class="nc" id="L22">    def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L23">      &quot;controllers.HomeController.repoProfileRequestHandler&quot;,</span>
 <span class="nc" id="L24">      &quot;&quot;&quot;</span>
-        function(topicname0) {
-<span class="nc" id="L26">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;topic/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;topicname&quot;, topicname0))})</span>
+        function(query0,id1) {
+<span class="nc" id="L26">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;repo/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;query&quot;, query0)) + &quot;/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;id&quot;, id1))})</span>
         }
       &quot;&quot;&quot;
     )
   
-    // @LINE:18
-<span class="nc" id="L32">    def repoProfileRequestHandler: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L33">      &quot;controllers.HomeController.repoProfileRequestHandler&quot;,</span>
+    // @LINE:8
+<span class="nc" id="L32">    def wsTopic: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L33">      &quot;controllers.HomeController.wsTopic&quot;,</span>
 <span class="nc" id="L34">      &quot;&quot;&quot;</span>
-        function(query0,id1) {
-<span class="nc" id="L36">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;repo/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;query&quot;, query0)) + &quot;/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;id&quot;, id1))})</span>
+        function() {
+<span class="nc" id="L36">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;wsTopic&quot;})</span>
         }
       &quot;&quot;&quot;
     )
@@ -58,32 +58,42 @@ package controllers.javascript {
       &quot;&quot;&quot;
     )
   
-    // @LINE:20
-<span class="nc" id="L62">    def commits: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L63">      &quot;controllers.HomeController.commits&quot;,</span>
+    // @LINE:17
+<span class="nc" id="L62">    def topics: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L63">      &quot;controllers.HomeController.topics&quot;,</span>
 <span class="nc" id="L64">      &quot;&quot;&quot;</span>
+        function(topicname0) {
+<span class="nc" id="L66">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;topic/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;topicname&quot;, topicname0))})</span>
+        }
+      &quot;&quot;&quot;
+    )
+  
+    // @LINE:20
+<span class="nc" id="L72">    def commits: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L73">      &quot;controllers.HomeController.commits&quot;,</span>
+<span class="nc" id="L74">      &quot;&quot;&quot;</span>
         function(ownerName0,repoName1) {
-<span class="nc" id="L66">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;repos/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;ownerName&quot;, ownerName0)) + &quot;/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;repoName&quot;, repoName1)) + &quot;/commits&quot;})</span>
+<span class="nc" id="L76">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;repos/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;ownerName&quot;, ownerName0)) + &quot;/&quot; + encodeURIComponent((&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;repoName&quot;, repoName1)) + &quot;/commits&quot;})</span>
         }
       &quot;&quot;&quot;
     )
   
     // @LINE:6
-<span class="nc" id="L72">    def index: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L73">      &quot;controllers.HomeController.index&quot;,</span>
-<span class="nc" id="L74">      &quot;&quot;&quot;</span>
+<span class="nc" id="L82">    def index: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L83">      &quot;controllers.HomeController.index&quot;,</span>
+<span class="nc" id="L84">      &quot;&quot;&quot;</span>
         function() {
-<span class="nc" id="L76">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + &quot;&quot;&quot;&quot;})</span>
+<span class="nc" id="L86">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + &quot;&quot;&quot;&quot;})</span>
         }
       &quot;&quot;&quot;
     )
   
     // @LINE:19
-<span class="nc" id="L82">    def issues: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L83">      &quot;controllers.HomeController.issues&quot;,</span>
-<span class="nc" id="L84">      &quot;&quot;&quot;</span>
+<span class="nc" id="L92">    def issues: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L93">      &quot;controllers.HomeController.issues&quot;,</span>
+<span class="nc" id="L94">      &quot;&quot;&quot;</span>
         function() {
-<span class="nc" id="L86">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;statistics/&quot;})</span>
+<span class="nc" id="L96">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;statistics/&quot;})</span>
         }
       &quot;&quot;&quot;
     )
@@ -91,29 +101,29 @@ package controllers.javascript {
   }
 
   // @LINE:11
-<span class="nc" id="L94">  class ReverseAssets(_prefix: =&gt; String) {</span>
+<span class="nc" id="L104">  class ReverseAssets(_prefix: =&gt; String) {</span>
 
     def _defaultPrefix: String = {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">      if (_prefix.endsWith(&quot;/&quot;)) &quot;&quot; else &quot;/&quot;</span>
     }
 
   
     // @LINE:12
-<span class="nc" id="L102">    def at: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L103">      &quot;controllers.Assets.at&quot;,</span>
-<span class="nc" id="L104">      &quot;&quot;&quot;</span>
+<span class="nc" id="L112">    def at: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L113">      &quot;controllers.Assets.at&quot;,</span>
+<span class="nc" id="L114">      &quot;&quot;&quot;</span>
         function(file1) {
-<span class="nc" id="L106">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</span>
+<span class="nc" id="L116">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[String]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</span>
         }
       &quot;&quot;&quot;
     )
   
     // @LINE:11
-<span class="nc" id="L112">    def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
-<span class="nc" id="L113">      &quot;controllers.Assets.versioned&quot;,</span>
-<span class="nc" id="L114">      &quot;&quot;&quot;</span>
+<span class="nc" id="L122">    def versioned: JavaScriptReverseRoute = JavaScriptReverseRoute(</span>
+<span class="nc" id="L123">      &quot;controllers.Assets.versioned&quot;,</span>
+<span class="nc" id="L124">      &quot;&quot;&quot;</span>
         function(file1) {
-<span class="nc" id="L116">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</span>
+<span class="nc" id="L126">          return _wA({method:&quot;GET&quot;, url:&quot;&quot;&quot;&quot; + _prefix + { _defaultPrefix } + &quot;&quot;&quot;&quot; + &quot;assets/&quot; + (&quot;&quot;&quot; + implicitly[play.api.mvc.PathBindable[Asset]].javascriptUnbind + &quot;&quot;&quot;)(&quot;file&quot;, file1)})</span>
         }
       &quot;&quot;&quot;
     )
@@ -121,5 +131,5 @@ package controllers.javascript {
   }
 
 
-<span class="nc" id="L124">}</span>
+<span class="nc" id="L134">}</span>
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

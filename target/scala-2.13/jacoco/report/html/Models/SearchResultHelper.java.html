@@ -74,9 +74,9 @@ public class SearchResultHelper{
 	 */
 	public void addToTotalSearchList(String query, ArrayList&lt;GithubResult&gt; singleRecord) {
 		
-<span class="pc bpc" id="L77" title="1 of 2 branches missed.">		if(allSearches.contains(query)) {</span>
-<span class="nc" id="L78">			allResult.remove(query);</span>
-<span class="nc" id="L79">			allSearches.remove(allSearches.indexOf(query));</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">		if(allSearches.contains(query)) {</span>
+<span class="fc" id="L78">			allResult.remove(query);</span>
+<span class="fc" id="L79">			allSearches.remove(allSearches.indexOf(query));</span>
 		}
 		
 <span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if(allSearches.size()==10) {</span>
@@ -108,7 +108,7 @@ public class SearchResultHelper{
 <span class="fc" id="L108">		LinkedHashMap&lt;String, ArrayList&lt;GithubResult&gt;&gt; finalList = null;</span>
 <span class="fc" id="L109">			String querytoCheckCache = &quot;https://api.github.com/search/repositories?q=&quot; + query;</span>
 <span class="fc" id="L110">			JsonNode obj = cache.get(querytoCheckCache);</span>
-<span class="pc bpc" id="L111" title="3 of 4 branches missed.">			if (obj != null &amp;&amp; USE_CACHE) {</span>
+<span class="pc bpc" id="L111" title="1 of 4 branches missed.">			if (obj != null &amp;&amp; USE_CACHE) {</span>
 <span class="nc" id="L112">				System.out.println(&quot;Taking from Cache&quot;);</span>
 			} else {
 <span class="fc" id="L114">				System.out.println(&quot;Not Found in Cache, requesting and Storing in Cache&quot;);</span>

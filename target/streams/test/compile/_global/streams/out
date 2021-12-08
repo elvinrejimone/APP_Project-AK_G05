@@ -1,6 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0mE:\Masters\Concordia\Fall 2021\SOEN 6441\Project\Actor based implementation\APP_Project-AK_G05\test\actors\SearchResultTest.java:87:1: actors.SearchResultActor.Tick has private access in actors.SearchResultActor[0m
-[0m[[0m[31merror[0m] [0m[0mSearchResultActor.Tick[0m
-[0m[[0m[31merror[0m] [0m[0mE:\Masters\Concordia\Fall 2021\SOEN 6441\Project\Actor based implementation\APP_Project-AK_G05\test\actors\SearchSupervisorTest.java:28:1: cannot find symbol[0m
-[0m[[0m[31merror[0m] [0m[0m  symbol:   class RegisterMsg[0m
-[0m[[0m[31merror[0m] [0m[0m  location: class actors.SearchSupervisor[0m
-[0m[[0m[31merror[0m] [0m[0mSearchSupervisor.RegisterMsg[0m

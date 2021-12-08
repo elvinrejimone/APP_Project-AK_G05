@@ -48,19 +48,23 @@ import com.fasterxml.jackson.databind.JsonNode;
 		
 <span class="fc" id="L49">		return allResult;</span>
 	}
-	
+	/**
+	 * 
+	 * @param query searches for the query
+	 * @param singleRecord argument
+	 */
 	public void addToTotalSearchList(String query, ArrayList&lt;GithubResult&gt; singleRecord) {
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">		if(!allSearches.contains(query)) {</span>
-<span class="pc bpc" id="L54" title="1 of 2 branches missed.">			if(allSearches.size()==10) {</span>
-<span class="nc" id="L55">				String removingQuery = allSearches.get(0);</span>
-<span class="nc" id="L56">				allResult.remove(removingQuery);</span>
-<span class="nc" id="L57">				allSearches.remove(0);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">		if(!allSearches.contains(query)) {</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">			if(allSearches.size()==10) {</span>
+<span class="nc" id="L59">				String removingQuery = allSearches.get(0);</span>
+<span class="nc" id="L60">				allResult.remove(removingQuery);</span>
+<span class="nc" id="L61">				allSearches.remove(0);</span>
 			}
-<span class="fc" id="L59">			allSearches.add(query);</span>
-<span class="fc" id="L60">			allResult.put(query, singleRecord);</span>
+<span class="fc" id="L63">			allSearches.add(query);</span>
+<span class="fc" id="L64">			allResult.put(query, singleRecord);</span>
 		}
-<span class="fc" id="L62">	System.out.println(allSearches.toString());</span>
-<span class="fc" id="L63">	}</span>
+<span class="fc" id="L66">	System.out.println(allSearches.toString());</span>
+<span class="fc" id="L67">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
