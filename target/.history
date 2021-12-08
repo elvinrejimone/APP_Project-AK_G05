@@ -303,3 +303,5 @@ test
 run
 test
 run
+test
+jacoco
