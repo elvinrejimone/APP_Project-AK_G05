@@ -35,6 +35,8 @@ import javax.inject.Inject;
 
 import actors.SearchResultActor;
 import actors.SearchResultActor.SearchResultInfo;
+import actors.SearchSupervisor.GithubSearchMessage;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
@@ -52,11 +54,10 @@ public class SearchResultTest {
 		{
 			Cache c = new Cache();
 			c.put("soen 6441 warzone", testObj);
-			// SearchResultActor sra = new SearchResultActor();
 			Materializer materializer = Materializer.matFromSystem(system);
-			final ObjectNode response = Json.newObject();
+			ObjectNode response = Json.newObject();
 			response.put("status", "No-Change");
-			// Set up AsyncHttpClient directly from config
+			GithubSearchMessage gsm = new GithubSearchMessage(response);
 			AsyncHttpClientConfig asyncHttpClientConfig =
 			    new DefaultAsyncHttpClientConfig.Builder()
 			        .setMaxRequestRetry(0)
@@ -64,10 +65,7 @@ public class SearchResultTest {
 			        .setShutdownTimeout(0)
 			        .build();
 			AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient(asyncHttpClientConfig);
-
-			// Set up WSClient instance directly from asynchttpclient.
 			WSClient client = new AhcWSClient(asyncHttpClient, materializer);
-			// WSClient ws = null;
 			String url = "soen 6441 warzone";
 			final SearchResultHelper srHelper = new SearchResultHelper(client);
 			SearchResultInfo sri = new SearchResultInfo(url, c, srHelper);
@@ -75,19 +73,13 @@ public class SearchResultTest {
                 System.out.println(system);
                 final Props props = SearchResultActor.getProps();
                 final ActorRef searchSystem = system.actorOf(props);
-                
-                // LinkedHashMap<String, ArrayList<GithubResult>> currentResultList = srh.getArrayofGithubResult(url, testObj);
-                // System.out.println("CURRENT LIST : " + currentResultList.toString());
-                // Mockito.when(srh.searchGithub(url, null, true)).thenReturn(CompletableFuture.completedFuture(currentResultList).get());
                 within(Duration.ofSeconds(30), () ->{
                 	searchSystem.tell(new SearchResultActor.RegisterMsg(), getRef());
                     searchSystem.tell("data",getRef());
                     searchSystem.tell(new SearchResultActor.SearchResultInfo(url, c, srHelper), getRef());
                     expectMsgClass(LinkedHashMap.class);
                 	searchSystem.tell(new SearchResultActor.Tick(sri), getRef());
-                	expectMsg(response);
-                	// awaitCond(this::msgAvailable);
-                	// expectMsg("list " + currentResultList.toString());
+                	expectMsgClass(GithubSearchMessage.class);
                 	expectNoMessage();
                 	return null;
                 });

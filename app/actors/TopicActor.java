@@ -79,7 +79,6 @@ public class TopicActor extends AbstractActorWithTimers{
 	public Receive createReceive() {
 
 		return receiveBuilder()
-				.match(Tick.class,msg -> notifyClients())
 				.match(TopicInfo.class, this::getTopicData)
 				.match(RegisterMsg.class, msg -> userActors.add(sender()))
 				.build();

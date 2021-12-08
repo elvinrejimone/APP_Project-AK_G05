@@ -52,7 +52,7 @@ public class SearchResultActor extends AbstractActorWithTimers{
 	}
 	
 
-    private static final class Tick{
+    public static final class Tick{
     	SearchResultInfo savedSRF;
     	public Tick(SearchResultInfo savedSRF) {
     		this.savedSRF = savedSRF;
