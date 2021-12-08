@@ -13,9 +13,16 @@ import akka.actor.Props;
 import Models.CommitsResult;
 import play.libs.ws.WSClient;
 import services.CommitService;
-
+/**
+ * @author Santhosh Santhanam
+ * Commits Akka Actor to fetch user details from web socket and passing the instance to Service 
+ * together with appropriate message classes
+ */
 public class CommitsActor extends AbstractActor {
-
+/**
+* get the user details creating instance of Service class
+*
+*/
 	static public class CommitInfo {
 		public final String username;
 		public final String reponame;
@@ -27,24 +34,36 @@ public class CommitsActor extends AbstractActor {
 			this.cService = cService;
 		}
 	}
-
+/**
+* Constructor of this Info class.
+*
+*/
 	private final CommitService commitService;
 
 	@Inject
 	public CommitsActor(CommitService commitService) {
 		this.commitService = commitService;
 	}
-
+	/**
+	 * Factory method to create instance of Commits Actor
+	 * @return Props
+	 */
 	public static Props getProps(CommitService cs) {
 		return Props.create(CommitsActor.class, () -> new CommitsActor(cs));
 	}
-
+	/**
+	 * It receives referrences and decides action based on them.
+	 * 
+	 */
 	@Override
 	public Receive createReceive() {
 		// TODO Auto-generated method stub
 		return receiveBuilder().match(CommitInfo.class, this::sendCommitsData).build();
 	}
-
+	/**
+	*Commits function to calculate the statistics for a repositories commits
+	* @throws Exception
+	*/
 	private void sendCommitsData(CommitInfo cInfo) {
 		try {
 			CompletionStage<List<CommitsResult>> cData = cInfo.cService.getCommitsData(cInfo.username, cInfo.reponame);

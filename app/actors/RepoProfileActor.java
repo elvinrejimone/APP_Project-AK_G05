@@ -15,15 +15,26 @@ import Models.RepositoryProfile;
 import Models.SearchResultHelper;
 import services.RepoProfileService;
 import Utils.Cache;
-
+/**
+ * @author Elvin Rejimone
+ * Repository Actor containing all available details for a repository of a user
+ */
 public class RepoProfileActor extends AbstractActor{ 
 
 
+/**
+* get the user details and query string
+* storing and retrieving data from Cache
+*/
 	static public class RepoProfileInfo{
 		public final String queryString;
 		public final String repoID;
 		public final Cache cache;
 		public final RepoProfileService repoService;
+/**
+* Constructor of this Info class.
+*
+*/
 		public RepoProfileInfo(String queryString, String repoID, Cache cache,RepoProfileService repoServ) {
 			this.queryString = queryString;
 			this.repoID = repoID;
@@ -32,12 +43,18 @@ public class RepoProfileActor extends AbstractActor{
 		}
 	}
 	
-	
+	/**
+	 * Factory method to create instance of Repository Actor
+	 * @return Props
+	 */
 	public static Props getProps() {
 		return Props.create(RepoProfileActor.class);
 	}
 	
-	
+	/**
+	 * It receives referrences and decides action based on them.
+	 * 
+	 */
 	@Override
 	public Receive createReceive() {
 		// TODO Auto-generated method stub
@@ -45,7 +62,10 @@ public class RepoProfileActor extends AbstractActor{
 				.match(RepoProfileInfo.class, this::sendRepoProfileData )
 				.build();
 	}
-	
+	/**
+	* fetch details from service class - issue and collaborators
+	* @throws Exception
+	*/
 	private void sendRepoProfileData(RepoProfileInfo rpi) {
 		try {
 			

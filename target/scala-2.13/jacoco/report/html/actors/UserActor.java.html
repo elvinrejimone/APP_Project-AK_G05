@@ -7,45 +7,51 @@ import play.Logger;
 import play.libs.Json;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+	*User Actor to fetch the user details
+	* @author Ujjawal Aggarwal
+	*/
 public final class UserActor extends AbstractActor {
     private final ActorRef ws;
 
     static public class TimeMessage {
         public final JsonNode obj;
-<span class="nc" id="L16">        public TimeMessage(JsonNode obj) {</span>
-<span class="nc" id="L17">            this.obj = obj;</span>
-<span class="nc" id="L18">        }</span>
+<span class="nc" id="L19">        public TimeMessage(JsonNode obj) {</span>
+<span class="nc" id="L20">            this.obj = obj;</span>
+<span class="nc" id="L21">        }</span>
     }
-    
-<span class="nc" id="L21">    public UserActor(final ActorRef wsOut) {</span>
-<span class="nc" id="L22">    	ws =  wsOut;</span>
-<span class="nc" id="L23">       Logger.debug(&quot;New UserActor {} forWebSocket {} ; timeActor : {}&quot;,self(),wsOut);</span>
-<span class="nc" id="L24">    }</span>
+    /**
+* get the user details creating instance of Service class
+*
+*/
+<span class="nc" id="L27">    public UserActor(final ActorRef wsOut) {</span>
+<span class="nc" id="L28">    	ws =  wsOut;</span>
+<span class="nc" id="L29">       Logger.debug(&quot;New UserActor {} forWebSocket {} ; timeActor : {}&quot;,self(),wsOut);</span>
+<span class="nc" id="L30">    }</span>
 
     public static Props props(final ActorRef wsout) {
-<span class="nc" id="L27">        return Props.create(UserActor.class, wsout);</span>
+<span class="nc" id="L33">        return Props.create(UserActor.class, wsout);</span>
     }
 
     @Override
     public Receive createReceive(){
-<span class="nc" id="L32">        return receiveBuilder()</span>
-<span class="nc" id="L33">                .match(TimeMessage.class, this::sendTime)</span>
-<span class="nc" id="L34">                .build();</span>
+<span class="nc" id="L38">        return receiveBuilder()</span>
+<span class="nc" id="L39">                .match(TimeMessage.class, this::sendTime)</span>
+<span class="nc" id="L40">                .build();</span>
     }
 
     @Override
     public void preStart() {
-<span class="nc" id="L39">        context().actorSelection(&quot;/user/topicActor/&quot;)</span>
-<span class="nc" id="L40">        .tell(new TopicActor.RegisterMsg(),self());</span>
+<span class="nc" id="L45">        context().actorSelection(&quot;/user/topicActor/&quot;)</span>
+<span class="nc" id="L46">        .tell(new TopicActor.RegisterMsg(),self());</span>
         
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L48">    }</span>
     private void sendTime(TimeMessage msg){
         //final ObjectNode response =Json.newObject();
     	//final ObjectNode response =msg.obj;
         //response.put(&quot;time&quot;,msg.obj);
-<span class="nc" id="L47">        ws.tell(msg.obj,self());</span>
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L53">        ws.tell(msg.obj,self());</span>
+<span class="nc" id="L54">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

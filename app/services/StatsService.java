@@ -23,7 +23,13 @@ import play.libs.Json;
 import Models.*;
 
 
-
+/**
+ * @author ANUSHKA SHARMA
+ * 
+ * Calculate total number or words in issues, total_repetition of words, total characters
+ * max_frequency of a word, minimum frequency of a word, unique words as 
+ * Statistics along with Map (key- words, value- count).
+ */
 
 public class StatsService {
     public Integer total_words;

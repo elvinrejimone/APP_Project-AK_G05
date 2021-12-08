@@ -15,55 +15,75 @@ import Models.RepositoryProfile;
 import Models.SearchResultHelper;
 import services.RepoProfileService;
 import Utils.Cache;
+/**
+ * @author Elvin Rejimone
+ * Repository Actor containing all available details for a repository of a user
+ */
+<span class="fc" id="L22">public class RepoProfileActor extends AbstractActor{ </span>
 
-<span class="fc" id="L19">public class RepoProfileActor extends AbstractActor{ </span>
 
-
+/**
+* get the user details and query string
+* storing and retrieving data from Cache
+*/
 	static public class RepoProfileInfo{
 		public final String queryString;
 		public final String repoID;
 		public final Cache cache;
 		public final RepoProfileService repoService;
-<span class="nc" id="L27">		public RepoProfileInfo(String queryString, String repoID, Cache cache,RepoProfileService repoServ) {</span>
-<span class="nc" id="L28">			this.queryString = queryString;</span>
-<span class="nc" id="L29">			this.repoID = repoID;</span>
-<span class="nc" id="L30">			this.cache = cache;</span>
-<span class="nc" id="L31">			this.repoService = repoServ;</span>
-<span class="nc" id="L32">		}</span>
+/**
+* Constructor of this Info class.
+*
+*/
+<span class="nc" id="L38">		public RepoProfileInfo(String queryString, String repoID, Cache cache,RepoProfileService repoServ) {</span>
+<span class="nc" id="L39">			this.queryString = queryString;</span>
+<span class="nc" id="L40">			this.repoID = repoID;</span>
+<span class="nc" id="L41">			this.cache = cache;</span>
+<span class="nc" id="L42">			this.repoService = repoServ;</span>
+<span class="nc" id="L43">		}</span>
 	}
 	
-	
+	/**
+	 * Factory method to create instance of Repository Actor
+	 * @return Props
+	 */
 	public static Props getProps() {
-<span class="fc" id="L37">		return Props.create(RepoProfileActor.class);</span>
+<span class="fc" id="L51">		return Props.create(RepoProfileActor.class);</span>
 	}
 	
-	
+	/**
+	 * It receives referrences and decides action based on them.
+	 * 
+	 */
 	@Override
 	public Receive createReceive() {
 		// TODO Auto-generated method stub
-<span class="fc" id="L44">		return receiveBuilder()</span>
-<span class="fc" id="L45">				.match(RepoProfileInfo.class, this::sendRepoProfileData )</span>
-<span class="fc" id="L46">				.build();</span>
+<span class="fc" id="L61">		return receiveBuilder()</span>
+<span class="fc" id="L62">				.match(RepoProfileInfo.class, this::sendRepoProfileData )</span>
+<span class="fc" id="L63">				.build();</span>
 	}
-	
+	/**
+	* fetch details from service class - issue and collaborators
+	* @throws Exception
+	*/
 	private void sendRepoProfileData(RepoProfileInfo rpi) {
 		try {
 			
-<span class="nc" id="L52">			RepositoryProfile newRepository = new RepositoryProfile(SearchResultHelper.fullSearchData.get(rpi.queryString),rpi.queryString, rpi.repoID);        	</span>
-<span class="nc" id="L53">		    System.out.println(rpi.repoService.githubIssueResultHelper(newRepository.issues_URL, newRepository, &quot;Issues&quot;, rpi.cache));</span>
-<span class="nc" id="L54">		    System.out.println(rpi.repoService.githubIssueResultHelper(newRepository.contributors_URL, newRepository, &quot;Collab&quot;, rpi.cache));</span>
-<span class="nc" id="L55">		    System.out.println(&quot;REPO-ACTOR ::: RepoName ::&quot;+ newRepository.repoName);</span>
-<span class="nc" id="L56">		    sender().tell(newRepository, self());</span>
+<span class="nc" id="L72">			RepositoryProfile newRepository = new RepositoryProfile(SearchResultHelper.fullSearchData.get(rpi.queryString),rpi.queryString, rpi.repoID);        	</span>
+<span class="nc" id="L73">		    System.out.println(rpi.repoService.githubIssueResultHelper(newRepository.issues_URL, newRepository, &quot;Issues&quot;, rpi.cache));</span>
+<span class="nc" id="L74">		    System.out.println(rpi.repoService.githubIssueResultHelper(newRepository.contributors_URL, newRepository, &quot;Collab&quot;, rpi.cache));</span>
+<span class="nc" id="L75">		    System.out.println(&quot;REPO-ACTOR ::: RepoName ::&quot;+ newRepository.repoName);</span>
+<span class="nc" id="L76">		    sender().tell(newRepository, self());</span>
 		    
 		}
-<span class="nc" id="L59">		catch(InterruptedException e) {</span>
-<span class="nc" id="L60">			sender().tell(new RepoProfileInfo(rpi.queryString, rpi.repoID, rpi.cache, rpi.repoService), self());</span>
+<span class="nc" id="L79">		catch(InterruptedException e) {</span>
+<span class="nc" id="L80">			sender().tell(new RepoProfileInfo(rpi.queryString, rpi.repoID, rpi.cache, rpi.repoService), self());</span>
 		}
-<span class="nc" id="L62">		catch(ExecutionException e) {</span>
-<span class="nc" id="L63">			sender().tell(new RepoProfileInfo(rpi.queryString, rpi.repoID, rpi.cache, rpi.repoService), self());</span>
-<span class="nc" id="L64">		}</span>
+<span class="nc" id="L82">		catch(ExecutionException e) {</span>
+<span class="nc" id="L83">			sender().tell(new RepoProfileInfo(rpi.queryString, rpi.repoID, rpi.cache, rpi.repoService), self());</span>
+<span class="nc" id="L84">		}</span>
 
 
-<span class="nc" id="L67">	}</span>
+<span class="nc" id="L87">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

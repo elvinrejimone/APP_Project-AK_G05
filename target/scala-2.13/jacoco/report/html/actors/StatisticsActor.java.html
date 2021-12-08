@@ -21,58 +21,81 @@ import java.util.Iterator;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.*;
-<span class="fc" id="L24">public class StatisticsActor extends AbstractActor {</span>
+/**
+ * @author Anushka Sharma
+ * create a new Akka Actor to perform the Word Level Statistics of Issues of a repository , together with appropriate message classes
+ * 
+ * @version 1.0.0
+ */
+<span class="fc" id="L30">public class StatisticsActor extends AbstractActor {</span>
 
     static public class StatsInfo {
 
 		public final ArrayList&lt;String&gt; issueTitleList;
-        
-<span class="fc" id="L30">        public StatsInfo(ArrayList&lt;String&gt; issueTitleList) {</span>
-<span class="fc" id="L31">			this.issueTitleList = issueTitleList;</span>
-<span class="fc" id="L32">        }</span>
+    /**
+	 * Constructor to create instance of this actor.
+	 * 
+	 * @param issueTitleList
+	 */
+<span class="fc" id="L40">        public StatsInfo(ArrayList&lt;String&gt; issueTitleList) {</span>
+<span class="fc" id="L41">			this.issueTitleList = issueTitleList;</span>
+<span class="fc" id="L42">        }</span>
     }
+	/**
+	 * Factory method to create instance of Word Stats Actor
+	 * @return Props
+	 */
 	public static Props getProps() {
-<span class="fc" id="L35">		return Props.create(StatisticsActor.class);</span>
+<span class="fc" id="L49">		return Props.create(StatisticsActor.class);</span>
 	}
 	
-	
+	/**
+	 * It receives referrences and decides action based on them.
+	 * 
+	 */
 	@Override
 	public Receive createReceive() {
 		// TODO Auto-generated method stub
-<span class="fc" id="L42">		return receiveBuilder()</span>
-<span class="fc" id="L43">				.match(StatsInfo.class, this::sendIssueData )</span>
-<span class="fc" id="L44">				.build();</span>
+<span class="fc" id="L59">		return receiveBuilder()</span>
+<span class="fc" id="L60">				.match(StatsInfo.class, this::sendIssueData )</span>
+<span class="fc" id="L61">				.build();</span>
 	}
 
-    //Change
+    /**
+	 * This method sends issue list data when queried by user to service 
+	 * Calculate total number or words in issues, total_repetition of words, total characters
+ 	 * max_frequency of a word, minimum frequency of a word, unique words as 
+ 	 * Statistics along with Map (key- words, value- count).
+	 */
 	private void sendIssueData(StatsInfo si) {
-<span class="nc" id="L49">		HashMap&lt;String,Object&gt; send_data = new HashMap&lt;String,Object&gt;();</span>
+<span class="nc" id="L71">		HashMap&lt;String,Object&gt; send_data = new HashMap&lt;String,Object&gt;();</span>
 			//StatsService statsService ;
-<span class="nc" id="L51">			StatsService statsService = new StatsService();</span>
-<span class="nc" id="L52">			StatsModel stats = statsService.get_Count(si.issueTitleList);</span>
+<span class="nc" id="L73">			StatsService statsService = new StatsService();</span>
+<span class="nc" id="L74">			StatsModel stats = statsService.get_Count(si.issueTitleList);</span>
 
             // for (Map.Entry&lt;String, Integer&gt; entry1 : stats.wordfrequency.entrySet()) {
 			// 	System.out.println(entry1.getKey() + &quot; =&gt; &quot; + entry1.getValue());
 			// }
-<span class="nc" id="L57">			System.out.println();</span>
-<span class="nc" id="L58">			System.out.println(&quot;Data List got&quot;);</span>
-<span class="nc" id="L59">			System.out.println();</span>
-			////////////////////////
-<span class="nc" id="L61">			ArrayList&lt;Integer&gt; Isseus_details = statsService.getstatsData();</span>
-<span class="nc" id="L62">			System.out.println();</span>
-<span class="nc" id="L63">			System.out.println(&quot;Stats List got&quot;);</span>
-<span class="nc" id="L64">			System.out.println();</span>
+			
+<span class="nc" id="L80">			System.out.println();</span>
+<span class="nc" id="L81">			System.out.println(&quot;Data List got&quot;);</span>
+<span class="nc" id="L82">			System.out.println();</span>
+			//
+<span class="nc" id="L84">			ArrayList&lt;Integer&gt; Isseus_details = statsService.getstatsData();</span>
+<span class="nc" id="L85">			System.out.println();</span>
+<span class="nc" id="L86">			System.out.println(&quot;Stats List got&quot;);</span>
+<span class="nc" id="L87">			System.out.println();</span>
 			//////////////////////////////
-<span class="nc" id="L66">			send_data.put(&quot;list&quot;,stats);</span>
-<span class="nc" id="L67">			send_data.put(&quot;count&quot;,Isseus_details);</span>
-<span class="nc" id="L68">			System.out.println(send_data.get(&quot;list&quot;));</span>
-<span class="nc" id="L69">			System.out.println(send_data.get(&quot;count&quot;));</span>
-<span class="nc" id="L70">			sender().tell(send_data, self());</span>
+<span class="nc" id="L89">			send_data.put(&quot;list&quot;,stats);</span>
+<span class="nc" id="L90">			send_data.put(&quot;count&quot;,Isseus_details);</span>
+<span class="nc" id="L91">			System.out.println(send_data.get(&quot;list&quot;));</span>
+<span class="nc" id="L92">			System.out.println(send_data.get(&quot;count&quot;));</span>
+<span class="nc" id="L93">			sender().tell(send_data, self());</span>
 	    
 		
 
 
-<span class="nc" id="L75">	}</span>
+<span class="nc" id="L98">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

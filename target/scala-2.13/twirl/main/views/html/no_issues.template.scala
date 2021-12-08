@@ -61,7 +61,7 @@ Seq[Any](format.raw/*1.1*/("""<section style=" margin: 0;background: linear-grad
               /*
                   -- GENERATED --
                   SOURCE: app/views/no_issues.scala.html
-                  HASH: fc2fbdd0a4bdaaf4708701b3fe47f12ed575f41f
+                  HASH: 003fe46ed9729f355cd75540d5900c56623548b5
                   MATRIX: 993->0
                   LINES: 32->1
                   -- GENERATED --

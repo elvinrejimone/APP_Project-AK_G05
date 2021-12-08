@@ -20,7 +20,14 @@ import play.libs.ws.WSBodyWritables;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSRequest;
 import Models.CommitsResult;
-
+/**
+ * Class for CommitsResult data model
+ * @author Santhosh Santhanam
+ * fetch the 100 newest commits and compile statistics about: (i) the top-10 committers, i.e., users who had
+ * the most commits, where you hyperlink the user to the profile page from task a) and show the total
+ * number of commits of that user as a number (n) next to the name; (ii) the minimum, maximum,
+ * and average number of additions and deletions across all these commits.
+ */
 public class CommitService implements WSBodyReadables, WSBodyWritables {
 
 	private WSClient ws;

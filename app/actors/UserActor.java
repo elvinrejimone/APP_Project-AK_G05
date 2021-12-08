@@ -7,7 +7,10 @@ import play.Logger;
 import play.libs.Json;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+	*User Actor to fetch the user details
+	* @author Ujjawal Aggarwal
+	*/
 public final class UserActor extends AbstractActor {
     private final ActorRef ws;
 
@@ -17,7 +20,10 @@ public final class UserActor extends AbstractActor {
             this.obj = obj;
         }
     }
-    
+    /**
+* get the user details creating instance of Service class
+*
+*/
     public UserActor(final ActorRef wsOut) {
     	ws =  wsOut;
        Logger.debug("New UserActor {} forWebSocket {} ; timeActor : {}",self(),wsOut);

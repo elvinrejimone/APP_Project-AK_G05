@@ -24,7 +24,11 @@ import Models.CommitsResult;
 import Models.RepositoryProfile;
 import Utils.Cache;
 
-
+/**
+* @author Elvin Rejimone
+* Service Class of Repository Display
+* Data is read from web socket and all details are fetched
+*/
 public class RepoProfileService implements WSBodyReadables, WSBodyWritables{
 
 	private WSClient ws;

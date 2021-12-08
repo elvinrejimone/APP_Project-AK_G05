@@ -13,49 +13,68 @@ import akka.actor.Props;
 import Models.CommitsResult;
 import play.libs.ws.WSClient;
 import services.CommitService;
-
+/**
+ * @author Santhosh Santhanam
+ * Commits Akka Actor to fetch user details from web socket and passing the instance to Service 
+ * together with appropriate message classes
+ */
 public class CommitsActor extends AbstractActor {
-
+/**
+* get the user details creating instance of Service class
+*
+*/
 	static public class CommitInfo {
 		public final String username;
 		public final String reponame;
 		CommitService cService;
 
-<span class="fc" id="L24">		public CommitInfo(String username, String reponame, CommitService cService) {</span>
-<span class="fc" id="L25">			this.username = username;</span>
-<span class="fc" id="L26">			this.reponame = reponame;</span>
-<span class="fc" id="L27">			this.cService = cService;</span>
-<span class="fc" id="L28">		}</span>
+<span class="fc" id="L31">		public CommitInfo(String username, String reponame, CommitService cService) {</span>
+<span class="fc" id="L32">			this.username = username;</span>
+<span class="fc" id="L33">			this.reponame = reponame;</span>
+<span class="fc" id="L34">			this.cService = cService;</span>
+<span class="fc" id="L35">		}</span>
 	}
-
+/**
+* Constructor of this Info class.
+*
+*/
 	private final CommitService commitService;
 
 	@Inject
-<span class="fc" id="L34">	public CommitsActor(CommitService commitService) {</span>
-<span class="fc" id="L35">		this.commitService = commitService;</span>
-<span class="fc" id="L36">	}</span>
-
+<span class="fc" id="L44">	public CommitsActor(CommitService commitService) {</span>
+<span class="fc" id="L45">		this.commitService = commitService;</span>
+<span class="fc" id="L46">	}</span>
+	/**
+	 * Factory method to create instance of Commits Actor
+	 * @return Props
+	 */
 	public static Props getProps(CommitService cs) {
-<span class="fc" id="L39">		return Props.create(CommitsActor.class, () -&gt; new CommitsActor(cs));</span>
+<span class="fc" id="L52">		return Props.create(CommitsActor.class, () -&gt; new CommitsActor(cs));</span>
 	}
-
+	/**
+	 * It receives referrences and decides action based on them.
+	 * 
+	 */
 	@Override
 	public Receive createReceive() {
 		// TODO Auto-generated method stub
-<span class="fc" id="L45">		return receiveBuilder().match(CommitInfo.class, this::sendCommitsData).build();</span>
+<span class="fc" id="L61">		return receiveBuilder().match(CommitInfo.class, this::sendCommitsData).build();</span>
 	}
-
+	/**
+	*Commits function to calculate the statistics for a repositories commits
+	* @throws Exception
+	*/
 	private void sendCommitsData(CommitInfo cInfo) {
 		try {
-<span class="fc" id="L50">			CompletionStage&lt;List&lt;CommitsResult&gt;&gt; cData = cInfo.cService.getCommitsData(cInfo.username, cInfo.reponame);</span>
-<span class="fc" id="L51">			System.out.println(&quot;Output from Commits ACTOR!!&quot;);</span>
-<span class="fc" id="L52">			sender().tell(cData.toCompletableFuture().get(), self());</span>
-<span class="nc" id="L53">		} catch (InterruptedException e) {</span>
-<span class="nc" id="L54">			sender().tell(new CommitsResult(), self());</span>
-<span class="nc" id="L55">		} catch (ExecutionException e) {</span>
-<span class="nc" id="L56">			sender().tell(new CommitsResult(), self());</span>
-<span class="pc" id="L57">		}</span>
-<span class="fc" id="L58">	}</span>
+<span class="fc" id="L69">			CompletionStage&lt;List&lt;CommitsResult&gt;&gt; cData = cInfo.cService.getCommitsData(cInfo.username, cInfo.reponame);</span>
+<span class="fc" id="L70">			System.out.println(&quot;Output from Commits ACTOR!!&quot;);</span>
+<span class="fc" id="L71">			sender().tell(cData.toCompletableFuture().get(), self());</span>
+<span class="nc" id="L72">		} catch (InterruptedException e) {</span>
+<span class="nc" id="L73">			sender().tell(new CommitsResult(), self());</span>
+<span class="nc" id="L74">		} catch (ExecutionException e) {</span>
+<span class="nc" id="L75">			sender().tell(new CommitsResult(), self());</span>
+<span class="pc" id="L76">		}</span>
+<span class="fc" id="L77">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
